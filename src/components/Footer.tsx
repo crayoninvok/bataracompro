@@ -132,7 +132,9 @@ export default function Footer() {
                   className="mr-2 mt-1 flex-shrink-0 text-blue-300"
                 />
                 <span className="text-gray-300 text-sm">
-                  Jl. Raya Bekasi No. 123, Bekasi Timur, Jawa Barat 17113
+                  Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar., Kec.
+                  Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta
+                  13910
                 </span>
               </li>
               <li className="flex items-center">

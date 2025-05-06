@@ -70,7 +70,9 @@ export default function CTASection() {
                 <div>
                   <p className="text-sm text-gray-500">Kantor Pusat</p>
                   <p className="font-bold">
-                    Jl. Mega Kuningan Barat, Jakarta Selatan 12950
+                    Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar.,
+                    Kec. Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota
+                    Jakarta 13910
                   </p>
                 </div>
               </div>
