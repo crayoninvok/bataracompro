@@ -8,12 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
+      // jangan override theme.colors dengan CSS variables, cukup pakai di CSS/className langsung
     },
   },
   plugins: [],
 };
+
 export default config;
