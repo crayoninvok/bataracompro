@@ -117,10 +117,10 @@ export default function Navbar() {
 
           <div className="ml-8">
             <Link
-              href="/kontak"
+              href="/login"
               className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md shadow-md hover:shadow-lg transition-all"
             >
-              Hubungi Kami
+              Login or Register
             </Link>
           </div>
         </div>
@@ -190,11 +190,11 @@ export default function Navbar() {
 
             <div className="pt-2 mt-3 border-t border-gray-200">
               <Link
-                href="/kontak"
+                href="/login"
                 onClick={() => setIsOpen(false)}
                 className="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
               >
-                Hubungi Kami
+               Login or Register
               </Link>
             </div>
           </div>

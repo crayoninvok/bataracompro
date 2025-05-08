@@ -92,7 +92,7 @@ export default function Proyek() {
               <span className="absolute -bottom-2 left-0 w-full h-3 bg-orange-300 opacity-40 z-0"></span>
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              PT Bahtera Putera Nusantara beroperasi di beberapa lokasi strategis pertambangan batubara di Indonesia
+              PT Batara Dharma Persada beroperasi di beberapa lokasi strategis pertambangan batubara di Indonesia
             </p>
           </div>
 

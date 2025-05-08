@@ -46,7 +46,7 @@ export default function Karir() {
         
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Karir di PT Bahtera Putera Nusantara
+            Karir di PT Batara Dharma Persada
           </h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto opacity-90">
             Bergabunglah dengan tim kami untuk membangun masa depan industri transportasi batubara yang lebih baik
@@ -63,7 +63,7 @@ export default function Karir() {
               <span className="absolute -bottom-2 left-0 w-full h-3 bg-orange-300 opacity-40 z-0"></span>
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              PT Bahtera Putera Nusantara menawarkan lingkungan kerja yang dinamis dengan berbagai kesempatan untuk berkembang
+              PT Batara Dharma Persada menawarkan lingkungan kerja yang dinamis dengan berbagai kesempatan untuk berkembang
             </p>
           </div>
 
@@ -113,7 +113,7 @@ export default function Karir() {
               <span className="absolute -bottom-2 left-0 w-full h-3 bg-blue-300 opacity-40 z-0"></span>
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Temukan posisi yang sesuai dengan keahlian dan minat Anda di PT Bahtera Putera Nusantara
+              Temukan posisi yang sesuai dengan keahlian dan minat Anda di PT Batara Dharma Persada
             </p>
           </div>
 
@@ -248,7 +248,7 @@ export default function Karir() {
               <span className="absolute -bottom-2 left-0 w-full h-3 bg-orange-300 opacity-40 z-0"></span>
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Memahami tahapan proses rekrutmen PT Bahtera Putera Nusantara
+              Memahami tahapan proses rekrutmen PT Batara Dharma Persada
             </p>
           </div>
 

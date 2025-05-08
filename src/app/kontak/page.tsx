@@ -127,7 +127,7 @@ export default function Kontak() {
                 <span className="absolute -bottom-2 left-0 w-full h-3 bg-orange-300 opacity-40 z-0"></span>
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                Hubungi kami untuk mendiskusikan kebutuhan transportasi batubara atau kerjasama bisnis lainnya dengan PT Bahtera Putera Nusantara.
+                Hubungi kami untuk mendiskusikan kebutuhan transportasi batubara atau kerjasama bisnis lainnya dengan PT Batara Dharma Persada.
               </p>
 
               <div className="space-y-6">
@@ -414,7 +414,7 @@ export default function Kontak() {
             Ingin Mengetahui Lebih Lanjut?
           </h2>
           <p className="text-lg md:text-xl mb-8 opacity-90">
-            Unduh brosur perusahaan kami untuk mendapatkan informasi lengkap tentang layanan transportasi batubara PT Bahtera Putera Nusantara
+            Unduh brosur perusahaan kami untuk mendapatkan informasi lengkap tentang layanan transportasi batubara PT Bahtera Dharma Persada
           </p>
           <a
             href="/download/company-profile.pdf"
