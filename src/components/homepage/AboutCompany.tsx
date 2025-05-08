@@ -64,7 +64,7 @@ export default function AboutCompany() {
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
               With the faith of God the Almighty as the main pillar,{" "}
               <strong className="text-blue-700">
-                PT Bahtera Putera Nusantara
+                PT Batara Dharma Persada
               </strong>{" "}
               (<span className="text-orange-500 font-bold">PT BATARA</span>) was
               founded in 2019 to take part in enhancing the nation&apos;s

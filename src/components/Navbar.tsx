@@ -34,17 +34,10 @@ export default function Navbar() {
         { href: "/tentang/tim", label: "Tim Kami" },
       ],
     },
-    {
-      href: "#",
-      label: "Layanan",
-      dropdown: [
-        { href: "/layanan/konstruksi", label: "Konstruksi" },
-        { href: "/layanan/konsultasi", label: "Konsultasi" },
-        { href: "/layanan/pengembangan", label: "Pengembangan" },
-      ],
-    },
+    
     { href: "/proyek", label: "Proyek" },
     { href: "/kontak", label: "Kontak" },
+    { href: "/karir", label: "Karir" },
   ];
 
   const toggleDropdown = (label: string) => {
