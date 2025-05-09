@@ -24,10 +24,10 @@ export default function VisiMisiHero() {
           }`}
         >
           <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Visi & Misi
+            Vision & Mission
           </h1>
           <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-            Arah dan tujuan yang membimbing perjalanan PT. Batara Dharma Persada
+          The direction and goals that guide the journey of PT. Batara Dharma Persada.
           </p>
           <div className="w-24 h-1 bg-orange-500 mx-auto" />
         </div>

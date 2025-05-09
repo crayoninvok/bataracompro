@@ -48,12 +48,11 @@ export default function AboutCompany() {
         {/* Section header */}
         <div className="text-center mb-16 reveal opacity-0 translate-y-6 transition-all duration-1000">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 relative inline-block">
-            <span className="relative z-10">Tentang Perusahaan</span>
+            <span className="relative z-10">About the Company</span>
             <span className="absolute -bottom-2 left-0 w-full h-3 bg-orange-300 opacity-40 z-0"></span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Dibangun dengan dedikasi tinggi dan visi untuk masa depan yang lebih
-            baik
+            Built with great dedication and a vision for a better future
           </p>
         </div>
 
@@ -66,23 +65,22 @@ export default function AboutCompany() {
               <strong className="text-blue-700">
                 PT Batara Dharma Persada
               </strong>{" "}
-              (<span className="text-orange-500 font-bold">PT BATARA</span>) was
-              founded in 2019 to take part in enhancing the nation&apos;s
-              quality of life through human resources and value development,
-              along with optimum natural resources exploitation.
+              (<span className="text-orange-500 font-bold">PT BATARA</span>)
+              founded in 2024, focuses on improving the nation's quality of life
+              through resource optimization and human development.
             </p>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
-              The company is designed to grow sustainably by embracing
-              innovation, integrity, and a strong commitment to national
-              development.
+              The company supports medium-scale miners in Indonesia’s coal,
+              bauxite, and nickel sectors with efficient, safe, and
+              environmentally responsible mining practices.
             </p>
 
             <div className="mt-8">
               <a
-                href="/tentang/profil"
+                href="/about/profile"
                 className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-md transition group"
               >
-                <span>Selengkapnya</span>
+                <span>Learn More</span>
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
@@ -92,7 +90,7 @@ export default function AboutCompany() {
           <div className="reveal opacity-0 translate-y-6 transition-all duration-1000 delay-500">
             <div className="bg-gray-50 p-8 rounded-xl shadow-sm border border-gray-100">
               <h3 className="text-2xl font-bold mb-6 text-blue-700">
-                Nilai-Nilai Perusahaan
+                Company Values
               </h3>
 
               <div className="space-y-6">
@@ -101,10 +99,9 @@ export default function AboutCompany() {
                     <Trophy className="w-6 h-6 text-orange-500" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg mb-1">Integritas</h4>
+                    <h4 className="font-bold text-lg mb-1">Integrity</h4>
                     <p className="text-gray-600">
-                      Kami menjunjung tinggi kejujuran dan etika dalam setiap
-                      aspek bisnis.
+                      We uphold honesty and ethics in every aspect of our business.
                     </p>
                   </div>
                 </div>
@@ -114,10 +111,9 @@ export default function AboutCompany() {
                     <Users className="w-6 h-6 text-blue-500" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg mb-1">Inovasi</h4>
+                    <h4 className="font-bold text-lg mb-1">Innovation</h4>
                     <p className="text-gray-600">
-                      Terus berinovasi untuk memberikan solusi teknologi
-                      terbaik.
+                      Continuously innovating to provide the best technological solutions.
                     </p>
                   </div>
                 </div>
@@ -127,10 +123,9 @@ export default function AboutCompany() {
                     <Building className="w-6 h-6 text-green-500" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg mb-1">Keberlanjutan</h4>
+                    <h4 className="font-bold text-lg mb-1">Sustainability</h4>
                     <p className="text-gray-600">
-                      Berkomitmen pada pertumbuhan berkelanjutan dan pembangunan
-                      nasional.
+                      Committed to sustainable growth and national development.
                     </p>
                   </div>
                 </div>

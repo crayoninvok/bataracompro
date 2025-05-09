@@ -83,12 +83,12 @@ export default function CTASection() {
           name: formData.name,
           email: formData.email,
           message: `
-            Nama: ${formData.name}
-            Perusahaan: ${formData.company}
+            Name: ${formData.name}
+            Company: ${formData.company}
             Email: ${formData.email}
-            Telepon: ${formData.phone}
+            Phone: ${formData.phone}
             
-            Pesan:
+            Message:
             ${formData.message}
           `,
         }),
@@ -100,7 +100,7 @@ export default function CTASection() {
         setStatus({
           type: "success",
           message:
-            "Pesan Anda berhasil dikirim. Kami akan menghubungi Anda segera.",
+            "Your message has been successfully sent. We will contact you soon.",
         });
         // Reset form
         setFormData({
@@ -115,14 +115,14 @@ export default function CTASection() {
           type: "error",
           message:
             data.message ||
-            "Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.",
+            "An error occurred while sending the message. Please try again.",
         });
       }
     } catch (error) {
       console.error("Error submitting form:", error);
       setStatus({
         type: "error",
-        message: "Terjadi kesalahan pada sistem. Silakan coba lagi nanti.",
+        message: "An error occurred on the system. Please try again later.",
       });
     } finally {
       setLoading(false);
@@ -136,12 +136,12 @@ export default function CTASection() {
           {/* Left Side: Contact Info */}
           <div className="reveal-cta opacity-0 translate-y-6 transition-all duration-700">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Butuh solusi transportasi batubara yang andal?
+              Need reliable coal transportation solutions?
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              PT. Batara Dharma Persada siap menjadi mitra terpercaya untuk
-              kebutuhan transportasi batubara Anda. Hubungi kami untuk
-              konsultasi dan penawaran khusus.
+              PT. Batara Dharma Persada is ready to be your trusted partner for
+              your coal transportation needs. Contact us for consultation and
+              special offers.
             </p>
 
             <div className="space-y-4">
@@ -150,7 +150,7 @@ export default function CTASection() {
                   <Phone className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Telepon</p>
+                  <p className="text-sm text-gray-500">Phone</p>
                   <p className="font-bold">+62 21 1234 5678</p>
                 </div>
               </div>
@@ -170,26 +170,26 @@ export default function CTASection() {
                   <MapPin className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Kantor Pusat</p>
+                  <p className="text-sm text-gray-500">Head Office</p>
                   <p className="font-bold">
                     Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar.,
-                    Kec. Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota
-                    Jakarta 13910
+                    Kec. Cakung, East Jakarta, Special Capital Region of Jakarta
+                    13910
                   </p>
                 </div>
               </div>
             </div>
 
             <div className="mt-8 bg-gray-100 p-4 rounded-lg">
-              <h4 className="font-bold mb-2">Area Operasional:</h4>
-              <p className="text-gray-700">Tabang - Kalimantan Timur</p>
+              <h4 className="font-bold mb-2">Operational Area:</h4>
+              <p className="text-gray-700">Tabang - East Kalimantan</p>
             </div>
           </div>
 
           {/* Right Side: Contact Form */}
           <div className="reveal-cta opacity-0 translate-y-6 transition-all duration-700 delay-200">
             <div className="bg-gray-50 p-8 rounded-xl shadow-sm border border-gray-100">
-              <h3 className="text-2xl font-bold mb-6">Hubungi Kami</h3>
+              <h3 className="text-2xl font-bold mb-6">Contact Us</h3>
 
               {status.type === "success" ? (
                 <div className="bg-green-50 border border-green-200 rounded-md p-4 mb-6">
@@ -227,7 +227,7 @@ export default function CTASection() {
                     htmlFor="name"
                     className="block text-sm font-medium mb-1 text-gray-700"
                   >
-                    Nama
+                    Name
                   </label>
                   <input
                     type="text"
@@ -235,7 +235,7 @@ export default function CTASection() {
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900"
-                    placeholder="Nama lengkap Anda"
+                    placeholder="Your full name"
                     required
                     disabled={loading}
                   />
@@ -246,7 +246,7 @@ export default function CTASection() {
                     htmlFor="company"
                     className="block text-sm font-medium mb-1 text-gray-700"
                   >
-                    Perusahaan
+                    Company
                   </label>
                   <input
                     type="text"
@@ -254,7 +254,7 @@ export default function CTASection() {
                     value={formData.company}
                     onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900"
-                    placeholder="Nama perusahaan Anda"
+                    placeholder="Your company name"
                     required
                     disabled={loading}
                   />
@@ -273,7 +273,7 @@ export default function CTASection() {
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900"
-                    placeholder="Alamat email Anda"
+                    placeholder="Your email address"
                     required
                     disabled={loading}
                   />
@@ -284,7 +284,7 @@ export default function CTASection() {
                     htmlFor="phone"
                     className="block text-sm font-medium mb-1 text-gray-700"
                   >
-                    No. Telepon
+                    Phone Number
                   </label>
                   <input
                     type="tel"
@@ -292,7 +292,7 @@ export default function CTASection() {
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900"
-                    placeholder="Nomor telepon Anda"
+                    placeholder="Your phone number"
                     disabled={loading}
                   />
                 </div>
@@ -302,7 +302,7 @@ export default function CTASection() {
                     htmlFor="message"
                     className="block text-sm font-medium mb-1 text-gray-700"
                   >
-                    Kebutuhan Anda
+                    Your Needs
                   </label>
                   <textarea
                     id="message"
@@ -310,7 +310,7 @@ export default function CTASection() {
                     value={formData.message}
                     onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900"
-                    placeholder="Jelaskan kebutuhan transportasi batubara yang Anda perlukan"
+                    placeholder="Describe your coal transportation needs"
                     required
                     disabled={loading}
                   ></textarea>
@@ -326,10 +326,10 @@ export default function CTASection() {
                   } text-white py-3 px-4 rounded-md transition group`}
                 >
                   {loading ? (
-                    <span>Mengirim...</span>
+                    <span>Sending...</span>
                   ) : (
                     <>
-                      <span>Kirim Permintaan</span>
+                      <span>Submit Request</span>
                       <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}

@@ -10,21 +10,21 @@ export default function TestimonialsSection() {
   const testimonials = [
     {
       quote:
-        "PT. Batara Dharma Persada telah menjadi mitra transportasi batubara yang sangat andal. Sistem monitoring mereka membantu kami meningkatkan efisiensi pengiriman dan mengurangi waktu tunggu di lokasi tambang.",
+        "PT. Batara Dharma Persada has been a very reliable coal transportation partner. Their monitoring system has helped us improve delivery efficiency and reduce waiting times at the mining site.",
       author: "Hendri Wijaya",
       position: "Operations Director, PT. BUMA",
       image: "/api/placeholder/80/80",
     },
     {
       quote:
-        "Selama bermitra dengan Batara Dharma Persada, kami mengalami peningkatan signifikan dalam produktivitas transportasi batubara. Armada mereka selalu dalam kondisi prima dan didukung teknologi tracking yang akurat.",
+        "During our partnership with Batara Dharma Persada, we have experienced a significant increase in coal transportation productivity. Their fleet is always in top condition and supported by accurate tracking technology.",
       author: "Surya Pratama",
       position: "Logistics Manager, PT. Adaro Indonesia",
       image: "/api/placeholder/80/80",
     },
     {
       quote:
-        "Layanan hauling batubara dari Batara Dharma Persada telah membantu kami mencapai target produksi dengan konsistensi yang luar biasa. Sistem manajemen fleet mereka menjadi kunci dalam mengoptimalkan operasional tambang kami.",
+        "Batara Dharma Persada's coal hauling service has helped us achieve production targets with exceptional consistency. Their fleet management system is key to optimizing our mining operations.",
       author: "Dian Kusuma",
       position: "Mine Operations Head, PT. Kaltim Prima Coal",
       image: "/api/placeholder/80/80",
@@ -82,12 +82,11 @@ export default function TestimonialsSection() {
       <div className="max-w-5xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4 relative inline-block">
-            <span className="relative z-10">Testimonial Klien</span>
+            <span className="relative z-10">Client Testimonials</span>
             <span className="absolute -bottom-2 left-0 w-full h-3 bg-orange-300 opacity-40 z-0"></span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Apa kata mitra pertambangan kami tentang layanan transportasi
-            batubara kami
+            What our mining partners say about our coal transportation services
           </p>
         </div>
 

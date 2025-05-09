@@ -15,17 +15,17 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const companyLinks = [
-    { href: "/tentang/profil", label: "Profil Perusahaan" },
-    { href: "/tentang/visi-misi", label: "Visi & Misi" },
-    { href: "/tentang/tim", label: "Tim Kami" },
-    { href: "/kebijakan-privasi", label: "Kebijakan Privasi" },
+    { href: "/about/profile", label: "Company Profile" },
+    { href: "/about/vision-mission", label: "Vision & Mission" },
+    { href: "/about/team", label: "Our Team" },
+    { href: "/privacy-policy", label: "Privacy Policy" },
   ];
 
   const serviceLinks = [
-    { href: "/layanan/konstruksi", label: "Konstruksi" },
-    { href: "/layanan/konsultasi", label: "Konsultasi" },
-    { href: "/layanan/pengembangan", label: "Pengembangan" },
-    { href: "/proyek", label: "Proyek Kami" },
+    { href: "/services/construction", label: "Construction" },
+    { href: "/services/consulting", label: "Consulting" },
+    { href: "/services/development", label: "Development" },
+    { href: "/projects", label: "Our Projects" },
   ];
 
   return (
@@ -38,7 +38,7 @@ export default function Footer() {
               <div className="w-12 h-12 rounded-full bg-white p-1">
                 <Image
                   src="/btr.png"
-                  alt="Logo BTR"
+                  alt="BTR Logo"
                   width={48}
                   height={48}
                   className="object-contain w-full h-full"
@@ -50,9 +50,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-300 text-sm">
-              PT. Batara Dharma Persada adalah perusahaan yang bergerak di
-              bidang jasa konstruksi, konsultasi dan pengembangan dengan standar
-              kualitas terbaik.
+              PT. Batara Dharma Persada is a company engaged in construction, consulting, and development services with the best quality standards.
             </p>
             <div className="flex space-x-4 pt-2">
               <a
@@ -85,7 +83,7 @@ export default function Footer() {
           {/* Company Links */}
           <div>
             <h3 className="font-bold text-lg mb-4 border-b border-blue-700 pb-2">
-              Perusahaan
+              Company
             </h3>
             <ul className="space-y-2">
               {companyLinks.map((link) => (
@@ -104,7 +102,7 @@ export default function Footer() {
           {/* Services Links */}
           <div>
             <h3 className="font-bold text-lg mb-4 border-b border-blue-700 pb-2">
-              Layanan Kami
+              Our Services
             </h3>
             <ul className="space-y-2">
               {serviceLinks.map((link) => (
@@ -123,7 +121,7 @@ export default function Footer() {
           {/* Contact Info */}
           <div>
             <h3 className="font-bold text-lg mb-4 border-b border-blue-700 pb-2">
-              Kontak
+              Contact
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start">
@@ -133,8 +131,7 @@ export default function Footer() {
                 />
                 <span className="text-gray-300 text-sm">
                   Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar., Kec.
-                  Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta
-                  13910
+                  Cakung, East Jakarta City, DKI Jakarta 13910
                 </span>
               </li>
               <li className="flex items-center">
@@ -162,8 +159,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="pt-8 mt-8 border-t border-blue-700 text-center text-gray-400 text-sm">
           <p>
-            &copy; {currentYear} PT. Batara Dharma Persada. Hak Cipta
-            Dilindungi.
+            &copy; {currentYear} PT. Batara Dharma Persada. All Rights Reserved.
           </p>
         </div>
       </div>

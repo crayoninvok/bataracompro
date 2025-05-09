@@ -12,7 +12,7 @@ export function useUpload() {
       const url = await uploadAvatar(file);
       return url;
     } catch (err) {
-      setError("Gagal mengunggah avatar.");
+      setError("Failed to upload avatar.");
       return null;
     } finally {
       setUploading(false);
@@ -26,7 +26,7 @@ export function useUpload() {
       const url = await uploadCertificate(file, token);
       return url;
     } catch (err) {
-      setError("Gagal mengunggah sertifikat.");
+      setError("Failed to upload certificate.");
       return null;
     } finally {
       setUploading(false);

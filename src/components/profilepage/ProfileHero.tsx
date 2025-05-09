@@ -24,11 +24,10 @@ export default function ProfileHero() {
           }`}
         >
           <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Profil Perusahaan
+            Company Profile
           </h1>
           <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-            Mengenal lebih dekat PT. Batara Dharma Persada sebagai mitra
-            transportasi yang terpercaya
+          Get to know PT. Batara Dharma Persada as a trusted coal transportation partner in Indonesia.
           </p>
           <div className="w-24 h-1 bg-orange-500 mx-auto" />
         </div>

@@ -5,12 +5,17 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Profil Perusahaan | Batara Dharma Persada",
   description:
-    "Mengenal lebih dekat PT. Batara Dharma Persada sebagai mitra transportasi batubara yang terpercaya di Indonesia",
+    "Get to know PT. Batara Dharma Persada as a trusted coal transportation partner in Indonesia.",
   keywords: [
     "Batara Dharma Persada",
     "Profil Perusahaan",
+    "Company Profile",
     "Transportasi Batubara",
-    "Bekasi",
+    "Coal Transport",
+    "Jakarta",
+    "Kalimantan",
+    "Kalimantan Timur",
+    "Tabang",
     "Indonesia",
   ],
 };

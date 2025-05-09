@@ -10,9 +10,7 @@ export default function RegisterPage() {
     name: "",
     email: "",
     password: "",
-    avatar: "",
   });
-  const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,48 +18,50 @@ export default function RegisterPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setAvatarFile(file);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Optional validation
+    if (!formData.name || !formData.email || !formData.password) {
+      Swal.fire({
+        icon: "warning",
+        title: "Isi semua field!",
+        text: "Nama, email, dan password wajib diisi.",
+        confirmButtonColor: "#F59E0B",
+      });
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      Swal.fire({
+        icon: "warning",
+        title: "Password terlalu pendek",
+        text: "Minimal 6 karakter.",
+        confirmButtonColor: "#F59E0B",
+      });
+      return;
+    }
+
     try {
       setLoading(true);
 
-      let avatarUrl = "";
-      if (avatarFile) {
-        const uploadData = new FormData();
-        uploadData.append("file", avatarFile);
-        uploadData.append("upload_preset", "unsigned_avatar");
-        uploadData.append("folder", "avatar_reqruiters");
-
-        const res = await fetch(
-          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`,
-          {
-            method: "POST",
-            body: uploadData,
-          }
-        );
-
-        const data = await res.json();
-        if (!res.ok || !data.secure_url) throw new Error("Gagal upload avatar");
-        avatarUrl = data.secure_url;
-      }
+      const avatar = `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 70) + 1}`;
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, avatar: avatarUrl }),
+        body: JSON.stringify({ ...formData, avatar }),
       });
 
-      if (!response.ok) throw new Error("Gagal mendaftar");
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Pendaftaran gagal");
+      }
 
       await Swal.fire({
         icon: "success",
         title: "Register Berhasil!",
-        text: "Silakan cek email dan verifikasi akun Anda.",
+        text: "Silakan cek email untuk verifikasi.",
         confirmButtonColor: "#2563EB",
       });
 
@@ -69,8 +69,8 @@ export default function RegisterPage() {
     } catch (err: any) {
       Swal.fire({
         icon: "error",
-        title: "Gagal mendaftar",
-        text: err.message || "Terjadi kesalahan.",
+        title: "Gagal Daftar",
+        text: err.message || "Terjadi kesalahan",
         confirmButtonColor: "#EF4444",
       });
     } finally {
@@ -81,33 +81,24 @@ export default function RegisterPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 space-y-6 border border-gray-200">
-        <h2 className="text-center text-2xl font-bold text-blue-700">Buat Akun Baru</h2>
+        <h2 className="text-center text-2xl font-bold text-blue-700">Create New Account</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <Input label="Nama Lengkap" name="name" type="text" onChange={handleChange} />
-          <Input label="Email" name="email" type="email" onChange={handleChange} />
-          <Input label="Password" name="password" type="password" onChange={handleChange} />
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Upload Avatar</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-              className="mt-1 w-full border border-gray-300 px-4 py-2 rounded-md text-sm text-gray-600 focus:outline-none"
-            />
-          </div>
+          <Input label="Full Name" name="name" type="text" value={formData.name} onChange={handleChange} />
+          <Input label="Email" name="email" type="email" value={formData.email} onChange={handleChange} />
+          <Input label="Password" name="password" type="password" value={formData.password} onChange={handleChange} />
           <button
             type="submit"
             disabled={loading}
             className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md shadow hover:bg-blue-700 transition disabled:opacity-50"
           >
-            {loading ? "Mendaftarkan..." : "Daftar"}
+            {loading ? "Registering..." : "Register"}
           </button>
         </form>
 
         <p className="text-sm text-center text-gray-600">
-          Sudah punya akun?{" "}
+          Already have an account?{" "}
           <a href="/login" className="text-blue-600 hover:underline font-medium">
-            Masuk di sini
+            Login here
           </a>
         </p>
       </div>
@@ -119,11 +110,13 @@ function Input({
   label,
   name,
   type,
+  value,
   onChange,
 }: {
   label: string;
   name: string;
   type: string;
+  value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
@@ -135,6 +128,7 @@ function Input({
         id={name}
         name={name}
         type={type}
+        value={value}
         required
         onChange={onChange}
         className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"

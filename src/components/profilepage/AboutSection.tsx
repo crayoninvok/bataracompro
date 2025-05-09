@@ -39,7 +39,7 @@ export default function AboutSection() {
           >
             <div className="relative rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="/office.jpg" // Replace with actual image
+                src="/truck1.png" // Replace with actual image
                 alt="PT. Batara Dharma Persada Office"
                 width={600}
                 height={400}
@@ -61,21 +61,24 @@ export default function AboutSection() {
             }`}
           >
             <h2 className="text-2xl md:text-3xl font-bold text-blue-900 mb-4">
-              Tentang PT. Batara Dharma Persada
+              About PT. Batara Dharma Persada
             </h2>
             <div className="w-16 h-1 bg-orange-500 mb-6" />
             <p className="text-gray-700 mb-4 leading-relaxed">
-              Didirikan pada tahun 2015, PT. Batara Dharma Persada merupakan
-              perusahaan yang bergerak di bidang jasa transportasi batubara yang
-              berlokasi di Bekasi, Jawa Barat. Kami menyediakan solusi
-              transportasi yang efisien dan andal untuk memenuhi kebutuhan
-              industri batubara di Indonesia.
+              With the faith of God the Almighty as the main pillar, PT Batara
+              Dharma Persada was founded in 2024 to take a part to enhance
+              nation’s quality of the life through human resources and value
+              development along with optimum natural resources exploitation. The
+              company is designed to complement mining industry in Indonesia,
+              especially in coal, bauxite and nickel mining operation.
             </p>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              Dengan dukungan armada yang modern dan tim profesional yang
-              berpengalaman, kami berkomitmen untuk memberikan layanan terbaik
-              kepada setiap klien kami dengan mengutamakan keamanan, ketepatan
-              waktu, dan efisiensi dalam setiap operasional.
+              With the decentralization of government in mining, so that many
+              Mining Business Permits are issued on a medium-to-small scale, PT
+              Batara Dharma Persada is present to ll the gap of medium-scale
+              miners with the right mining techniques and patterns, not only
+              efcient, optimum recovery, but very concerned about safety and
+              the environment by applying Good Mining Practice.
             </p>
 
             <div className="flex flex-wrap gap-4 mt-8">
@@ -85,7 +88,7 @@ export default function AboutSection() {
                 </div>
                 <div>
                   <p className="font-semibold">Didirikan</p>
-                  <p className="text-gray-600">2015</p>
+                  <p className="text-gray-600">2024</p>
                 </div>
               </div>
 
@@ -95,7 +98,7 @@ export default function AboutSection() {
                 </div>
                 <div>
                   <p className="font-semibold">Karyawan</p>
-                  <p className="text-gray-600">120+</p>
+                  <p className="text-gray-600">150+</p>
                 </div>
               </div>
 

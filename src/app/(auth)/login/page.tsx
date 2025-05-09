@@ -27,8 +27,8 @@ export default function Login() {
 
       await Swal.fire({
         icon: "success",
-        title: "Berhasil login!",
-        text: "Selamat Datang 👋",
+        title: "Login Successful!",
+        text: "Welcome 👋",
         confirmButtonColor: "#2563EB",
       });
 
@@ -36,8 +36,8 @@ export default function Login() {
     } catch (err) {
       await Swal.fire({
         icon: "error",
-        title: "Gagal login",
-        text: "Email atau password salah!",
+        title: "Login Failed",
+        text: "Incorrect email or password!",
         confirmButtonColor: "#EF4444",
       });
       console.error(err);
@@ -56,10 +56,10 @@ export default function Login() {
             <LogIn className="h-8 w-8 text-white" />
           </div>
           <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
-            Masuk ke Akun
+            Log in to Your Account
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Portal Rekrutmen PT Batara Dharma Persada
+            PT Batara Dharma Persada Recruitment Portal
           </p>
         </div>
       </div>
@@ -83,7 +83,7 @@ export default function Login() {
                   value={formData.email}
                   onChange={handleChange}
                   className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
-                  placeholder="email@perusahaan.com"
+                  placeholder="email@company.com"
                 />
               </div>
             </div>
@@ -129,12 +129,12 @@ export default function Login() {
                   className="h-4 w-4 text-blue-600 border-gray-300 rounded"
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                  Ingat saya
+                  Remember me
                 </label>
               </div>
 
-              <Link href="/lupa-password" className="text-sm text-blue-600 hover:text-blue-500">
-                Lupa password?
+              <Link href="/forgot-password" className="text-sm text-blue-600 hover:text-blue-500">
+                Forgot password?
               </Link>
             </div>
 
@@ -144,7 +144,7 @@ export default function Login() {
                 className="w-full flex justify-center items-center py-3 px-4 text-white bg-blue-600 hover:bg-blue-700 rounded-md"
               >
                 <LogIn className="mr-2 h-5 w-5" />
-                Masuk
+                Log in
               </button>
             </div>
           </form>
@@ -154,17 +154,17 @@ export default function Login() {
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Atau</span>
+              <span className="px-2 bg-white text-gray-500">Or</span>
             </div>
           </div>
 
           <p className="mt-6 text-center text-sm text-gray-600">
-            Belum memiliki akun?{" "}
+            Don't have an account?{" "}
             <Link
               href="/register"
               className="font-medium text-blue-600 hover:text-blue-500 inline-flex items-center"
             >
-              Daftar sekarang
+              Sign up now
               <ArrowRight className="ml-1 h-4 w-4" />
             </Link>
           </p>
@@ -173,14 +173,14 @@ export default function Login() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center space-x-4 text-sm text-gray-500">
-          <Link href="/bantuan" className="hover:text-gray-900">
-            Bantuan
+          <Link href="/help" className="hover:text-gray-900">
+            Help
           </Link>
-          <Link href="/privasi" className="hover:text-gray-900">
-            Privasi
+          <Link href="/privacy" className="hover:text-gray-900">
+            Privacy
           </Link>
-          <Link href="/syarat-dan-ketentuan" className="hover:text-gray-900">
-            Syarat & Ketentuan
+          <Link href="/terms-and-conditions" className="hover:text-gray-900">
+            Terms & Conditions
           </Link>
         </div>
       </div>
