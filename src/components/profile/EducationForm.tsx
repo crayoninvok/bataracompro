@@ -1,0 +1,182 @@
+// src/components/profile/EducationForm.tsx
+"use client";
+
+import React, { useState } from "react";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { Education } from "@/types/profile.types";
+import { isValidYear } from "@/utils/validation";
+
+interface EducationFormProps {
+  education?: Education;
+  onSubmit: (education: Education) => void;
+  onCancel: () => void;
+}
+
+export const EducationForm: React.FC<EducationFormProps> = ({
+  education,
+  onSubmit,
+  onCancel,
+}) => {
+  const [formData, setFormData] = useState<Education>(
+    education || {
+      degree: "",
+      institution: "",
+      major: "",
+      yearStart: undefined,
+      yearEnd: undefined,
+    }
+  );
+
+  const [formErrors, setFormErrors] = useState({
+    degree: "",
+    institution: "",
+    yearStart: "",
+    yearEnd: "",
+  });
+
+  const validateForm = (): boolean => {
+    const errors = {
+      degree: "",
+      institution: "",
+      yearStart: "",
+      yearEnd: "",
+    };
+
+    if (!formData.degree.trim()) {
+      errors.degree = "Degree is required";
+    }
+
+    if (!formData.institution.trim()) {
+      errors.institution = "Institution is required";
+    }
+
+    if (formData.yearStart && !isValidYear(formData.yearStart)) {
+      errors.yearStart = "Enter a valid year";
+    }
+
+    if (formData.yearEnd && !isValidYear(formData.yearEnd)) {
+      errors.yearEnd = "Enter a valid year";
+    }
+
+    if (
+      formData.yearStart &&
+      formData.yearEnd &&
+      formData.yearStart > formData.yearEnd
+    ) {
+      errors.yearEnd = "End year cannot be before start year";
+    }
+
+    setFormErrors(errors);
+
+    return (
+      !errors.degree &&
+      !errors.institution &&
+      !errors.yearStart &&
+      !errors.yearEnd
+    );
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    // Handle number inputs
+    if (name === "yearStart" || name === "yearEnd") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value ? parseInt(value, 10) : undefined,
+      }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+
+    // Clear error when typing
+    if (formErrors[name as keyof typeof formErrors]) {
+      setFormErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    onSubmit(formData);
+  };
+
+  return (
+    <Card title={education ? "Edit Education" : "Add Education"}>
+      <form onSubmit={handleSubmit}>
+        <div className="space-y-4">
+          <Input
+            type="text"
+            name="degree"
+            label="Degree"
+            placeholder="e.g., Bachelor of Science, High School"
+            value={formData.degree}
+            onChange={handleChange}
+            error={formErrors.degree}
+            fullWidth
+            required
+          />
+
+          <Input
+            type="text"
+            name="institution"
+            label="Institution"
+            placeholder="e.g., University of Indonesia"
+            value={formData.institution}
+            onChange={handleChange}
+            error={formErrors.institution}
+            fullWidth
+            required
+          />
+
+          <Input
+            type="text"
+            name="major"
+            label="Major/Field of Study"
+            placeholder="e.g., Computer Science"
+            value={formData.major || ""}
+            onChange={handleChange}
+            fullWidth
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input
+              type="number"
+              name="yearStart"
+              label="Start Year"
+              placeholder="e.g., 2018"
+              value={formData.yearStart?.toString() || ""}
+              onChange={handleChange}
+              error={formErrors.yearStart}
+            />
+
+            <Input
+              type="number"
+              name="yearEnd"
+              label="End Year (or Expected)"
+              placeholder="e.g., 2022"
+              value={formData.yearEnd?.toString() || ""}
+              onChange={handleChange}
+              error={formErrors.yearEnd}
+            />
+          </div>
+
+          <div className="pt-4 flex justify-end space-x-3">
+            <Button type="button" variant="outline" onClick={onCancel}>
+              Cancel
+            </Button>
+            <Button type="submit" variant="primary">
+              {education ? "Update" : "Add"} Education
+            </Button>
+          </div>
+        </div>
+      </form>
+    </Card>
+  );
+};

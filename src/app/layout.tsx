@@ -1,9 +1,11 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Analytics } from "@/components/Analytics";
+import Navbar from "@/components/Navbar";
+import AuthWrapper from "@/components/AuthWrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -53,13 +55,16 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
     >
       <body className="bg-white text-gray-900 antialiased">
-        <div className="relative flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
+        <AuthWrapper>
+          <div className="relative flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+        </AuthWrapper>
         <Analytics />
       </body>
     </html>
   );
 }
+ 

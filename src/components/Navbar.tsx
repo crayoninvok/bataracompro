@@ -1,10 +1,12 @@
+// src/components/Navbar.tsx
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useAuthContext } from "@/context/auth-provider";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,14 +14,9 @@ export default function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [avatarDropdown, setAvatarDropdown] = useState(false);
   const [avatarError, setAvatarError] = useState(false);
-  const { user, logout } = useAuth();
-  
-  // Debug user avatar
-  useEffect(() => {
-    if (user) {
-      console.log("User avatar URL:", user.avatar);
-    }
-  }, [user]);
+
+  const { user, isAuthenticated, isAdmin, logout } = useAuthContext();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +24,19 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest(".dropdown-container")) {
+        setActiveDropdown(null);
+        setAvatarDropdown(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   const navLinks = [
@@ -49,35 +59,31 @@ export default function Navbar() {
     setActiveDropdown((prev) => (prev === label ? null : label));
   };
 
-  // Get avatar URL, handling Cloudinary URLs correctly
+  // Get avatar URL with error handling
   const getAvatarUrl = () => {
     if (!user || !user.avatar || avatarError) {
       return "/avatar-default.png";
     }
-    
-    // If avatar already looks like a Cloudinary URL, use it directly
-    if (user.avatar.includes('cloudinary.com') || user.avatar.startsWith('http')) {
+
+    // If avatar is a valid URL, use it directly
+    if (
+      user.avatar.includes("cloudinary.com") ||
+      user.avatar.startsWith("http")
+    ) {
       return user.avatar;
     }
-    
-    // If avatar is just a Cloudinary public ID or partial path, construct the full URL
-    // Replace YOUR_CLOUD_NAME with your actual Cloudinary cloud name
-    return `/avatar-default.png`;
+
+    // Fallback to default avatar
+    return "/avatar-default.png";
   };
 
-  // Close dropdowns when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      // Only close if clicking outside the dropdown areas
-      if (!(e.target as HTMLElement).closest('.dropdown-container')) {
-        setActiveDropdown(null);
-        setAvatarDropdown(false);
-      }
-    };
-    
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  // Add admin dashboard link if user is admin
+  const getDashboardLink = () => {
+    if (isAdmin) {
+      return "/admin/dashboard";
+    }
+    return "/dashboard";
+  };
 
   return (
     <nav
@@ -109,7 +115,10 @@ export default function Navbar() {
         <div className="hidden md:flex items-center">
           <div className="flex space-x-2">
             {navLinks.map((link) => (
-              <div key={link.label} className="relative group dropdown-container">
+              <div
+                key={link.label}
+                className="relative group dropdown-container"
+              >
                 {link.dropdown ? (
                   <button
                     onClick={(e) => {
@@ -124,7 +133,11 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={link.href}
-                    className="px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md block transition"
+                    className={`px-3 py-2 ${
+                      pathname === link.href
+                        ? "text-blue-600 bg-blue-50"
+                        : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                    } rounded-md block transition`}
                   >
                     {link.label}
                   </Link>
@@ -136,7 +149,11 @@ export default function Navbar() {
                       <Link
                         key={item.href}
                         href={item.href}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                        className={`block px-4 py-2 text-sm ${
+                          pathname === item.href
+                            ? "bg-blue-50 text-blue-600"
+                            : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                        }`}
                         onClick={() => setActiveDropdown(null)}
                       >
                         {item.label}
@@ -150,7 +167,7 @@ export default function Navbar() {
 
           {/* Auth section */}
           <div className="ml-8 relative dropdown-container">
-            {user ? (
+            {isAuthenticated ? (
               <div className="relative">
                 <button
                   onClick={(e) => {
@@ -159,10 +176,9 @@ export default function Navbar() {
                   }}
                   className="w-10 h-10 rounded-full border-2 border-blue-500 overflow-hidden shadow"
                 >
-                  {/* Use regular img tag instead of Next.js Image for Cloudinary URLs */}
                   <img
                     src={getAvatarUrl()}
-                    alt={user.name || "User Avatar"}
+                    alt={user?.name || "User Avatar"}
                     className="object-cover w-full h-full"
                     onError={() => setAvatarError(true)}
                   />
@@ -170,8 +186,17 @@ export default function Navbar() {
                 {avatarDropdown && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50">
                     <div className="py-2 px-4 border-b">
-                      <p className="text-sm font-medium truncate">{user.name}</p>
-                      <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                      <p className="text-sm font-medium truncate">
+                        {user?.name}
+                      </p>
+                      <p className="text-xs text-gray-500 truncate">
+                        {user?.email}
+                      </p>
+                      {isAdmin && (
+                        <p className="text-xs font-medium text-blue-600 mt-1">
+                          Admin
+                        </p>
+                      )}
                     </div>
                     <Link
                       href="/profile"
@@ -180,8 +205,18 @@ export default function Navbar() {
                     >
                       My Profile
                     </Link>
+                    <Link
+                      href={getDashboardLink()}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
+                      onClick={() => setAvatarDropdown(false)}
+                    >
+                      Dashboard
+                    </Link>
                     <button
-                      onClick={logout}
+                      onClick={() => {
+                        logout();
+                        setAvatarDropdown(false);
+                      }}
                       className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 transition"
                     >
                       Logout
@@ -222,16 +257,27 @@ export default function Navbar() {
                       className="flex items-center justify-between w-full py-2 text-gray-700"
                     >
                       <span>{link.label}</span>
-                      <ChevronDown size={16} className={activeDropdown === link.label ? "transform rotate-180" : ""} />
+                      <ChevronDown
+                        size={16}
+                        className={
+                          activeDropdown === link.label
+                            ? "transform rotate-180"
+                            : ""
+                        }
+                      />
                     </button>
-                    
+
                     {activeDropdown === link.label && (
                       <div className="pl-4 mt-1 border-l-2 border-blue-300 space-y-2">
                         {link.dropdown.map((item) => (
                           <Link
                             key={item.href}
                             href={item.href}
-                            className="block py-2 text-sm text-gray-600 hover:text-blue-600"
+                            className={`block py-2 text-sm ${
+                              pathname === item.href
+                                ? "text-blue-600"
+                                : "text-gray-600 hover:text-blue-600"
+                            }`}
                             onClick={() => setIsOpen(false)}
                           >
                             {item.label}
@@ -243,7 +289,11 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={link.href}
-                    className="block py-2 text-gray-700 hover:text-blue-600"
+                    className={`block py-2 ${
+                      pathname === link.href
+                        ? "text-blue-600"
+                        : "text-gray-700 hover:text-blue-600"
+                    }`}
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}
@@ -251,22 +301,25 @@ export default function Navbar() {
                 )}
               </div>
             ))}
-            
+
             {/* Mobile auth section */}
-            {user ? (
+            {isAuthenticated ? (
               <div className="pt-4 mt-4 border-t">
                 <div className="flex items-center space-x-3 mb-3">
                   <div className="w-10 h-10 rounded-full border-2 border-blue-500 overflow-hidden">
                     <img
                       src={getAvatarUrl()}
-                      alt={user.name || "User Avatar"}
+                      alt={user?.name || "User Avatar"}
                       className="object-cover w-full h-full"
                       onError={() => setAvatarError(true)}
                     />
                   </div>
                   <div>
-                    <p className="font-medium text-sm">{user.name}</p>
-                    <p className="text-xs text-gray-500">{user.email}</p>
+                    <p className="font-medium text-sm">{user?.name}</p>
+                    <p className="text-xs text-gray-500">{user?.email}</p>
+                    {isAdmin && (
+                      <p className="text-xs text-blue-600 font-medium">Admin</p>
+                    )}
                   </div>
                 </div>
                 <Link
@@ -275,6 +328,13 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                 >
                   My Profile
+                </Link>
+                <Link
+                  href={getDashboardLink()}
+                  className="block py-2 text-blue-600 hover:text-blue-700"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Dashboard
                 </Link>
                 <button
                   onClick={() => {

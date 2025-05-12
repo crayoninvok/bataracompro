@@ -1,113 +1,144 @@
-import { useState, useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import { AuthService } from '@/services/auth.service';
-import { LoginResponse } from '@/types/auth.types';
-import Swal from 'sweetalert2';
-
-const TOKEN_KEY = 'token';
-const USER_KEY = 'user';
+// src/hooks/use-auth.ts
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { authService } from "@/services/auth-services";
+import { ApiResponse } from "@/types/api";
+import {
+  User,
+  LoginRequest,
+  RegisterRequest,
+  AuthResponse,
+} from "@/types/auth";
 
 export function useAuth() {
-  const [user, setUser] = useState<LoginResponse['user'] | null>(null);
-  const [token, setToken] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const pathname = usePathname();
 
   useEffect(() => {
-    const storedToken = localStorage.getItem(TOKEN_KEY);
-    const storedUser = localStorage.getItem(USER_KEY);
+    // Only run on client side
+    if (typeof window === "undefined") return;
 
-    if (storedToken) {
-      setToken(storedToken);
-
-      if (storedUser) {
-        try {
-          setUser(JSON.parse(storedUser));
-        } catch {
-          localStorage.removeItem(USER_KEY);
-        }
-      } else {
-        AuthService.getProfile(storedToken)
-          .then((profile) => {
-            setUser(profile);
-            localStorage.setItem(USER_KEY, JSON.stringify(profile));
-          })
-          .catch(async () => {
-            await Swal.fire({
-              icon: 'warning',
-              title: 'Sesi telah berakhir',
-              text: 'Silakan login kembali.',
-              confirmButtonColor: '#2563EB',
-            });
-            logout();
-          });
+    const loadUser = async () => {
+      if (!authService.isLoggedIn()) {
+        setIsLoading(false);
+        return;
       }
-    }
 
-    // Optional redirect if already logged in and on /login
-    // if (storedToken && pathname === '/login') {
-    //   router.push('/profile');
-    // }
+      try {
+        const userData = await authService.getCurrentUser();
+        setUser(userData);
+      } catch (err: any) {
+        console.error("Failed to load user:", err);
+        if (err.status === 401) {
+          // Token expired or invalid
+          authService.logout();
+        }
+        setError(err.message || "Failed to authenticate");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
+    loadUser();
   }, []);
 
-  const login = async (email: string, password: string) => {
-    setLoading(true);
+  const login = async (
+    credentials: LoginRequest
+  ): Promise<ApiResponse<AuthResponse>> => {
+    setIsLoading(true);
+    setError(null);
+
     try {
-      const data = await AuthService.login({ email, password });
-      localStorage.setItem(TOKEN_KEY, data.token);
-      localStorage.setItem(USER_KEY, JSON.stringify(data.user));
-      setToken(data.token);
-      setUser(data.user);
+      const response = await authService.login(credentials);
+      localStorage.setItem("token", response.token);
+
+      // Make sure we don't pass undefined to setUser
+      if (response.user) {
+        setUser(response.user);
+      } else {
+        // If for some reason user is undefined, set to null
+        setUser(null);
+      }
+
+      return { data: response, isLoading: false };
+    } catch (err: any) {
+      setError(err.message || "Login failed");
+      return { error: err, isLoading: false };
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  const logout = async () => {
-    const result = await Swal.fire({
-      title: 'Keluar dari akun?',
-      text: 'Anda akan keluar dari sesi saat ini.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#2563EB',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Ya, keluar',
-      cancelButtonText: 'Batal',
-    });
+  const loginAdmin = async (
+    credentials: LoginRequest
+  ): Promise<ApiResponse<AuthResponse>> => {
+    setIsLoading(true);
+    setError(null);
 
-    if (result.isConfirmed) {
-      localStorage.removeItem(TOKEN_KEY);
-      localStorage.removeItem(USER_KEY);
-      setToken(null);
-      setUser(null);
+    try {
+      const response = await authService.loginAdmin(credentials);
+      localStorage.setItem("token", response.token);
 
-      await Swal.fire({
-        icon: 'success',
-        title: 'Berhasil keluar',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      // Handle admin response format
+      if (response.admin) {
+        // Convert admin object to User format
+        setUser({
+          id: response.admin.id,
+          email: response.admin.email,
+          name: response.admin.name,
+          role: "ADMIN",
+        });
+      } else if (response.user) {
+        setUser(response.user);
+      } else {
+        // If neither is present, set to null
+        setUser(null);
+      }
 
-      router.push('/login');
+      return { data: response, isLoading: false };
+    } catch (err: any) {
+      setError(err.message || "Admin login failed");
+      return { error: err, isLoading: false };
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const refreshProfile = async () => {
-    if (!token) return;
-    const profile = await AuthService.getProfile(token);
-    setUser(profile);
-    localStorage.setItem(USER_KEY, JSON.stringify(profile));
+  const register = async (
+    data: RegisterRequest
+  ): Promise<ApiResponse<AuthResponse>> => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await authService.register(data);
+      // Don't auto-login after registration since email verification is required
+      return { data: response, isLoading: false };
+    } catch (err: any) {
+      setError(err.message || "Registration failed");
+      return { error: err, isLoading: false };
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const logout = () => {
+    authService.logout();
+    setUser(null);
+    router.push("/login");
   };
 
   return {
     user,
-    token,
-    loading,
+    isLoading,
+    error,
+    isAuthenticated: !!user,
+    isAdmin: user?.role === "ADMIN",
     login,
+    loginAdmin,
+    register,
     logout,
-    refreshProfile,
-    isLoggedIn: Boolean(user),
   };
 }
