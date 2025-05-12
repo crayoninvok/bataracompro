@@ -113,10 +113,7 @@ export default function AdminLayout({
           {/* Sidebar Footer */}
           <div className="absolute bottom-0 w-full border-t border-indigo-700 p-4">
             <button
-              onClick={() => {
-                logout();
-                router.push("/login");
-              }}
+              onClick={logout}
               className="flex w-full items-center rounded-md px-3 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700"
             >
               <LogOut className="mr-3 h-5 w-5" />

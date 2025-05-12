@@ -1,11 +1,10 @@
-// app/layout.tsx
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import { Analytics } from "@/components/Analytics";
-import Navbar from "@/components/Navbar";
 import AuthWrapper from "@/components/AuthWrapper";
+import NavbarWrapper from "@/components/NavbarWrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -57,8 +56,9 @@ export default function RootLayout({
       <body className="bg-white text-gray-900 antialiased">
         <AuthWrapper>
           <div className="relative flex min-h-screen flex-col">
-            <Navbar />
-            <main className="flex-1">{children}</main>
+            <NavbarWrapper>
+              <main className="flex-1">{children}</main>
+            </NavbarWrapper>
             <Footer />
           </div>
         </AuthWrapper>
@@ -67,4 +67,3 @@ export default function RootLayout({
     </html>
   );
 }
- 

@@ -1,4 +1,3 @@
-// src/hooks/use-auth.ts
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { authService } from "@/services/auth-services";
@@ -17,7 +16,6 @@ export function useAuth() {
   const router = useRouter();
 
   useEffect(() => {
-    // Only run on client side
     if (typeof window === "undefined") return;
 
     const loadUser = async () => {
@@ -32,7 +30,6 @@ export function useAuth() {
       } catch (err: any) {
         console.error("Failed to load user:", err);
         if (err.status === 401) {
-          // Token expired or invalid
           authService.logout();
         }
         setError(err.message || "Failed to authenticate");
@@ -54,11 +51,9 @@ export function useAuth() {
       const response = await authService.login(credentials);
       localStorage.setItem("token", response.token);
 
-      // Make sure we don't pass undefined to setUser
       if (response.user) {
         setUser(response.user);
       } else {
-        // If for some reason user is undefined, set to null
         setUser(null);
       }
 
@@ -81,20 +76,11 @@ export function useAuth() {
       const response = await authService.loginAdmin(credentials);
       localStorage.setItem("token", response.token);
 
-      // Handle admin response format
       if (response.admin) {
-        // Convert admin object to User format
         setUser({
-          id: response.admin.id,
-          email: response.admin.email,
-          name: response.admin.name,
-          role: "ADMIN",
+          ...response.admin,
+          role: "ADMIN", // ✅ tambahkan ini supaya cocok dengan tipe User
         });
-      } else if (response.user) {
-        setUser(response.user);
-      } else {
-        // If neither is present, set to null
-        setUser(null);
       }
 
       return { data: response, isLoading: false };
@@ -114,7 +100,6 @@ export function useAuth() {
 
     try {
       const response = await authService.register(data);
-      // Don't auto-login after registration since email verification is required
       return { data: response, isLoading: false };
     } catch (err: any) {
       setError(err.message || "Registration failed");
@@ -125,9 +110,10 @@ export function useAuth() {
   };
 
   const logout = () => {
+    const isAdmin = user?.role === "ADMIN";
     authService.logout();
     setUser(null);
-    router.push("/login");
+    router.push(isAdmin ? "/admin/login" : "/login");
   };
 
   return {

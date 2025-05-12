@@ -1,30 +1,23 @@
-// src/components/NavbarWrapper.tsx
 "use client";
 
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar"; // adjust the import path as needed
+import { ReactNode } from "react";
 
-export default function NavbarWrapper() {
-  const [mounted, setMounted] = useState(false);
+interface NavbarWrapperProps {
+  children: ReactNode;
+}
+
+const hiddenRoutes = ["/admin/dashboard",]; // pages without Navbar
+
+export default function NavbarWrapper({ children }: NavbarWrapperProps) {
   const pathname = usePathname();
+  const showNavbar = !hiddenRoutes.includes(pathname);
 
-  // Check if current route is admin route
-  const isAdminRoute = pathname?.startsWith("/admin");
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Don't render navbar on admin routes
-  if (isAdminRoute) {
-    return null;
-  }
-
-  // Don't render until mounted
-  if (!mounted) {
-    return <div className="h-16 md:h-20"></div>;
-  }
-
-  return <Navbar />;
+  return (
+    <>
+      {showNavbar && <Navbar />}
+      {children}
+    </>
+  );
 }
