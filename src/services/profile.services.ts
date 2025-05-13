@@ -24,7 +24,7 @@ export const profileService = {
     const formData = new FormData();
     formData.append("avatar", file);
 
-    return fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/avatar`, {
+    return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/profile/avatar`, {
       method: "POST",
       headers: {
         ...getAuthHeader(),
@@ -48,7 +48,7 @@ export const profileService = {
     formData.append("issuedAt", data.issuedAt);
     if (data.type) formData.append("type", data.type);
 
-    return fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/certificate`, {
+    return fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/profile/certificate`, {
       method: "POST",
       headers: getAuthHeader(),
       body: formData,

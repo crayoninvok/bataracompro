@@ -8,11 +8,16 @@ interface NavbarWrapperProps {
   children: ReactNode;
 }
 
-const hiddenRoutes = ["/admin/dashboard",]; // pages without Navbar
+// Hide Navbar on these route prefixes
+const hiddenRoutePrefixes = ["/admin/dashboard", "/admin/jobs/applications", "/admin/jobs/create", "/admin/jobs/edit", "/admin/applicants"];
 
 export default function NavbarWrapper({ children }: NavbarWrapperProps) {
   const pathname = usePathname();
-  const showNavbar = !hiddenRoutes.includes(pathname);
+
+  // Check if current route starts with any of the hiddenRoutePrefixes
+  const showNavbar = !hiddenRoutePrefixes.some((route) =>
+    pathname.startsWith(route)
+  );
 
   return (
     <>

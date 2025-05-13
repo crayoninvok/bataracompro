@@ -1,4 +1,3 @@
-// src/components/auth/RegisterForm.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -26,9 +25,9 @@ export const RegisterForm: React.FC = () => {
     if (error) {
       Swal.fire({
         title: "Registration Failed",
-        text: error.message,
+        text: error, // Fixed: removed .message since error is a string
         icon: "error",
-        confirmButtonColor: "#2563eb",
+        confirmButtonColor: "#00BCD4",
         confirmButtonText: "Try Again",
       });
     }
@@ -50,7 +49,7 @@ export const RegisterForm: React.FC = () => {
         title: "Invalid Name",
         text: "Please enter your full name",
         icon: "warning",
-        confirmButtonColor: "#2563eb",
+        confirmButtonColor: "#00BCD4",
       });
       return false;
     }
@@ -61,7 +60,7 @@ export const RegisterForm: React.FC = () => {
         title: "Invalid Email",
         text: "Please enter a valid email address",
         icon: "warning",
-        confirmButtonColor: "#2563eb",
+        confirmButtonColor: "#00BCD4",
       });
       return false;
     }
@@ -72,7 +71,7 @@ export const RegisterForm: React.FC = () => {
         title: "Invalid Password",
         text: "Password must be at least 8 characters long",
         icon: "warning",
-        confirmButtonColor: "#2563eb",
+        confirmButtonColor: "#00BCD4",
       });
       return false;
     }
@@ -83,7 +82,7 @@ export const RegisterForm: React.FC = () => {
         title: "Passwords Do Not Match",
         text: "Please make sure your passwords match",
         icon: "warning",
-        confirmButtonColor: "#2563eb",
+        confirmButtonColor: "#00BCD4",
       });
       return false;
     }
@@ -129,7 +128,7 @@ export const RegisterForm: React.FC = () => {
         title: "Registration Successful!",
         text: "You will be redirected to the login page. Please check your email for verification.",
         icon: "success",
-        confirmButtonColor: "#2563eb",
+        confirmButtonColor: "#00BCD4",
         confirmButtonText: "Continue to Login",
       });
 
@@ -144,20 +143,20 @@ export const RegisterForm: React.FC = () => {
   return (
     <div className="max-w-md w-full bg-white rounded-xl shadow-lg overflow-hidden">
       {/* Image Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 py-6 px-8">
+      <div className="bg-gradient-to-r from-[#FF5722] to-[#00BCD4] py-6 px-8">
         <div className="flex items-center justify-center space-x-4">
           <div className="w-12 h-12 rounded-full border-2 border-white bg-white p-1">
             <Image
-              src="/btr.png"
-              alt="Batara Dharma Persada"
+              src="/nobgbtr.png"
+              alt="Company Logo"
               width={48}
               height={48}
               className="object-contain"
             />
           </div>
           <div className="text-white">
-            <h1 className="text-xl font-bold">Batara Dharma</h1>
-            <p className="text-blue-100 text-sm">Persada</p>
+            <h1 className="text-xl font-bold">Batara Dharma Persada</h1>
+            <p className="text-white/80 text-sm">Career Portal</p>
           </div>
         </div>
       </div>
@@ -188,7 +187,7 @@ export const RegisterForm: React.FC = () => {
               required
               value={formData.name}
               onChange={handleChange}
-              className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-[#00BCD4]"
               placeholder="John Doe"
               disabled={isLoading}
             />
@@ -210,7 +209,7 @@ export const RegisterForm: React.FC = () => {
               required
               value={formData.email}
               onChange={handleChange}
-              className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-[#00BCD4]"
               placeholder="you@example.com"
               disabled={isLoading}
             />
@@ -233,7 +232,7 @@ export const RegisterForm: React.FC = () => {
                 required
                 value={formData.password}
                 onChange={handleChange}
-                className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-[#00BCD4]"
                 placeholder="••••••••"
                 disabled={isLoading}
               />
@@ -271,7 +270,7 @@ export const RegisterForm: React.FC = () => {
                 required
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-[#00BCD4]"
                 placeholder="••••••••"
                 disabled={isLoading}
               />
@@ -282,7 +281,7 @@ export const RegisterForm: React.FC = () => {
           <div className="pt-2">
             <button
               type="submit"
-              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#FF5722] hover:bg-[#FF5722]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
               disabled={isLoading}
             >
               Create Account
@@ -296,7 +295,7 @@ export const RegisterForm: React.FC = () => {
             Already have an account?{" "}
             <Link
               href="/login"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-[#00BCD4] hover:text-[#00BCD4]/80"
             >
               Sign in
             </Link>

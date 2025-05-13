@@ -1,4 +1,3 @@
-// src/components/auth/LoginForm.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -31,7 +30,7 @@ export const LoginForm: React.FC = () => {
         title: "Registration Successful!",
         text: "Please check your email to verify your account.",
         icon: "success",
-        confirmButtonColor: "#2563eb",
+        confirmButtonColor: "#00BCD4",
         confirmButtonText: "Got it",
       });
     }
@@ -42,9 +41,9 @@ export const LoginForm: React.FC = () => {
     if (error) {
       Swal.fire({
         title: "Login Failed",
-        text: error.message,
+        text: error,
         icon: "error",
-        confirmButtonColor: "#2563eb",
+        confirmButtonColor: "#00BCD4",
         confirmButtonText: "Try Again",
       });
     }
@@ -59,7 +58,7 @@ export const LoginForm: React.FC = () => {
         title: "Missing Information",
         text: "Please enter both email and password",
         icon: "warning",
-        confirmButtonColor: "#2563eb",
+        confirmButtonColor: "#00BCD4",
       });
       return;
     }
@@ -83,7 +82,7 @@ export const LoginForm: React.FC = () => {
       Swal.close();
 
       // After successful login, navigate to dashboard or return URL
-      const destination = returnUrl || "/dashboard";
+      const destination = returnUrl || "/user/dashboard";
       router.push(destination);
 
       // Optional: Show welcome message after successful login
@@ -103,20 +102,20 @@ export const LoginForm: React.FC = () => {
   return (
     <div className="max-w-md w-full bg-white rounded-xl shadow-lg overflow-hidden">
       {/* Image Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 py-6 px-8">
+      <div className="bg-gradient-to-r from-[#FF5722] to-[#00BCD4] py-6 px-8">
         <div className="flex items-center justify-center space-x-4">
-          <div className="w-12 h-12 rounded-full border-2 border-white bg-white p-1">
+          <div className="w-12 h-12 rounded-full border-2 border-white bg-white p-1 flex items-center justify-center overflow-hidden">
             <Image
-              src="/btr.png"
-              alt="Batara Dharma Persada"
-              width={48}
-              height={48}
-              className="object-contain"
+              src="/nobgbtr.png"
+              alt="Company Logo"
+              width={40}
+              height={40}
+              className="w-full h-full object-contain"
             />
           </div>
           <div className="text-white">
-            <h1 className="text-xl font-bold">Batara Dharma</h1>
-            <p className="text-blue-100 text-sm">Persada</p>
+            <h1 className="text-xl font-bold">Batara Dharma Persada</h1>
+            <p className="text-white/80 text-sm">Career Portals</p>
           </div>
         </div>
       </div>
@@ -147,7 +146,7 @@ export const LoginForm: React.FC = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-[#00BCD4]"
               placeholder="your.email@example.com"
               disabled={isLoading}
             />
@@ -164,7 +163,7 @@ export const LoginForm: React.FC = () => {
               </label>
               <Link
                 href="/forgot-password"
-                className="text-sm text-blue-600 hover:text-blue-500"
+                className="text-sm text-[#00BCD4] hover:text-[#00BCD4]/80"
               >
                 Forgot password?
               </Link>
@@ -178,7 +177,7 @@ export const LoginForm: React.FC = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-[#00BCD4]"
                 placeholder="••••••••"
                 disabled={isLoading}
               />
@@ -202,8 +201,8 @@ export const LoginForm: React.FC = () => {
               type="submit"
               className={`w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
                 isLoading
-                  ? "bg-blue-400 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  ? "bg-[#607D8B]/70 cursor-not-allowed"
+                  : "bg-[#FF5722] hover:bg-[#FF5722]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
               }`}
               disabled={isLoading}
             >
@@ -218,7 +217,7 @@ export const LoginForm: React.FC = () => {
             Don't have an account?{" "}
             <Link
               href="/register"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-[#00BCD4] hover:text-[#00BCD4]/80"
             >
               Register here
             </Link>

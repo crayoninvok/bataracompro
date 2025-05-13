@@ -68,10 +68,10 @@ export default function Projects() {
   return (
     <main className="min-h-screen bg-gray-50 pt-16">
       {/* Header */}
-      <section className="bg-blue-700 text-white py-24 px-4 md:px-8 lg:px-24 relative overflow-hidden">
+      <section className="bg-[#5B5B5F] text-white py-24 px-4 md:px-8 lg:px-24 relative overflow-hidden">
         {/* Background accent */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full -mr-32 -mt-32 opacity-40"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-800 rounded-full -ml-48 -mb-48 opacity-40"></div>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-[#1FBFB8] rounded-full -mr-32 -mt-32 opacity-30"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#E85C23] rounded-full -ml-48 -mb-48 opacity-30"></div>
         
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -88,8 +88,8 @@ export default function Projects() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 reveal-project opacity-0 translate-y-6 transition-all duration-700">
             <h2 className="text-3xl font-bold mb-4 relative inline-block">
-              <span className="relative z-10">Service Area Map</span>
-              <span className="absolute -bottom-2 left-0 w-full h-3 bg-blue-300 opacity-40 z-0"></span>
+              <span className="relative z-10 text-[#5B5B5F]">Service Area Map</span>
+              <span className="absolute -bottom-2 left-0 w-full h-3 bg-[#1FBFB8] opacity-40 z-0"></span>
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               View the distribution of PT Batara Dharma Persada operational sites across Indonesia
@@ -98,15 +98,15 @@ export default function Projects() {
 
           <div className="reveal-project opacity-0 translate-y-6 transition-all duration-700">
             <div className="bg-white p-6 rounded-xl shadow-sm mb-6">
-              <h3 className="text-xl font-bold mb-4">Strategic Locations</h3>
+              <h3 className="text-xl font-bold mb-4 text-[#5B5B5F]">Strategic Locations</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="border border-gray-200 p-4 rounded-lg">
                   <div className="flex items-start">
-                    <div className="bg-blue-100 p-3 rounded-full mr-3">
-                      <Building className="w-5 h-5 text-blue-600" />
+                    <div className="bg-[#1FBFB8]/20 p-3 rounded-full mr-3">
+                      <Building className="w-5 h-5 text-[#1FBFB8]" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-lg mb-1">Head Office</h4>
+                      <h4 className="font-bold text-lg mb-1 text-[#5B5B5F]">Head Office</h4>
                       <p className="text-gray-600 mb-2">East Jakarta, Indonesia</p>
                       <p className="text-sm text-gray-500">
                         Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar., Kec. Cakung, East Jakarta City, DKI Jakarta 13910
@@ -116,11 +116,11 @@ export default function Projects() {
                 </div>
                 <div className="border border-gray-200 p-4 rounded-lg">
                   <div className="flex items-start">
-                    <div className="bg-orange-100 p-3 rounded-full mr-3">
-                      <Truck className="w-5 h-5 text-orange-600" />
+                    <div className="bg-[#E85C23]/20 p-3 rounded-full mr-3">
+                      <Truck className="w-5 h-5 text-[#E85C23]" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-lg mb-1">Operation Site</h4>
+                      <h4 className="font-bold text-lg mb-1 text-[#5B5B5F]">Operation Site</h4>
                       <p className="text-gray-600 mb-2">Tabang, East Kalimantan</p>
                       <p className="text-sm text-gray-500">
                         PT. Bayan Resource Tbk
@@ -163,7 +163,7 @@ export default function Projects() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 md:px-8 lg:px-24 bg-blue-700 text-white">
+      <section className="py-20 px-4 md:px-8 lg:px-24 bg-[#5B5B5F] text-white">
         <div className="max-w-4xl mx-auto text-center reveal-project opacity-0 translate-y-6 transition-all duration-700">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Interested in Our Services?
@@ -173,7 +173,7 @@ export default function Projects() {
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center bg-white text-blue-700 hover:bg-gray-100 px-8 py-3 rounded-md transition font-medium"
+            className="inline-flex items-center bg-[#E85C23] text-white hover:bg-[#d14b17] px-8 py-3 rounded-md transition font-medium"
           >
             <span>Contact Us</span>
             <ArrowRight className="ml-2" />

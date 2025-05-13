@@ -27,7 +27,7 @@ export default function CompanyStats() {
   return (
     <section
       id="stats-section"
-      className="py-16 md:py-24 bg-blue-900 text-white"
+      className="py-16 md:py-24 bg-[#5B5B5F] text-white"
     >
       <div
         className={`container mx-auto px-4 md:px-6 transition-all duration-1000 ${
@@ -38,39 +38,39 @@ export default function CompanyStats() {
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
             Pencapaian Kami
           </h2>
-          <div className="w-16 h-1 bg-orange-500 mx-auto mb-6" />
-          <p className="text-blue-100">
+          <div className="w-16 h-1 bg-[#E85C23] mx-auto mb-6" />
+          <p className="text-gray-300">
             Perjalanan dan pencapaian PT. Batara Dharma Persada hingga saat ini
           </p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="p-6">
-            <div className="text-4xl md:text-5xl font-bold text-orange-400 mb-2">
+            <div className="text-4xl md:text-5xl font-bold text-[#1FBFB8] mb-2">
               2015
             </div>
-            <p className="text-blue-100">Tahun Berdiri</p>
+            <p className="text-gray-300">Tahun Berdiri</p>
           </div>
 
           <div className="p-6">
-            <div className="text-4xl md:text-5xl font-bold text-orange-400 mb-2">
+            <div className="text-4xl md:text-5xl font-bold text-[#1FBFB8] mb-2">
               50+
             </div>
-            <p className="text-blue-100">Proyek Selesai</p>
+            <p className="text-gray-300">Proyek Selesai</p>
           </div>
 
           <div className="p-6">
-            <div className="text-4xl md:text-5xl font-bold text-orange-400 mb-2">
+            <div className="text-4xl md:text-5xl font-bold text-[#1FBFB8] mb-2">
               120+
             </div>
-            <p className="text-blue-100">Karyawan</p>
+            <p className="text-gray-300">Karyawan</p>
           </div>
 
           <div className="p-6">
-            <div className="text-4xl md:text-5xl font-bold text-orange-400 mb-2">
+            <div className="text-4xl md:text-5xl font-bold text-[#1FBFB8] mb-2">
               25+
             </div>
-            <p className="text-blue-100">Armada Truk</p>
+            <p className="text-gray-300">Armada Truk</p>
           </div>
         </div>
       </div>

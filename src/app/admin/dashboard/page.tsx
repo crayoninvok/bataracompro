@@ -1,19 +1,14 @@
-// src/app/admin/dashboard/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAuthContext } from "@/context/auth-provider";
+import { useAuth } from "@/hooks/useAuth";
 import { Job } from "@/types/job";
 import { useJobs } from "@/hooks/useJobs";
+import { formatSalaryRange, formatDate } from "@/utils/format";
 
 export default function AdminDashboardPage() {
-  const {
-    user,
-    isAdmin,
-    isAuthenticated,
-    isLoading: authLoading,
-  } = useAuthContext();
+  const { user, isLoading: authLoading } = useAuth();
   const router = useRouter();
   const { getJobs, isLoading: jobsLoading } = useJobs();
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -23,6 +18,9 @@ export default function AdminDashboardPage() {
     totalItems: 0,
     totalPages: 0,
   });
+
+  const isAdmin = user?.role === "ADMIN";
+  const isAuthenticated = !!user;
 
   // Check if user is authenticated and is an admin
   useEffect(() => {
@@ -56,7 +54,7 @@ export default function AdminDashboardPage() {
   if (authLoading || jobsLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="text-xl">Loading...</div>
+        <div className="w-12 h-12 border-4 border-blue-400 border-t-blue-700 rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -72,7 +70,7 @@ export default function AdminDashboardPage() {
         <h1 className="text-2xl font-bold">Admin Dashboard</h1>
         <button
           onClick={() => router.push("/admin/jobs/create")}
-          className="rounded bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
+          className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
         >
           Post New Job
         </button>
@@ -117,16 +115,12 @@ export default function AdminDashboardPage() {
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       <div className="text-sm text-gray-500">
-                        {job.salaryMin && job.salaryMax
-                          ? `$${job.salaryMin.toLocaleString()} - $${job.salaryMax.toLocaleString()}`
-                          : job.salaryMin
-                          ? `From $${job.salaryMin.toLocaleString()}`
-                          : "Not specified"}
+                        {formatSalaryRange(job.salaryMin, job.salaryMax)}
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       <div className="text-sm text-gray-500">
-                        {new Date(job.postedAt).toLocaleDateString()}
+                        {formatDate(job.postedAt)}
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-sm font-medium">
@@ -134,7 +128,7 @@ export default function AdminDashboardPage() {
                         onClick={() =>
                           router.push(`/admin/jobs/edit/${job.id}`)
                         }
-                        className="mr-2 text-indigo-600 hover:text-indigo-900"
+                        className="mr-2 text-blue-600 hover:text-blue-900"
                       >
                         Edit
                       </button>

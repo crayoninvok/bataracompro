@@ -1,11 +1,10 @@
-// src/components/Navbar.tsx
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { useAuthContext } from "@/context/auth-provider";
+import { useAuth } from "@/hooks/useAuth";
 import { Menu, X, ChevronDown } from "lucide-react";
 
 export default function Navbar() {
@@ -15,7 +14,7 @@ export default function Navbar() {
   const [avatarDropdown, setAvatarDropdown] = useState(false);
   const [avatarError, setAvatarError] = useState(false);
 
-  const { user, isAuthenticated, isAdmin, logout } = useAuthContext();
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -47,7 +46,7 @@ export default function Navbar() {
       dropdown: [
         { href: "/tentang/profil", label: "Company Profile" },
         { href: "/tentang/visi-misi", label: "Vision & Mission" },
-        { href: "/tentang/tim", label: "Our Team" },
+        { href: "/tentang/tim", label: "Board of Director" },
       ],
     },
     { href: "/proyek", label: "Project" },
@@ -77,14 +76,6 @@ export default function Navbar() {
     return "/avatar-default.png";
   };
 
-  // Add admin dashboard link if user is admin
-  const getDashboardLink = () => {
-    if (isAdmin) {
-      return "/admin/dashboard";
-    }
-    return "/dashboard";
-  };
-
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -96,7 +87,7 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center px-4 md:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-3">
-          <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-blue-500 bg-white p-1 shadow-sm">
+          <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-[#E85C23] bg-white p-1 shadow-sm">
             <Image
               src="/btr.png"
               alt="Logo BTR"
@@ -106,8 +97,8 @@ export default function Navbar() {
             />
           </div>
           <div className="hidden md:block">
-            <h1 className="font-bold text-blue-900 text-lg">Batara Dharma</h1>
-            <p className="text-blue-600 text-xs">Persada</p>
+            <h1 className="font-bold text-[#5B5B5F] text-lg">Batara Dharma</h1>
+            <p className="text-[#E85C23] text-xs">Persada</p>
           </div>
         </Link>
 
@@ -125,7 +116,7 @@ export default function Navbar() {
                       e.stopPropagation();
                       toggleDropdown(link.label);
                     }}
-                    className="flex items-center px-3 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition"
+                    className="flex items-center px-3 py-2 text-gray-700 hover:text-[#E85C23] hover:bg-orange-50 rounded-md transition"
                   >
                     {link.label}
                     <ChevronDown size={16} className="ml-1" />
@@ -135,8 +126,8 @@ export default function Navbar() {
                     href={link.href}
                     className={`px-3 py-2 ${
                       pathname === link.href
-                        ? "text-blue-600 bg-blue-50"
-                        : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                        ? "text-[#E85C23] bg-orange-50"
+                        : "text-gray-700 hover:text-[#E85C23] hover:bg-orange-50"
                     } rounded-md block transition`}
                   >
                     {link.label}
@@ -151,8 +142,8 @@ export default function Navbar() {
                         href={item.href}
                         className={`block px-4 py-2 text-sm ${
                           pathname === item.href
-                            ? "bg-blue-50 text-blue-600"
-                            : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                            ? "bg-orange-50 text-[#E85C23]"
+                            : "text-gray-700 hover:bg-orange-50 hover:text-[#E85C23]"
                         }`}
                         onClick={() => setActiveDropdown(null)}
                       >
@@ -174,7 +165,7 @@ export default function Navbar() {
                     e.stopPropagation();
                     setAvatarDropdown(!avatarDropdown);
                   }}
-                  className="w-10 h-10 rounded-full border-2 border-blue-500 overflow-hidden shadow"
+                  className="w-10 h-10 rounded-full border-2 border-[#E85C23] overflow-hidden shadow"
                 >
                   <img
                     src={getAvatarUrl()}
@@ -193,20 +184,20 @@ export default function Navbar() {
                         {user?.email}
                       </p>
                       {isAdmin && (
-                        <p className="text-xs font-medium text-blue-600 mt-1">
+                        <p className="text-xs font-medium text-[#1FBFB8] mt-1">
                           Admin
                         </p>
                       )}
                     </div>
                     <Link
-                      href="/profile"
+                      href="/user/myprofile"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
                       onClick={() => setAvatarDropdown(false)}
                     >
                       My Profile
                     </Link>
                     <Link
-                      href={getDashboardLink()}
+                      href="/user/dashboard"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
                       onClick={() => setAvatarDropdown(false)}
                     >
@@ -227,7 +218,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md shadow-md transition"
+                className="bg-[#E85C23] hover:bg-[#d14b17] text-white px-5 py-2 rounded-md shadow-md transition"
               >
                 Login or Register
               </Link>
@@ -268,15 +259,15 @@ export default function Navbar() {
                     </button>
 
                     {activeDropdown === link.label && (
-                      <div className="pl-4 mt-1 border-l-2 border-blue-300 space-y-2">
+                      <div className="pl-4 mt-1 border-l-2 border-[#1FBFB8] space-y-2">
                         {link.dropdown.map((item) => (
                           <Link
                             key={item.href}
                             href={item.href}
                             className={`block py-2 text-sm ${
                               pathname === item.href
-                                ? "text-blue-600"
-                                : "text-gray-600 hover:text-blue-600"
+                                ? "text-[#E85C23]"
+                                : "text-gray-600 hover:text-[#E85C23]"
                             }`}
                             onClick={() => setIsOpen(false)}
                           >
@@ -291,8 +282,8 @@ export default function Navbar() {
                     href={link.href}
                     className={`block py-2 ${
                       pathname === link.href
-                        ? "text-blue-600"
-                        : "text-gray-700 hover:text-blue-600"
+                        ? "text-[#E85C23]"
+                        : "text-gray-700 hover:text-[#E85C23]"
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
@@ -306,7 +297,7 @@ export default function Navbar() {
             {isAuthenticated ? (
               <div className="pt-4 mt-4 border-t">
                 <div className="flex items-center space-x-3 mb-3">
-                  <div className="w-10 h-10 rounded-full border-2 border-blue-500 overflow-hidden">
+                  <div className="w-10 h-10 rounded-full border-2 border-[#E85C23] overflow-hidden">
                     <img
                       src={getAvatarUrl()}
                       alt={user?.name || "User Avatar"}
@@ -318,20 +309,20 @@ export default function Navbar() {
                     <p className="font-medium text-sm">{user?.name}</p>
                     <p className="text-xs text-gray-500">{user?.email}</p>
                     {isAdmin && (
-                      <p className="text-xs text-blue-600 font-medium">Admin</p>
+                      <p className="text-xs text-[#1FBFB8] font-medium">Admin</p>
                     )}
                   </div>
                 </div>
                 <Link
-                  href="/profile"
-                  className="block py-2 text-blue-600 hover:text-blue-700"
+                  href="/user/myprofile"
+                  className="block py-2 text-[#E85C23] hover:text-[#d14b17]"
                   onClick={() => setIsOpen(false)}
                 >
                   My Profile
                 </Link>
                 <Link
-                  href={getDashboardLink()}
-                  className="block py-2 text-blue-600 hover:text-blue-700"
+                  href="/user/dashboard"
+                  className="block py-2 text-[#E85C23] hover:text-[#d14b17]"
                   onClick={() => setIsOpen(false)}
                 >
                   Dashboard
@@ -350,7 +341,7 @@ export default function Navbar() {
               <div className="pt-4 mt-4 border-t">
                 <Link
                   href="/login"
-                  className="block w-full py-2 px-3 text-center bg-blue-600 text-white rounded-md"
+                  className="block w-full py-2 px-3 text-center bg-[#E85C23] text-white rounded-md"
                   onClick={() => setIsOpen(false)}
                 >
                   Login or Register

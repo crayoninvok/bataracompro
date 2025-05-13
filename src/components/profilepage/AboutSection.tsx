@@ -1,9 +1,8 @@
-// src/components/profile/AboutSection.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Calendar, Users, Briefcase } from "lucide-react";
+import { Calendar, Users, Briefcase, Award } from "lucide-react";
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,7 +36,7 @@ export default function AboutSection() {
                 : "-translate-x-10 opacity-0"
             }`}
           >
-            <div className="relative rounded-lg overflow-hidden shadow-xl">
+            <div className="relative rounded-xl overflow-hidden shadow-xl">
               <Image
                 src="/truck1.png" // Replace with actual image
                 alt="PT. Batara Dharma Persada Office"
@@ -45,9 +44,10 @@ export default function AboutSection() {
                 height={400}
                 className="w-full h-auto object-cover"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-4">
                 <p className="text-white text-sm">
-                  Kantor PT. Batara Dharma Persada
+                  PT. Batara Dharma Persada
                 </p>
               </div>
             </div>
@@ -60,14 +60,14 @@ export default function AboutSection() {
                 : "translate-x-10 opacity-0"
             }`}
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-blue-900 mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#5B5B5F] mb-4">
               About PT. Batara Dharma Persada
             </h2>
-            <div className="w-16 h-1 bg-orange-500 mb-6" />
+            <div className="w-16 h-1 bg-[#E85C23] mb-6" />
             <p className="text-gray-700 mb-4 leading-relaxed">
               With the faith of God the Almighty as the main pillar, PT Batara
               Dharma Persada was founded in 2024 to take a part to enhance
-              nation’s quality of the life through human resources and value
+              nation's quality of the life through human resources and value
               development along with optimum natural resources exploitation. The
               company is designed to complement mining industry in Indonesia,
               especially in coal, bauxite and nickel mining operation.
@@ -75,40 +75,50 @@ export default function AboutSection() {
             <p className="text-gray-700 mb-6 leading-relaxed">
               With the decentralization of government in mining, so that many
               Mining Business Permits are issued on a medium-to-small scale, PT
-              Batara Dharma Persada is present to ll the gap of medium-scale
+              Batara Dharma Persada is present to fill the gap of medium-scale
               miners with the right mining techniques and patterns, not only
-              efcient, optimum recovery, but very concerned about safety and
+              efficient, optimum recovery, but very concerned about safety and
               the environment by applying Good Mining Practice.
             </p>
 
-            <div className="flex flex-wrap gap-4 mt-8">
+            <div className="flex flex-wrap gap-6 mt-8">
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                  <Calendar className="w-6 h-6 text-blue-600" />
+                <div className="w-14 h-14 bg-[#E85C23]/10 rounded-full flex items-center justify-center mr-3">
+                  <Calendar className="w-6 h-6 text-[#E85C23]" />
                 </div>
                 <div>
-                  <p className="font-semibold">Didirikan</p>
+                  <p className="font-semibold text-[#5B5B5F]">Established</p>
                   <p className="text-gray-600">2024</p>
                 </div>
               </div>
 
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                  <Users className="w-6 h-6 text-blue-600" />
+                <div className="w-14 h-14 bg-[#1FBFB8]/10 rounded-full flex items-center justify-center mr-3">
+                  <Users className="w-6 h-6 text-[#1FBFB8]" />
                 </div>
                 <div>
-                  <p className="font-semibold">Karyawan</p>
+                  <p className="font-semibold text-[#5B5B5F]">Employees</p>
                   <p className="text-gray-600">150+</p>
                 </div>
               </div>
 
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                  <Briefcase className="w-6 h-6 text-blue-600" />
+                <div className="w-14 h-14 bg-[#E85C23]/10 rounded-full flex items-center justify-center mr-3">
+                  <Briefcase className="w-6 h-6 text-[#E85C23]" />
                 </div>
                 <div>
-                  <p className="font-semibold">Proyek</p>
-                  <p className="text-gray-600">50+</p>
+                  <p className="font-semibold text-[#5B5B5F]">Projects</p>
+                  <p className="text-gray-600">2</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center">
+                <div className="w-14 h-14 bg-[#1FBFB8]/10 rounded-full flex items-center justify-center mr-3">
+                  <Award className="w-6 h-6 text-[#1FBFB8]" />
+                </div>
+                <div>
+                  <p className="font-semibold text-[#5B5B5F]">Experience</p>
+                  <p className="text-gray-600">10+ Years</p>
                 </div>
               </div>
             </div>

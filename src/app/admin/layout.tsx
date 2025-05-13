@@ -1,4 +1,3 @@
-// src/app/admin/layout.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -6,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuthContext } from "@/context/auth-provider";
 import { Home, Briefcase, LogOut, Menu, X, User } from "lucide-react";
+import Swal from "sweetalert2";
 
 export default function AdminLayout({
   children,
@@ -13,8 +13,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { user, isAdmin, isAuthenticated, isLoading, logout } =
-    useAuthContext();
+  const { user, isAdmin, isAuthenticated, isLoading, logout } = useAuthContext();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -41,15 +40,35 @@ export default function AdminLayout({
     return null;
   }
 
+  const handleLogout = async () => {
+    const result = await Swal.fire({
+      title: "Yakin ingin logout?",
+      text: "Kamu akan keluar dari akun admin.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#6366f1", // indigo
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, logout",
+      cancelButtonText: "Batal",
+    });
+
+    if (result.isConfirmed) {
+      logout();
+      Swal.fire({
+        title: "Berhasil Logout",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    }
+  };
+
   return (
     <div className="h-screen overflow-hidden bg-gray-50">
       {/* Mobile header */}
       <div className="bg-indigo-600 px-4 py-3 md:hidden">
         <div className="flex items-center justify-between">
-          <Link
-            href="/admin/dashboard"
-            className="text-xl font-bold text-white"
-          >
+          <Link href="/admin/dashboard" className="text-xl font-bold text-white">
             Admin Dashboard
           </Link>
           <button
@@ -113,7 +132,7 @@ export default function AdminLayout({
           {/* Sidebar Footer */}
           <div className="absolute bottom-0 w-full border-t border-indigo-700 p-4">
             <button
-              onClick={logout}
+              onClick={handleLogout}
               className="flex w-full items-center rounded-md px-3 py-2 text-sm font-medium text-indigo-100 hover:bg-indigo-700"
             >
               <LogOut className="mr-3 h-5 w-5" />
