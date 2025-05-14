@@ -1,4 +1,3 @@
-// src/app/(auth)/verify-email/[token]/page.tsx
 "use client";
 
 import { EmailVerification } from "@/components/auth/EmailVerification";

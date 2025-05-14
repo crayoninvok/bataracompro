@@ -8,7 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // jangan override theme.colors dengan CSS variables, cukup pakai di CSS/className langsung
+      fontFamily: {
+        poetsen: ['"Poetsen One"', "cursive"],
+        geist: ['var(--font-geist-sans)', "sans-serif"],
+        mono: ['var(--font-geist-mono)', "monospace"],
+        comfortaa: ['"Comfortaa"', "cursive"],
+        inder: ['"Inder"', "cursive"]
+      },
     },
   },
   plugins: [],

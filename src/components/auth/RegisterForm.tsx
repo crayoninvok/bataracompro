@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, User, Mail, Lock } from "lucide-react";
 import Swal from "sweetalert2";
 
 export const RegisterForm: React.FC = () => {
@@ -25,10 +25,12 @@ export const RegisterForm: React.FC = () => {
     if (error) {
       Swal.fire({
         title: "Registration Failed",
-        text: error, // Fixed: removed .message since error is a string
+        text: error,
         icon: "error",
-        confirmButtonColor: "#00BCD4",
+        confirmButtonColor: "#E85C23",
         confirmButtonText: "Try Again",
+        background: "#1a1a1a",
+        color: "#fff"
       });
     }
   }, [error]);
@@ -49,7 +51,9 @@ export const RegisterForm: React.FC = () => {
         title: "Invalid Name",
         text: "Please enter your full name",
         icon: "warning",
-        confirmButtonColor: "#00BCD4",
+        confirmButtonColor: "#E85C23",
+        background: "#1a1a1a",
+        color: "#fff"
       });
       return false;
     }
@@ -60,7 +64,9 @@ export const RegisterForm: React.FC = () => {
         title: "Invalid Email",
         text: "Please enter a valid email address",
         icon: "warning",
-        confirmButtonColor: "#00BCD4",
+        confirmButtonColor: "#E85C23",
+        background: "#1a1a1a",
+        color: "#fff"
       });
       return false;
     }
@@ -71,7 +77,9 @@ export const RegisterForm: React.FC = () => {
         title: "Invalid Password",
         text: "Password must be at least 8 characters long",
         icon: "warning",
-        confirmButtonColor: "#00BCD4",
+        confirmButtonColor: "#E85C23",
+        background: "#1a1a1a",
+        color: "#fff"
       });
       return false;
     }
@@ -82,7 +90,9 @@ export const RegisterForm: React.FC = () => {
         title: "Passwords Do Not Match",
         text: "Please make sure your passwords match",
         icon: "warning",
-        confirmButtonColor: "#00BCD4",
+        confirmButtonColor: "#E85C23",
+        background: "#1a1a1a",
+        color: "#fff"
       });
       return false;
     }
@@ -112,6 +122,8 @@ export const RegisterForm: React.FC = () => {
         willOpen: () => {
           Swal.showLoading();
         },
+        background: "#1a1a1a",
+        color: "#fff"
       });
 
       // Remove confirmPassword before sending to API
@@ -128,8 +140,10 @@ export const RegisterForm: React.FC = () => {
         title: "Registration Successful!",
         text: "You will be redirected to the login page. Please check your email for verification.",
         icon: "success",
-        confirmButtonColor: "#00BCD4",
+        confirmButtonColor: "#E85C23",
         confirmButtonText: "Continue to Login",
+        background: "#1a1a1a",
+        color: "#fff"
       });
 
       // Registration success handled by the hook (redirects to login with registered=true)
@@ -141,165 +155,182 @@ export const RegisterForm: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md w-full bg-white rounded-xl shadow-lg overflow-hidden">
-      {/* Image Header */}
-      <div className="bg-gradient-to-r from-[#FF5722] to-[#00BCD4] py-6 px-8">
-        <div className="flex items-center justify-center space-x-4">
-          <div className="w-12 h-12 rounded-full border-2 border-white bg-white p-1">
-            <Image
-              src="/nobgbtr.png"
-              alt="Company Logo"
-              width={48}
-              height={48}
-              className="object-contain"
-            />
-          </div>
-          <div className="text-white">
-            <h1 className="text-xl font-bold">Batara Dharma Persada</h1>
-            <p className="text-white/80 text-sm">Career Portal</p>
-          </div>
+    <div className="w-full">
+      {/* Animated logo */}
+      <div className="flex justify-center mb-6">
+        <div className="w-20 h-20 rounded-full border-2 border-[#E85C23] bg-black/40 p-2 flex items-center justify-center overflow-hidden shadow-lg">
+          <Image
+            src="/nobgbtrlogo.png"
+            alt="Company Logo"
+            width={70}
+            height={70}
+            className="w-full h-full object-contain"
+          />
         </div>
       </div>
-
-      {/* Register Form */}
-      <div className="p-8">
-        <h2 className="text-2xl font-semibold text-gray-800 text-center mb-2">
-          Create an Account
-        </h2>
-        <p className="text-gray-600 text-center mb-6">
-          Join us and discover opportunities that match your skills
-        </p>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Name field */}
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Full Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              autoComplete="name"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-[#00BCD4]"
-              placeholder="John Doe"
-              disabled={isLoading}
-            />
+      
+      <div className="bg-gray-900/60 rounded-xl overflow-hidden border border-gray-800 shadow-lg backdrop-blur-sm">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-[#E85C23] to-[#1FBFB8] py-6 px-8">
+          <div className="text-center text-white">
+            <h1 className="text-2xl font-bold">Create Your Account</h1>
+            <p className="text-white/80 text-sm mt-1">Join our talent community</p>
           </div>
+        </div>
 
-          {/* Email field */}
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Email Address
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-[#00BCD4]"
-              placeholder="you@example.com"
-              disabled={isLoading}
-            />
-          </div>
-
-          {/* Password field */}
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Password
-            </label>
-            <div className="relative">
-              <input
-                id="password"
-                name="password"
-                type={showPassword ? "text" : "password"}
-                autoComplete="new-password"
-                required
-                value={formData.password}
-                onChange={handleChange}
-                className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-[#00BCD4]"
-                placeholder="••••••••"
-                disabled={isLoading}
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+        {/* Registration Form */}
+        <div className="p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Name field */}
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-300 mb-2"
               >
-                {showPassword ? (
-                  <EyeOff className="h-5 w-5" />
-                ) : (
-                  <Eye className="h-5 w-5" />
-                )}
+                Full Name
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <User className="h-5 w-5 text-gray-500" />
+                </div>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="block w-full pl-10 pr-3 py-3 bg-black/40 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1FBFB8] focus:border-transparent"
+                  placeholder="John Doe"
+                  disabled={isLoading}
+                />
+              </div>
+            </div>
+
+            {/* Email field */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-300 mb-2"
+              >
+                Email Address
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-gray-500" />
+                </div>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="block w-full pl-10 pr-3 py-3 bg-black/40 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1FBFB8] focus:border-transparent"
+                  placeholder="you@example.com"
+                  disabled={isLoading}
+                />
+              </div>
+            </div>
+
+            {/* Password field */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-300 mb-2"
+              >
+                Password
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-gray-500" />
+                </div>
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="block w-full pl-10 pr-10 py-3 bg-black/40 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1FBFB8] focus:border-transparent"
+                  placeholder="••••••••"
+                  disabled={isLoading}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                >
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
+              <p className="mt-1 text-xs text-gray-400">
+                Must be at least 8 characters long
+              </p>
+            </div>
+
+            {/* Confirm Password field */}
+            <div>
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-gray-300 mb-2"
+              >
+                Confirm Password
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-gray-500" />
+                </div>
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  required
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  className="block w-full pl-10 pr-3 py-3 bg-black/40 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1FBFB8] focus:border-transparent"
+                  placeholder="••••••••"
+                  disabled={isLoading}
+                />
+              </div>
+            </div>
+
+            {/* Submit button */}
+            <div className="pt-2">
+              <button
+                type="submit"
+                className={`w-full flex justify-center py-3 px-4 rounded-lg shadow-md text-white font-medium ${
+                  isLoading
+                    ? "bg-gray-700 cursor-not-allowed"
+                    : "bg-gradient-to-r from-[#E85C23] to-[#d14b17] hover:from-[#d14b17] hover:to-[#E85C23] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E85C23]"
+                } transition-all duration-300`}
+                disabled={isLoading}
+              >
+                Create Account
               </button>
             </div>
-            <p className="mt-1 text-xs text-gray-500">
-              Must be at least 8 characters long
+          </form>
+
+          {/* Login link */}
+          <div className="mt-8 text-center">
+            <p className="text-gray-400">
+              Already have an account?{" "}
+              <Link
+                href="/login"
+                className="font-medium text-[#1FBFB8] hover:text-[#E85C23] transition-colors"
+              >
+                Sign in
+              </Link>
             </p>
           </div>
-
-          {/* Confirm Password field */}
-          <div>
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Confirm Password
-            </label>
-            <div className="relative">
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type={showPassword ? "text" : "password"}
-                autoComplete="new-password"
-                required
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-[#00BCD4]"
-                placeholder="••••••••"
-                disabled={isLoading}
-              />
-            </div>
-          </div>
-
-          {/* Submit button */}
-          <div className="pt-2">
-            <button
-              type="submit"
-              className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#FF5722] hover:bg-[#FF5722]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF5722]"
-              disabled={isLoading}
-            >
-              Create Account
-            </button>
-          </div>
-        </form>
-
-        {/* Login link */}
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-600">
-            Already have an account?{" "}
-            <Link
-              href="/login"
-              className="font-medium text-[#00BCD4] hover:text-[#00BCD4]/80"
-            >
-              Sign in
-            </Link>
-          </p>
         </div>
       </div>
     </div>

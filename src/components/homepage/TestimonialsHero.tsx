@@ -74,38 +74,38 @@ export default function TestimonialsSection() {
   }, []);
 
   return (
-    <section className="testimonial-section py-24 px-4 md:px-8 lg:px-24 bg-blue-50 relative overflow-hidden">
+    <section className="testimonial-section py-20 px-4 md:px-8 lg:px-24 bg-black/80 backdrop-blur-lg text-white relative overflow-hidden border-y border-gray-800">
       {/* Background decorations */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-blue-100 rounded-full -ml-32 -mt-32 opacity-70"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-100 rounded-full -mr-48 -mb-48 opacity-50"></div>
+      <div className="absolute top-0 left-0 w-64 h-64 bg-gradient-to-br from-[#E85C23]/10 to-transparent rounded-full -ml-32 -mt-32"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-[#1FBFB8]/10 to-transparent rounded-full -mr-48 -mb-48"></div>
 
       <div className="max-w-5xl mx-auto relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 relative inline-block">
-            <span className="relative z-10">Client Testimonials</span>
-            <span className="absolute -bottom-2 left-0 w-full h-3 bg-orange-300 opacity-40 z-0"></span>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold mb-3 relative inline-block">
+            <span className="relative z-10 text-white">Client Testimonials</span>
+            <span className="absolute -bottom-2 left-0 w-full h-3 bg-[#E85C23]/20 z-0"></span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base text-gray-300 max-w-3xl mx-auto">
             What our mining partners say about our coal transportation services
           </p>
         </div>
 
         <div
-          className={`bg-white rounded-xl p-8 md:p-12 shadow-md relative transition-all duration-700 ${
+          className={`bg-gray-900/80 border border-gray-800 rounded-lg p-6 md:p-10 shadow-lg relative transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="absolute -top-6 left-10 text-orange-500">
-            <Quote size={48} className="opacity-80" />
+          <div className="absolute -top-5 left-8 text-[#E85C23]">
+            <Quote size={40} className="opacity-80" />
           </div>
 
           <div className="transition-opacity duration-500">
-            <p className="text-lg md:text-xl text-gray-700 mb-8 italic leading-relaxed">
+            <p className="text-base md:text-lg text-gray-300 mb-6 italic leading-relaxed">
               "{testimonials[currentIndex].quote}"
             </p>
 
             <div className="flex items-center">
-              <div className="w-14 h-14 rounded-full overflow-hidden mr-4 border-2 border-gray-200">
+              <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#E85C23]">
                 <img
                   src={testimonials[currentIndex].image}
                   alt={testimonials[currentIndex].author}
@@ -113,40 +113,40 @@ export default function TestimonialsSection() {
                 />
               </div>
               <div>
-                <h4 className="font-bold text-lg">
+                <h4 className="font-bold text-base text-white">
                   {testimonials[currentIndex].author}
                 </h4>
-                <p className="text-gray-600">
+                <p className="text-gray-400 text-sm">
                   {testimonials[currentIndex].position}
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="absolute bottom-8 right-8 flex space-x-2">
+          <div className="absolute bottom-6 right-6 flex space-x-2">
             <button
               onClick={prevTestimonial}
-              className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+              className="p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors border border-gray-700"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft size={20} />
+              <ChevronLeft size={18} className="text-gray-300" />
             </button>
             <button
               onClick={nextTestimonial}
-              className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+              className="p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors border border-gray-700"
               aria-label="Next testimonial"
             >
-              <ChevronRight size={20} />
+              <ChevronRight size={18} className="text-gray-300" />
             </button>
           </div>
 
-          <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+          <div className="absolute bottom-3 left-0 right-0 flex justify-center space-x-2">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  currentIndex === index ? "bg-blue-600 w-4" : "bg-gray-300"
+                className={`h-1.5 rounded-full transition-all ${
+                  currentIndex === index ? "bg-[#E85C23] w-6" : "bg-gray-700 w-3"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />

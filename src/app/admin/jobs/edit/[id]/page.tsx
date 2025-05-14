@@ -1,4 +1,3 @@
-// src/app/admin/jobs/edit/[id]/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -6,6 +5,11 @@ import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/auth-provider";
 import { useJobs } from "@/hooks/useJobs";
 import { UpdateJobRequest, Job } from "@/types/job";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
+
+// Import React Quill dynamically to avoid SSR issues
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function EditJobPage({ params }: { params: { id: string } }) {
   const {
@@ -32,6 +36,17 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
+
+  // Quill editor modules configuration
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
+      ["clean"],
+    ],
+  };
 
   // Check if user is authenticated and is an admin
   useEffect(() => {
@@ -73,7 +88,7 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = e.target;
 
@@ -90,6 +105,20 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
       setErrors((prev) => {
         const newErrors = { ...prev };
         delete newErrors[name];
+        return newErrors;
+      });
+    }
+  };
+
+  // Handle Quill editor changes
+  const handleQuillChange = (value: string, field: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    
+    // Clear error for this field when user types
+    if (errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
         return newErrors;
       });
     }
@@ -291,14 +320,15 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
           >
             Job Description
           </label>
-          <textarea
-            name="description"
-            id="description"
-            rows={6}
-            value={formData.description || ""}
-            onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          ></textarea>
+          <div className="mt-1">
+            <ReactQuill
+              theme="snow"
+              value={formData.description || ""}
+              onChange={(content) => handleQuillChange(content, "description")}
+              modules={modules}
+              className="h-64"
+            />
+          </div>
           {errors.description && (
             <p className="mt-2 text-sm text-red-600">{errors.description}</p>
           )}
@@ -311,20 +341,21 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
           >
             Job Requirements
           </label>
-          <textarea
-            name="requirements"
-            id="requirements"
-            rows={4}
-            value={formData.requirements || ""}
-            onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          ></textarea>
+          <div className="mt-1">
+            <ReactQuill
+              theme="snow"
+              value={formData.requirements || ""}
+              onChange={(content) => handleQuillChange(content, "requirements")}
+              modules={modules}
+              className="h-48"
+            />
+          </div>
           {errors.requirements && (
             <p className="mt-2 text-sm text-red-600">{errors.requirements}</p>
           )}
         </div>
 
-        <div className="flex justify-end space-x-3">
+        <div className="flex justify-end space-x-3 pt-5">
           <button
             type="button"
             onClick={() => router.push("/admin/dashboard")}

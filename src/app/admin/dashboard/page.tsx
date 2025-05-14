@@ -6,12 +6,21 @@ import { useAuth } from "@/hooks/useAuth";
 import { Job } from "@/types/job";
 import { useJobs } from "@/hooks/useJobs";
 import { formatSalaryRange, formatDate } from "@/utils/format";
+import { Briefcase, ChevronLeft, ChevronRight, Eye, Edit, Search, Plus } from "lucide-react";
+
+// Update the Job type to include the deadline property
+declare module "@/types/job" {
+  interface Job {
+    deadline: string;
+  }
+}
 
 export default function AdminDashboardPage() {
   const { user, isLoading: authLoading } = useAuth();
   const router = useRouter();
   const { getJobs, isLoading: jobsLoading } = useJobs();
   const [jobs, setJobs] = useState<Job[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [pagination, setPagination] = useState({
     page: 1,
     limit: 10,
@@ -27,7 +36,7 @@ export default function AdminDashboardPage() {
     if (!authLoading && !isAuthenticated) {
       router.push("/admin/login");
     } else if (!authLoading && !isAdmin) {
-      router.push("/dashboard"); // Redirect to user dashboard if not admin
+      router.push("/dashboard");
     }
   }, [authLoading, isAuthenticated, isAdmin, router]);
 
@@ -42,6 +51,7 @@ export default function AdminDashboardPage() {
     const response = await getJobs({
       page: pagination.page,
       limit: pagination.limit,
+      search: searchTerm,
     });
 
     if (response.data) {
@@ -50,11 +60,20 @@ export default function AdminDashboardPage() {
     }
   };
 
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    setPagination(prev => ({ ...prev, page: 1 }));
+    fetchJobs();
+  };
+
   // Loading state
   if (authLoading || jobsLoading) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="w-12 h-12 border-4 border-blue-400 border-t-blue-700 rounded-full animate-spin"></div>
+      <div className="flex h-full items-center justify-center p-8">
+        <div className="flex flex-col items-center">
+          <div className="h-12 w-12 rounded-full border-4 border-t-[#E85C23] border-[#E85C23]/30 animate-spin"></div>
+          <p className="mt-4 text-gray-600">Loading dashboard...</p>
+        </div>
       </div>
     );
   }
@@ -65,20 +84,88 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-        <button
-          onClick={() => router.push("/admin/jobs/create")}
-          className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-        >
-          Post New Job
-        </button>
+    <div className="h-full overflow-auto">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Admin Dashboard</h1>
+        <p className="text-gray-500">Manage job listings and applications</p>
       </div>
 
-      <div className="mb-8">
-        <h2 className="mb-4 text-xl font-semibold">Job Listings</h2>
-        <div className="overflow-x-auto">
+      {/* Stats Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+          <div className="flex items-center">
+            <div className="p-3 bg-[#E85C23]/10 rounded-lg">
+              <Briefcase className="h-6 w-6 text-[#E85C23]" />
+            </div>
+            <div className="ml-4">
+              <p className="text-gray-500 text-sm">Total Jobs</p>
+              <h3 className="text-2xl font-bold text-gray-800">{pagination.totalItems}</h3>
+            </div>
+          </div>
+        </div>
+        
+        <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+          <div className="flex items-center">
+            <div className="p-3 bg-[#1FBFB8]/10 rounded-lg">
+              <Eye className="h-6 w-6 text-[#1FBFB8]" />
+            </div>
+            <div className="ml-4">
+              <p className="text-gray-500 text-sm">Active Listings</p>
+              <h3 className="text-2xl font-bold text-gray-800">
+                {jobs.filter(job => new Date(job.deadline) > new Date()).length}
+              </h3>
+            </div>
+          </div>
+        </div>
+        
+        <div className="bg-white rounded-lg shadow-md p-6 border border-gray-100">
+          <div className="flex items-start">
+            <div className="p-3 bg-[#E85C23]/10 rounded-lg">
+              <Briefcase className="h-6 w-6 text-[#E85C23]" />
+            </div>
+            <div className="ml-4">
+              <p className="text-gray-500 text-sm">Applications</p>
+              <h3 className="text-2xl font-bold text-gray-800">-</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Jobs List and Search */}
+      <div className="bg-white rounded-lg shadow-md border border-gray-100 overflow-hidden flex flex-col">
+        <div className="p-6 border-b border-gray-100">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <h2 className="text-lg font-semibold text-gray-800 flex items-center">
+              <Briefcase className="h-5 w-5 mr-2 text-[#E85C23]" />
+              Job Listings
+            </h2>
+            
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <form onSubmit={handleSearch} className="relative w-full sm:w-64">
+                <input
+                  type="text"
+                  placeholder="Search jobs..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] text-sm"
+                />
+                <button type="submit" className="absolute left-3 top-1/2 -translate-y-1/2">
+                  <Search className="h-4 w-4 text-gray-400" />
+                </button>
+              </form>
+              
+              <button
+                onClick={() => router.push("/admin/jobs/create")}
+                className="flex items-center justify-center px-4 py-2 bg-[#E85C23] text-white rounded-lg hover:bg-[#d14b17] transition-colors text-sm"
+              >
+                <Plus className="h-4 w-4 mr-1" />
+                Post New Job
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div className="overflow-x-auto flex-grow">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
@@ -95,61 +182,91 @@ export default function AdminDashboardPage() {
                   Posted Date
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                   Actions
                 </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
               {jobs.length > 0 ? (
-                jobs.map((job) => (
-                  <tr key={job.id}>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      <div className="text-sm font-medium text-gray-900">
-                        {job.title}
-                      </div>
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      <div className="text-sm text-gray-500">
-                        {job.location}
-                      </div>
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      <div className="text-sm text-gray-500">
-                        {formatSalaryRange(job.salaryMin, job.salaryMax)}
-                      </div>
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4">
-                      <div className="text-sm text-gray-500">
-                        {formatDate(job.postedAt)}
-                      </div>
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-sm font-medium">
-                      <button
-                        onClick={() =>
-                          router.push(`/admin/jobs/edit/${job.id}`)
-                        }
-                        className="mr-2 text-blue-600 hover:text-blue-900"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() =>
-                          router.push(`/admin/jobs/applications/${job.id}`)
-                        }
-                        className="text-gray-600 hover:text-gray-900"
-                      >
-                        View Applications
-                      </button>
-                    </td>
-                  </tr>
-                ))
+                jobs.map((job) => {
+                  const isActive = new Date(job.deadline) > new Date();
+                  
+                  return (
+                    <tr key={job.id} className="hover:bg-gray-50">
+                      <td className="px-6 py-4">
+                        <div className="text-sm font-medium text-gray-900">
+                          {job.title}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          ID: {job.id.substring(0, 8)}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm text-gray-500">
+                          {job.location}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm text-gray-500">
+                          {formatSalaryRange(job.salaryMin, job.salaryMax)}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="text-sm text-gray-500">
+                          {formatDate(job.postedAt)}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                          ${isActive 
+                            ? 'bg-green-100 text-green-800' 
+                            : 'bg-gray-100 text-gray-800'}`}
+                        >
+                          {isActive ? 'Active' : 'Closed'}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={() => router.push(`/admin/jobs/edit/${job.id}`)}
+                            className="text-[#E85C23] hover:text-[#d14b17]"
+                            title="Edit job"
+                          >
+                            <Edit className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => router.push(`/admin/jobs/applications/${job.id}`)}
+                            className="text-[#1FBFB8] hover:text-[#1aa9a3]"
+                            title="View applications"
+                          >
+                            <Eye className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
-                  <td
-                    colSpan={5}
-                    className="px-6 py-4 text-center text-sm text-gray-500"
-                  >
-                    No jobs found
+                  <td colSpan={6} className="px-6 py-8 text-center text-sm text-gray-500">
+                    <div className="flex flex-col items-center">
+                      <Briefcase className="h-12 w-12 text-gray-300 mb-2" />
+                      <p>No jobs found</p>
+                      {searchTerm && (
+                        <button
+                          onClick={() => {
+                            setSearchTerm("");
+                            fetchJobs();
+                          }}
+                          className="mt-2 text-[#E85C23] hover:text-[#d14b17] text-sm"
+                        >
+                          Clear search
+                        </button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               )}
@@ -159,34 +276,29 @@ export default function AdminDashboardPage() {
 
         {/* Pagination */}
         {pagination.totalPages > 1 && (
-          <div className="mt-4 flex items-center justify-center space-x-2">
-            <button
-              onClick={() =>
-                setPagination((prev) => ({
-                  ...prev,
-                  page: Math.max(1, prev.page - 1),
-                }))
-              }
-              disabled={pagination.page === 1}
-              className="rounded-md border px-3 py-1 text-sm disabled:opacity-50"
-            >
-              Previous
-            </button>
-            <span className="text-sm">
-              Page {pagination.page} of {pagination.totalPages}
-            </span>
-            <button
-              onClick={() =>
-                setPagination((prev) => ({
-                  ...prev,
-                  page: Math.min(prev.totalPages, prev.page + 1),
-                }))
-              }
-              disabled={pagination.page === pagination.totalPages}
-              className="rounded-md border px-3 py-1 text-sm disabled:opacity-50"
-            >
-              Next
-            </button>
+          <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex items-center justify-between">
+            <div className="text-sm text-gray-500">
+              Showing {((pagination.page - 1) * pagination.limit) + 1} to {Math.min(pagination.page * pagination.limit, pagination.totalItems)} of {pagination.totalItems} results
+            </div>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => setPagination(prev => ({ ...prev, page: Math.max(1, prev.page - 1) }))}
+                disabled={pagination.page === 1}
+                className="inline-flex items-center p-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <span className="text-sm text-gray-700">
+                Page {pagination.page} of {pagination.totalPages}
+              </span>
+              <button
+                onClick={() => setPagination(prev => ({ ...prev, page: Math.min(prev.totalPages, prev.page + 1) }))}
+                disabled={pagination.page === pagination.totalPages}
+                className="inline-flex items-center p-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
           </div>
         )}
       </div>

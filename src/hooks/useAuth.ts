@@ -113,7 +113,7 @@ export function useAuth() {
     const isAdmin = user?.role === "ADMIN";
     authService.logout();
     setUser(null);
-    router.push(isAdmin ? "/login-admin" : "/login");
+    window.location.assign(isAdmin ? "/login-admin" : "/login");
   };
 
   return {

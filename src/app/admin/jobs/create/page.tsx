@@ -7,7 +7,7 @@ import { useJobs } from "@/hooks/useJobs";
 import { CreateJobRequest } from "@/types/job";
 import dynamic from "next/dynamic";
 import 'react-quill/dist/quill.snow.css';
-import { AlertTriangle, CheckCircle } from "lucide-react";
+import { AlertTriangle, CheckCircle, ArrowLeft, Building, Calendar, CreditCard } from "lucide-react";
 
 // Import React Quill dynamically to avoid SSR issues
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
@@ -57,16 +57,16 @@ export default function CreateJobPage() {
     if (!authLoading && !isAuthenticated) {
       router.push("/admin/login");
     } else if (!authLoading && !isAdmin) {
-      router.push("/dashboard"); // Redirect to user dashboard if not admin
+      router.push("/dashboard");
     }
   }, [authLoading, isAuthenticated, isAdmin, router]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
 
-    // Handle salary fields specially to convert string to number
+    // Handle salary fields to convert string to number
     if (name === "salaryMin" || name === "salaryMax") {
       const numericValue = value === "" ? undefined : Number(value);
       setFormData((prev) => ({ ...prev, [name]: numericValue }));
@@ -74,7 +74,7 @@ export default function CreateJobPage() {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
 
-    // Clear error for this field when user types
+    // Clear error for this field
     if (errors[name]) {
       setErrors((prev) => {
         const newErrors = { ...prev };
@@ -88,7 +88,7 @@ export default function CreateJobPage() {
   const handleRichTextChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     
-    // Clear error for this field when user types
+    // Clear error for this field
     if (errors[field]) {
       setErrors((prev) => {
         const newErrors = { ...prev };
@@ -119,8 +119,7 @@ export default function CreateJobPage() {
 
     if (formData.salaryMin !== undefined && formData.salaryMax !== undefined) {
       if (formData.salaryMin > formData.salaryMax) {
-        newErrors.salaryMin =
-          "Minimum salary cannot be greater than maximum salary";
+        newErrors.salaryMin = "Minimum salary cannot be greater than maximum salary";
       }
     }
 
@@ -169,8 +168,11 @@ export default function CreateJobPage() {
   // Loading state
   if (authLoading) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="w-12 h-12 border-4 border-blue-400 border-t-blue-700 rounded-full animate-spin"></div>
+      <div className="flex h-full items-center justify-center p-8">
+        <div className="flex flex-col items-center">
+          <div className="h-12 w-12 rounded-full border-4 border-t-[#E85C23] border-[#E85C23]/30 animate-spin"></div>
+          <p className="mt-4 text-gray-600">Loading form...</p>
+        </div>
       </div>
     );
   }
@@ -181,210 +183,244 @@ export default function CreateJobPage() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-16">
-      {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <h1 className="text-3xl font-bold text-gray-900">Post a New Job</h1>
+    <div className="h-full overflow-auto">
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-800">Create New Job</h1>
+          <p className="text-gray-500">Post a new job opening with complete details</p>
         </div>
+        <button
+          onClick={() => router.push("/admin/dashboard")}
+          className="flex items-center text-gray-600 hover:text-[#E85C23] transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4 mr-1" />
+          Back to Dashboard
+        </button>
       </div>
-      
-      <div className="max-w-6xl mx-auto px-6 py-10">"
-        {submitError && (
-          <div className="mb-8 rounded-lg bg-red-50 p-5 flex items-start">
-            <AlertTriangle className="h-6 w-6 text-red-500 mt-0.5 mr-4" />
-            <div>
-              <h3 className="text-base font-medium text-red-800">
-                {submitError}
-              </h3>
-            </div>
-          </div>
-        )}
 
-        {submitSuccess && (
-          <div className="mb-8 rounded-lg bg-green-50 p-5 flex items-start">
-            <CheckCircle className="h-6 w-6 text-green-500 mt-0.5 mr-4" />
-            <div>
-              <h3 className="text-base font-medium text-green-800">
-                {submitSuccess}
-              </h3>
-            </div>
+      {submitError && (
+        <div className="mb-6 rounded-lg bg-red-50 p-4 flex items-start border border-red-100">
+          <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5 mr-3 flex-shrink-0" />
+          <div>
+            <h3 className="text-sm font-medium text-red-800">{submitError}</h3>
           </div>
-        )}
+        </div>
+      )}
 
-        <div className="bg-white shadow-sm rounded-lg">
-          <form onSubmit={handleSubmit} className="p-8 space-y-10">
-            {/* Basic Job Information */}
-            <div className="grid grid-cols-1 gap-y-8 gap-x-6 sm:grid-cols-6">
-              <div className="sm:col-span-4">
-                <label
-                  htmlFor="title"
-                  className="block text-base font-medium text-gray-700"
-                >
-                  Job Title
+      {submitSuccess && (
+        <div className="mb-6 rounded-lg bg-green-50 p-4 flex items-start border border-green-100">
+          <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+          <div>
+            <h3 className="text-sm font-medium text-green-800">{submitSuccess}</h3>
+          </div>
+        </div>
+      )}
+
+      <div className="bg-white rounded-lg shadow-md border border-gray-100">
+        <form onSubmit={handleSubmit} className="divide-y divide-gray-200">
+          {/* Basic Information */}
+          <div className="p-6">
+            <h2 className="text-lg font-medium text-gray-800 mb-4">Basic Information</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="col-span-1 md:col-span-2">
+                <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+                  Job Title*
                 </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    value={formData.title}
-                    onChange={handleChange}
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-base border-gray-300 rounded-md"
-                  />
-                </div>
+                <input
+                  type="text"
+                  name="title"
+                  id="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] transition-colors"
+                  placeholder="e.g. Senior Mining Engineer"
+                />
                 {errors.title && (
-                  <p className="mt-2 text-sm text-red-600">{errors.title}</p>
+                  <p className="mt-1 text-sm text-red-600">{errors.title}</p>
                 )}
               </div>
 
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="location"
-                  className="block text-base font-medium text-gray-700"
-                >
-                  Location
+              <div>
+                <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
+                  Location*
                 </label>
-                <div className="mt-2">
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <Building className="h-4 w-4 text-gray-400" />
+                  </div>
                   <input
                     type="text"
                     name="location"
                     id="location"
                     value={formData.location}
                     onChange={handleChange}
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-base border-gray-300 rounded-md"
-                    placeholder="e.g. Jakarta"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] transition-colors"
+                    placeholder="e.g. Jakarta, Indonesia"
                   />
                 </div>
                 {errors.location && (
-                  <p className="mt-2 text-sm text-red-600">{errors.location}</p>
+                  <p className="mt-1 text-sm text-red-600">{errors.location}</p>
                 )}
               </div>
 
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="salaryMin"
-                  className="block text-base font-medium text-gray-700"
+              <div>
+                <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
+                  Job Type
+                </label>
+                <select
+                  id="type"
+                  name="type"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] transition-colors"
                 >
+                  <option value="FULL_TIME">Full-time</option>
+                  <option value="PART_TIME">Part-time</option>
+                  <option value="CONTRACT">Contract</option>
+                  <option value="FREELANCE">Freelance</option>
+                  <option value="INTERNSHIP">Internship</option>
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="deadline" className="block text-sm font-medium text-gray-700 mb-1">
+                  Application Deadline
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <Calendar className="h-4 w-4 text-gray-400" />
+                  </div>
+                  <input
+                    type="date"
+                    name="deadline"
+                    id="deadline"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="salaryMin" className="block text-sm font-medium text-gray-700 mb-1">
                   Minimum Salary (IDR)
                 </label>
-                <div className="mt-2">
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <CreditCard className="h-4 w-4 text-gray-400" />
+                  </div>
                   <input
                     type="number"
                     name="salaryMin"
                     id="salaryMin"
                     value={formData.salaryMin === undefined ? "" : formData.salaryMin}
                     onChange={handleChange}
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-base border-gray-300 rounded-md"
-                    placeholder="Optional"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] transition-colors"
+                    placeholder="e.g. 10000000"
                   />
                 </div>
                 {errors.salaryMin && (
-                  <p className="mt-2 text-sm text-red-600">{errors.salaryMin}</p>
+                  <p className="mt-1 text-sm text-red-600">{errors.salaryMin}</p>
                 )}
               </div>
 
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="salaryMax"
-                  className="block text-base font-medium text-gray-700"
-                >
+              <div>
+                <label htmlFor="salaryMax" className="block text-sm font-medium text-gray-700 mb-1">
                   Maximum Salary (IDR)
                 </label>
-                <div className="mt-2">
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <CreditCard className="h-4 w-4 text-gray-400" />
+                  </div>
                   <input
                     type="number"
                     name="salaryMax"
                     id="salaryMax"
                     value={formData.salaryMax === undefined ? "" : formData.salaryMax}
                     onChange={handleChange}
-                    className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full text-base border-gray-300 rounded-md"
-                    placeholder="Optional"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] transition-colors"
+                    placeholder="e.g. 15000000"
                   />
                 </div>
                 {errors.salaryMax && (
-                  <p className="mt-2 text-sm text-red-600">{errors.salaryMax}</p>
+                  <p className="mt-1 text-sm text-red-600">{errors.salaryMax}</p>
                 )}
               </div>
             </div>
+          </div>
 
-            {/* Description Section */}
-            <div className="pt-4">
-              <label
-                htmlFor="description"
-                className="block text-lg font-medium text-gray-800"
-              >
-                Job Description
-              </label>
-              <p className="mt-2 text-base text-gray-500">
-                Provide details about the role, responsibilities, and expectations.
-              </p>
-              <div className="mt-3 bg-white">
-                <ReactQuill
-                  theme="snow"
-                  value={formData.description}
-                  onChange={(value) => handleRichTextChange('description', value)}
-                  modules={modules}
-                  formats={formats}
-                  placeholder="Describe the role, responsibilities, and company..."
-                  className="rounded-md h-72 bg-white text-base"
-                />
-              </div>
-              {errors.description && (
-                <p className="mt-2 text-sm text-red-600">{errors.description}</p>
+          {/* Job Description */}
+          <div className="p-6">
+            <h2 className="text-lg font-medium text-gray-800 mb-4">Job Description*</h2>
+            <p className="text-sm text-gray-500 mb-3">
+              Provide details about the role, responsibilities, and what the job entails
+            </p>
+            <div className="bg-white">
+              <ReactQuill
+                theme="snow"
+                value={formData.description}
+                onChange={(value) => handleRichTextChange('description', value)}
+                modules={modules}
+                formats={formats}
+                placeholder="Describe the role, responsibilities, and expectations..."
+                className="rounded h-64"
+              />
+            </div>
+            {errors.description && (
+              <p className="mt-1 text-sm text-red-600">{errors.description}</p>
+            )}
+          </div>
+
+          {/* Job Requirements */}
+          <div className="p-6">
+            <h2 className="text-lg font-medium text-gray-800 mb-4">Job Requirements*</h2>
+            <p className="text-sm text-gray-500 mb-3">
+              List qualifications, skills, experience, and education required for this position
+            </p>
+            <div className="bg-white">
+              <ReactQuill
+                theme="snow"
+                value={formData.requirements}
+                onChange={(value) => handleRichTextChange('requirements', value)}
+                modules={modules}
+                formats={formats}
+                placeholder="List required skills, experience, education..."
+                className="rounded h-52"
+              />
+            </div>
+            {errors.requirements && (
+              <p className="mt-1 text-sm text-red-600">{errors.requirements}</p>
+            )}
+          </div>
+
+          {/* Form Actions */}
+          <div className="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
+            <button
+              type="button"
+              onClick={() => router.push("/admin/dashboard")}
+              className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E85C23] transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`px-5 py-2 rounded-lg text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E85C23] transition-colors ${
+                isSubmitting
+                  ? "bg-[#E85C23]/70 cursor-not-allowed"
+                  : "bg-[#E85C23] hover:bg-[#d14b17]"
+              }`}
+            >
+              {isSubmitting ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Posting...
+                </span>
+              ) : (
+                "Post Job"
               )}
-            </div>
-
-            {/* Requirements Section */}
-            <div className="pt-10">
-              <label
-                htmlFor="requirements"
-                className="block text-lg font-medium text-gray-800"
-              >
-                Job Requirements
-              </label>
-              <p className="mt-2 text-base text-gray-500">
-                List the required skills, experience, education, and qualifications.
-              </p>
-              <div className="mt-3 bg-white">
-                <ReactQuill
-                  theme="snow"
-                  value={formData.requirements}
-                  onChange={(value) => handleRichTextChange('requirements', value)}
-                  modules={modules}
-                  formats={formats}
-                  placeholder="List required skills, experience, education..."
-                  className="rounded-md h-56 bg-white text-base"
-                />
-              </div>
-              {errors.requirements && (
-                <p className="mt-2 text-sm text-red-600">{errors.requirements}</p>
-              )}
-            </div>
-
-            {/* Action Buttons */}
-            <div className="pt-10 flex justify-end space-x-4">
-              <button
-                type="button"
-                onClick={() => router.push("/admin/dashboard")}
-                className="inline-flex items-center px-5 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white ${
-                  isSubmitting
-                    ? "bg-blue-400 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                }`}
-              >
-                {isSubmitting ? "Posting..." : "Post Job"}
-              </button>
-            </div>
-          </form>
-        </div>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

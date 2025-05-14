@@ -8,6 +8,7 @@ import {
   DollarSign,
   Briefcase,
   Loader,
+  ChevronRight,
 } from "lucide-react";
 import { useJobs } from "@/hooks/useJobs";
 import { useApplications } from "@/hooks/useApplication";
@@ -17,12 +18,21 @@ import { useAuth } from "@/hooks/useAuth";
 import { useProfileCompletion } from "@/hooks/useProfileCompletion";
 import { formatCurrency, formatSalaryRange, formatDate } from "@/utils/format";
 import Swal from "sweetalert2";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
+
+// Dynamically import React Quill to avoid SSR issues
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function JobDetails() {
   const [job, setJob] = useState<Job | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [descriptionHtml, setDescriptionHtml] = useState("");
+  const [requirementsHtml, setRequirementsHtml] = useState("");
 
   const params = useParams();
   const router = useRouter();
@@ -35,6 +45,16 @@ export default function JobDetails() {
   const slug = params.slug as string;
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
     const fetchJob = async () => {
       setIsLoading(true);
       setError(null);
@@ -43,6 +63,8 @@ export default function JobDetails() {
         const response = await getJobBySlug(slug);
         if (response.data) {
           setJob(response.data.job);
+          setDescriptionHtml(response.data.job.description);
+          setRequirementsHtml(response.data.job.requirements);
         } else if (response.error) {
           setError("Failed to load job details");
         }
@@ -57,7 +79,17 @@ export default function JobDetails() {
     if (slug) {
       fetchJob();
     }
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [slug]);
+
+  // Define Quill modules and formats
+  const modules = {
+    toolbar: false, // Disable toolbar for read-only view
+  };
 
   const goBack = () => {
     router.back();
@@ -154,10 +186,13 @@ export default function JobDetails() {
     }
   };
 
+  // Parallax effect calculation
+  const parallaxOffset = scrollPosition * 0.3;
+
   // Check for profile loading condition
   if (isCheckingProfile || isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-24 flex items-center justify-center">
+      <div className="min-h-screen bg-black/80 backdrop-blur-lg pt-24 flex items-center justify-center">
         <div className="w-16 h-16 border-4 border-[#1FBFB8] border-t-[#E85C23] rounded-full animate-spin"></div>
       </div>
     );
@@ -165,12 +200,12 @@ export default function JobDetails() {
 
   if (error || !job) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-24 px-4">
-        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-8 text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">
+      <div className="min-h-screen bg-black/80 backdrop-blur-lg pt-24 px-4">
+        <div className="max-w-4xl mx-auto bg-gray-900/60 rounded-xl shadow-lg p-8 text-center border border-gray-800">
+          <h1 className="text-2xl font-bold text-white mb-4">
             Job Not Found
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-300 mb-6">
             The job position you're looking for doesn't exist or has been
             removed.
           </p>
@@ -187,82 +222,208 @@ export default function JobDetails() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 pt-16">
-      {/* Header */}
-      <section className="bg-[#E85C23] text-white py-16 px-4 md:px-8 relative overflow-hidden">
-        {/* Background accent */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#1FBFB8] rounded-full -mr-32 -mt-32 opacity-30"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#5B5B5F] rounded-full -ml-48 -mb-48 opacity-30"></div>
-
-        <div className="max-w-4xl mx-auto relative z-10">
-          <button
-            onClick={goBack}
-            className="inline-flex items-center bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-md transition mb-6"
+    <main className="min-h-screen bg-black/80 backdrop-blur-lg">
+      {/* Hero Header */}
+      <section className="relative py-28 overflow-hidden border-b border-gray-800">
+        {/* Background layers */}
+        <div 
+          className="absolute inset-0 bg-gradient-to-br from-[#3A3A3D] to-[#1F1F23]"
+          style={{ transform: `translateY(${parallaxOffset * 0.2}px)` }}
+        />
+        
+        {/* Background image with overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://res.cloudinary.com/dysmj8esf/image/upload/v1747204272/IMG_8480_sc9mlm.jpg" 
+            alt="Mining operations"
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/60"></div>
+        </div>
+        
+        {/* Animated grid pattern */}
+        <div 
+          className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 bg-[length:60px_60px]"
+          style={{ 
+            transform: `translateY(${parallaxOffset * 0.1}px)`,
+            animation: 'gridMove 20s linear infinite'
+          }} 
+        />
+        
+        {/* Floating particles */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full bg-[#E85C23]/30"
+              style={{
+                width: `${Math.random() * 8 + 2}px`,
+                height: `${Math.random() * 8 + 2}px`,
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animation: `float ${Math.random() * 10 + 10}s linear infinite`,
+                animationDelay: `${Math.random() * 5}s`
+              }}
+            />
+          ))}
+        </div>
+        
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div
+            className={`max-w-4xl mx-auto transition-all duration-1000 ease-out ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
           >
-            <ArrowLeft className="mr-2" size={16} />
-            <span>Back to Jobs</span>
-          </button>
+            <button
+              onClick={goBack}
+              className="inline-flex items-center bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md transition mb-6 border border-white/20 group"
+            >
+              <ArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform" size={16} />
+              <span>Back to Jobs</span>
+            </button>
 
-          <div className="bg-[#1FBFB8]/20 text-white px-3 py-1 rounded-full text-sm font-medium inline-block mb-3 border border-[#1FBFB8]/30">
-            Full Time
-          </div>
-
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">{job.title}</h1>
-
-          <div className="flex flex-wrap gap-4 text-white/90">
-            <div className="flex items-center">
-              <MapPin className="w-5 h-5 mr-2" />
-              <span>{job.location}</span>
+            <div className="bg-[#1FBFB8]/20 text-[#1FBFB8] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-3 border border-[#1FBFB8]/30">
+              Full Time
             </div>
-            <div className="flex items-center">
-              <Clock className="w-5 h-5 mr-2" />
-              <span>Posted: {formatDate(job.postedAt)}</span>
-            </div>
-            {(job.salaryMin || job.salaryMax) && (
+
+            <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
+              {job.title}
+            </h1>
+
+            <div className="flex flex-wrap gap-6 text-gray-300 text-lg mb-8">
               <div className="flex items-center">
-                <DollarSign className="w-5 h-5 mr-2" />
-                <span>{formatSalaryRange(job.salaryMin, job.salaryMax)}</span>
+                <MapPin className="w-5 h-5 mr-2 text-[#E85C23]" />
+                <span>{job.location}</span>
               </div>
-            )}
+              <div className="flex items-center">
+                <Clock className="w-5 h-5 mr-2 text-[#E85C23]" />
+                <span>Posted: {formatDate(job.postedAt)}</span>
+              </div>
+              {(job.salaryMin || job.salaryMax) && (
+                <div className="flex items-center">
+                  <DollarSign className="w-5 h-5 mr-2 text-[#1FBFB8]" />
+                  <span>{formatSalaryRange(job.salaryMin, job.salaryMax)}</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
+        
+        {/* Custom animations */}
+        <style jsx global>{`
+          @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+          }
+          @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 60px 60px; }
+          }
+          
+          /* Custom styling for React Quill content */
+          .quill-content .ql-editor {
+            padding: 0;
+          }
+          
+          .quill-content .ql-editor h1, 
+          .quill-content .ql-editor h2, 
+          .quill-content .ql-editor h3 {
+            color: #f3f4f6;
+            margin-bottom: 1rem;
+            font-weight: 600;
+          }
+          
+          .quill-content .ql-editor h1 {
+            font-size: 1.5rem;
+          }
+          
+          .quill-content .ql-editor h2 {
+            font-size: 1.25rem;
+          }
+          
+          .quill-content .ql-editor p {
+            margin-bottom: 1rem;
+          }
+          
+          .quill-content .ql-editor ul, 
+          .quill-content .ql-editor ol {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+          }
+          
+          .quill-content .ql-editor li {
+            margin-bottom: 0.5rem;
+          }
+          
+          .quill-content .ql-editor a {
+            color: #1FBFB8;
+            text-decoration: underline;
+          }
+          
+          .quill-content .ql-container.ql-snow {
+            border: none;
+          }
+          
+          .quill-content .ql-editor blockquote {
+            border-left: 4px solid #E85C23;
+            padding-left: 1rem;
+            margin-left: 0;
+            margin-right: 0;
+            font-style: italic;
+          }
+        `}</style>
       </section>
 
       {/* Job Content */}
-      <section className="py-12 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm overflow-hidden">
-          <div className="p-8">
-            <div className="prose max-w-none">
-              <div className="mb-10">
-                <h2 className="text-2xl font-bold mb-4 text-[#E85C23]">
-                  Job Description
+      <section className="py-16 px-4 md:px-8 lg:px-24 relative">
+        {/* Background elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#E85C23]/10 to-transparent rounded-full -mr-48 -mt-48"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#1FBFB8]/10 to-transparent rounded-full -ml-48 -mb-48"></div>
+        
+        <div className="max-w-4xl mx-auto bg-gray-900/60 rounded-xl shadow-lg overflow-hidden border border-gray-800">
+          <div className="p-8 md:p-10">
+            <div className="prose prose-invert max-w-none">
+              <div className="mb-12">
+                <h2 className="text-2xl font-bold mb-6 text-[#E85C23] relative inline-block">
+                  <span>Job Description</span>
+                  <span className="absolute -bottom-2 left-0 w-full h-1 bg-[#E85C23]/30"></span>
                 </h2>
-                <div
-                  dangerouslySetInnerHTML={{ __html: job.description }}
-                  className="text-gray-700 leading-relaxed"
-                />
+                <div className="text-gray-300 leading-relaxed quill-content">
+                  <ReactQuill
+                    value={descriptionHtml}
+                    readOnly={true}
+                    modules={modules}
+                    theme="snow"
+                  />
+                </div>
               </div>
 
-              <div className="mb-8">
-                <h2 className="text-2xl font-bold mb-4 text-[#E85C23]">
-                  Requirements
+              <div className="mb-12">
+                <h2 className="text-2xl font-bold mb-6 text-[#1FBFB8] relative inline-block">
+                  <span>Requirements</span>
+                  <span className="absolute -bottom-2 left-0 w-full h-1 bg-[#1FBFB8]/30"></span>
                 </h2>
-                <div
-                  dangerouslySetInnerHTML={{ __html: job.requirements }}
-                  className="text-gray-700 leading-relaxed"
-                />
+                <div className="text-gray-300 leading-relaxed quill-content">
+                  <ReactQuill
+                    value={requirementsHtml}
+                    readOnly={true}
+                    modules={modules}
+                    theme="snow"
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="mt-10 pt-8 border-t border-gray-200">
+            <div className="mt-12 pt-8 border-t border-gray-700">
               <button
                 onClick={handleApply}
                 disabled={isSubmitting || !profileComplete}
                 className={`inline-flex items-center ${
                   isSubmitting || !profileComplete
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-[#E85C23] hover:bg-[#d14b17]"
-                } text-white px-8 py-3 rounded-lg transition font-medium`}
+                    ? "bg-gray-600 cursor-not-allowed"
+                    : "bg-gradient-to-r from-[#E85C23] to-[#d14b17] hover:from-[#d14b17] hover:to-[#E85C23]"
+                } text-white px-8 py-4 rounded-lg transition-all duration-300 font-medium shadow-lg group`}
               >
                 {isSubmitting ? (
                   <>
@@ -271,24 +432,23 @@ export default function JobDetails() {
                   </>
                 ) : (
                   <>
-                    <Briefcase className="mr-2" />
+                    <Briefcase className="mr-2 group-hover:scale-110 transition-transform" />
                     <span>Apply for this Position</span>
                   </>
                 )}
               </button>
 
               {!isAuthenticated && (
-                <p className="text-sm text-gray-600 mt-3">
+                <p className="text-gray-400 mt-4">
                   You need to{" "}
-                  <a href="/auth/login" className="text-[#E85C23] font-medium">
+                  <a href="/auth/login" className="text-[#1FBFB8] font-medium hover:text-[#E85C23] transition-colors">
                     log in
                   </a>{" "}
                   to apply for this position
                 </p>
               )}
-
               {isAuthenticated && !profileComplete && (
-                <p className="text-sm text-[#E85C23] mt-3">
+                <p className="text-[#E85C23] mt-4">
                   Please complete your profile before applying for positions
                 </p>
               )}

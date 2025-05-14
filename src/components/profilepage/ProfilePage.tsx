@@ -14,7 +14,6 @@ export default function ProfilePage() {
       <ProfileHero />
       <AboutSection />
       <CoreValues />
-      <CompanyStats />
       <ProfileCTA />
     </main>
   );

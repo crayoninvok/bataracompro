@@ -1,7 +1,7 @@
 // src/services/api.ts
 import { ApiError } from "@/types/api";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000/api";
 
 export async function fetchApi<T>(
   endpoint: string,

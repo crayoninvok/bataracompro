@@ -132,50 +132,50 @@ export default function CTASection() {
   };
 
   return (
-    <section className="py-24 px-4 md:px-8 lg:px-24 bg-gray-50 text-gray-900 relative overflow-hidden">
+    <section className="py-20 px-4 md:px-8 lg:px-24 bg-black/80 backdrop-blur-lg text-white relative overflow-hidden border-y border-gray-800">
       {/* Background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#E85C23]/5 rounded-full -mr-48 -mt-48"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#1FBFB8]/5 rounded-full -ml-48 -mb-48"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#E85C23]/10 to-transparent rounded-full -mr-48 -mt-48"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#1FBFB8]/10 to-transparent rounded-full -ml-48 -mb-48"></div>
       
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-10 items-start">
           {/* Left Side: Contact Info */}
           <div className="reveal-cta opacity-0 translate-y-6 transition-all duration-700">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#5B5B5F]">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
               Need reliable mining & hauling solutions?
             </h2>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-base text-gray-300 mb-6">
               PT. Batara Dharma Persada is ready to be your trusted partner for all your mining transportation needs. Contact us for consultation and tailored solutions.
             </p>
 
-            <div className="space-y-6">
+            <div className="space-y-5">
               <div className="flex items-center">
-                <div className="bg-[#E85C23]/10 p-3 rounded-full mr-4">
+                <div className="bg-[#E85C23]/10 p-2.5 rounded-lg mr-3">
                   <Phone className="w-5 h-5 text-[#E85C23]" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Phone</p>
-                  <p className="font-bold">+62 21 1234 5678</p>
+                  <p className="text-xs text-gray-400">Phone</p>
+                  <p className="font-medium text-gray-200">+62 21 1234 5678</p>
                 </div>
               </div>
 
               <div className="flex items-center">
-                <div className="bg-[#1FBFB8]/10 p-3 rounded-full mr-4">
+                <div className="bg-[#1FBFB8]/10 p-2.5 rounded-lg mr-3">
                   <Mail className="w-5 h-5 text-[#1FBFB8]" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Email</p>
-                  <p className="font-bold">info@bataramining.com</p>
+                  <p className="text-xs text-gray-400">Email</p>
+                  <p className="font-medium text-gray-200">info@bataramining.com</p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="bg-[#E85C23]/10 p-3 rounded-full mr-4 mt-1">
+                <div className="bg-[#E85C23]/10 p-2.5 rounded-lg mr-3 mt-0.5">
                   <MapPin className="w-5 h-5 text-[#E85C23]" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Head Office</p>
-                  <p className="font-bold">
+                  <p className="text-xs text-gray-400">Head Office</p>
+                  <p className="font-medium text-gray-200 text-sm">
                     Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar.,
                     Kec. Cakung, East Jakarta, Special Capital Region of Jakarta
                     13910
@@ -184,22 +184,22 @@ export default function CTASection() {
               </div>
               
               <div className="flex items-center">
-                <div className="bg-[#1FBFB8]/10 p-3 rounded-full mr-4">
+                <div className="bg-[#1FBFB8]/10 p-2.5 rounded-lg mr-3">
                   <Truck className="w-5 h-5 text-[#1FBFB8]" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Operational Area</p>
-                  <p className="font-bold">Tabang - East Kalimantan</p>
+                  <p className="text-xs text-gray-400">Operational Area</p>
+                  <p className="font-medium text-gray-200">Tabang - East Kalimantan</p>
                 </div>
               </div>
               
               <div className="flex items-center">
-                <div className="bg-[#E85C23]/10 p-3 rounded-full mr-4">
+                <div className="bg-[#E85C23]/10 p-2.5 rounded-lg mr-3">
                   <Calendar className="w-5 h-5 text-[#E85C23]" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Business Hours</p>
-                  <p className="font-bold">Monday - Friday: 8:00 AM - 5:00 PM</p>
+                  <p className="text-xs text-gray-400">Business Hours</p>
+                  <p className="font-medium text-gray-200">Monday - Friday: 8:00 AM - 5:00 PM</p>
                 </div>
               </div>
             </div>
@@ -207,17 +207,17 @@ export default function CTASection() {
 
           {/* Right Side: Contact Form */}
           <div className="reveal-cta opacity-0 translate-y-6 transition-all duration-700 delay-200">
-            <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-              <h3 className="text-2xl font-bold mb-6 text-[#5B5B5F]">Contact Us</h3>
+            <div className="bg-gray-900/80 p-6 rounded-lg shadow-lg border border-gray-800">
+              <h3 className="text-xl font-bold mb-5 text-white">Contact Us</h3>
 
               {status.type === "success" ? (
-                <div className="bg-green-50 border border-green-200 rounded-md p-4 mb-6">
+                <div className="bg-green-900/30 border border-green-700/50 rounded p-3 mb-5">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
-                      <Check className="h-5 w-5 text-green-500" />
+                      <Check className="h-4 w-4 text-green-400" />
                     </div>
                     <div className="ml-3">
-                      <p className="text-sm font-medium text-green-800">
+                      <p className="text-sm text-green-300">
                         {status.message}
                       </p>
                     </div>
@@ -226,13 +226,13 @@ export default function CTASection() {
               ) : null}
 
               {status.type === "error" ? (
-                <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
+                <div className="bg-red-900/30 border border-red-700/50 rounded p-3 mb-5">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
-                      <AlertCircle className="h-5 w-5 text-red-500" />
+                      <AlertCircle className="h-4 w-4 text-red-400" />
                     </div>
                     <div className="ml-3">
-                      <p className="text-sm font-medium text-red-800">
+                      <p className="text-sm text-red-300">
                         {status.message}
                       </p>
                     </div>
@@ -240,11 +240,11 @@ export default function CTASection() {
                 </div>
               ) : null}
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-sm font-medium mb-1.5 text-gray-700"
+                    className="block text-xs font-medium mb-1.5 text-gray-300"
                   >
                     Name
                   </label>
@@ -253,7 +253,7 @@ export default function CTASection() {
                     id="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900 focus:ring-2 focus:ring-[#1FBFB8] focus:border-[#1FBFB8]"
+                    className="w-full p-2.5 border border-gray-700 rounded bg-gray-800/50 text-gray-200 focus:ring-1 focus:ring-[#1FBFB8] focus:border-[#1FBFB8] text-sm"
                     placeholder="Your full name"
                     required
                     disabled={loading}
@@ -263,7 +263,7 @@ export default function CTASection() {
                 <div>
                   <label
                     htmlFor="company"
-                    className="block text-sm font-medium mb-1.5 text-gray-700"
+                    className="block text-xs font-medium mb-1.5 text-gray-300"
                   >
                     Company
                   </label>
@@ -272,18 +272,18 @@ export default function CTASection() {
                     id="company"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900 focus:ring-2 focus:ring-[#1FBFB8] focus:border-[#1FBFB8]"
+                    className="w-full p-2.5 border border-gray-700 rounded bg-gray-800/50 text-gray-200 focus:ring-1 focus:ring-[#1FBFB8] focus:border-[#1FBFB8] text-sm"
                     placeholder="Your company name"
                     required
                     disabled={loading}
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium mb-1.5 text-gray-700"
+                      className="block text-xs font-medium mb-1.5 text-gray-300"
                     >
                       Email
                     </label>
@@ -292,7 +292,7 @@ export default function CTASection() {
                       id="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900 focus:ring-2 focus:ring-[#1FBFB8] focus:border-[#1FBFB8]"
+                      className="w-full p-2.5 border border-gray-700 rounded bg-gray-800/50 text-gray-200 focus:ring-1 focus:ring-[#1FBFB8] focus:border-[#1FBFB8] text-sm"
                       placeholder="Your email address"
                       required
                       disabled={loading}
@@ -302,7 +302,7 @@ export default function CTASection() {
                   <div>
                     <label
                       htmlFor="phone"
-                      className="block text-sm font-medium mb-1.5 text-gray-700"
+                      className="block text-xs font-medium mb-1.5 text-gray-300"
                     >
                       Phone Number
                     </label>
@@ -311,7 +311,7 @@ export default function CTASection() {
                       id="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900 focus:ring-2 focus:ring-[#1FBFB8] focus:border-[#1FBFB8]"
+                      className="w-full p-2.5 border border-gray-700 rounded bg-gray-800/50 text-gray-200 focus:ring-1 focus:ring-[#1FBFB8] focus:border-[#1FBFB8] text-sm"
                       placeholder="Your phone number"
                       disabled={loading}
                     />
@@ -321,16 +321,16 @@ export default function CTASection() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-medium mb-1.5 text-gray-700"
+                    className="block text-xs font-medium mb-1.5 text-gray-300"
                   >
                     Your Requirements
                   </label>
                   <textarea
                     id="message"
-                    rows={5}
+                    rows={4}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900 focus:ring-2 focus:ring-[#1FBFB8] focus:border-[#1FBFB8]"
+                    className="w-full p-2.5 border border-gray-700 rounded bg-gray-800/50 text-gray-200 focus:ring-1 focus:ring-[#1FBFB8] focus:border-[#1FBFB8] text-sm"
                     placeholder="Describe your mining and hauling requirements"
                     required
                     disabled={loading}
@@ -342,16 +342,16 @@ export default function CTASection() {
                   disabled={loading}
                   className={`w-full inline-flex justify-center items-center ${
                     loading
-                      ? "bg-gray-400"
+                      ? "bg-gray-600"
                       : "bg-[#E85C23] hover:bg-[#d14b17]"
-                  } text-white py-3.5 px-6 rounded-lg transition group font-medium shadow-lg`}
+                  } text-white py-2.5 px-5 rounded transition group font-medium shadow-md text-sm`}
                 >
                   {loading ? (
                     <span>Sending...</span>
                   ) : (
                     <>
                       <span>Submit Request</span>
-                      <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
                     </>
                   )}
                 </button>

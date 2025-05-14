@@ -53,6 +53,16 @@ export default function RootLayout({
       lang="id"
       className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
     >
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inder&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="bg-white text-gray-900 antialiased">
         <AuthWrapper>
           <div className="relative flex min-h-screen flex-col">
