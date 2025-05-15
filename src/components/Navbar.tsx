@@ -95,9 +95,8 @@ export default function Navbar() {
           </div>
           <div className="hidden md:block">
             <h1 className="font-comfortaa font-bold text-[#E85C23] text-lg">
-              Batara Dharma
+              PT Batara Dharma <span className="font-comfortaa font-bold text-[#E85C23] text-lg">Persada</span>
             </h1>
-            <p className="text-[#1FBFB8] font-inder text-sm">Persada</p>
           </div>
         </Link>
 
