@@ -1,17 +1,28 @@
-// AnimationContext.tsx
-import React, { createContext, useContext, useEffect, ReactNode } from "react";
+// src/components/projects/AnimationContext.tsx
+"use client";
+
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode
+} from "react";
 
 interface AnimationContextType {
-  // Add any context values you might need in the future
+  isAnimated: boolean;
+  setIsAnimated: (value: boolean) => void;
 }
 
-const AnimationContext = createContext<AnimationContextType>({});
+const AnimationContext = createContext<AnimationContextType | undefined>(undefined);
 
 interface AnimationProviderProps {
   children: ReactNode;
 }
 
-export function AnimationProvider({ children }: AnimationProviderProps): React.ReactNode {
+export function AnimationProvider({ children }: AnimationProviderProps): JSX.Element {
+  const [isAnimated, setIsAnimated] = useState(false);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -19,6 +30,7 @@ export function AnimationProvider({ children }: AnimationProviderProps): React.R
           if (entry.isIntersecting) {
             entry.target.classList.add("opacity-100");
             entry.target.classList.remove("opacity-0", "translate-y-6");
+            setIsAnimated(true); // mark as animated once visible
           }
         });
       },
@@ -34,12 +46,16 @@ export function AnimationProvider({ children }: AnimationProviderProps): React.R
   }, []);
 
   return (
-    <AnimationContext.Provider value={{}}>
+    <AnimationContext.Provider value={{ isAnimated, setIsAnimated }}>
       {children}
     </AnimationContext.Provider>
   );
 }
 
 export function useAnimation(): AnimationContextType {
-  return useContext(AnimationContext);
+  const context = useContext(AnimationContext);
+  if (!context) {
+    throw new Error("useAnimation must be used within an AnimationProvider");
+  }
+  return context;
 }

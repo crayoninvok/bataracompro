@@ -1,7 +1,7 @@
 // src/components/dashboard/RecentJobs.tsx
 import React from "react";
 import Link from "next/link";
-import { Job } from "@/types/job.types";
+import { Job } from "@/types/job";
 
 interface RecentJobsProps {
   jobs: Job[];

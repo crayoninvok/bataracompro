@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { Education } from "@/types/profile.types";
+import { Education } from "@/types/profile";
 import { isValidYear } from "@/utils/validation";
 
 interface EducationFormProps {
