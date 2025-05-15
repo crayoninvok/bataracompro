@@ -3,7 +3,7 @@ import ProfilePage from "@/components/profilepage/ProfilePage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Profil Perusahaan | Batara Dharma Persada",
+  title: "Company Profile | Batara Dharma Persada",
   description:
     "Get to know PT. Batara Dharma Persada as a trusted coal transportation partner in Indonesia.",
   keywords: [

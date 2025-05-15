@@ -155,7 +155,7 @@ export default function CTASection() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Phone</p>
-                  <p className="font-medium text-gray-200">+62 21 1234 5678</p>
+                  <p className="font-medium text-gray-200">+68 1122 98203</p>
                 </div>
               </div>
 

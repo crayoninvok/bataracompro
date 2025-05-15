@@ -131,7 +131,7 @@ export default function OurUnits() {
               {/* Key features */}
               <div className="space-y-4 mb-8">
                 {[
-                  "Up to 60-ton coal capacity per trip",
+                  "Up to 200-ton coal capacity per trip",
                   "Fuel-efficient Volvo engine technology",
                   "Advanced safety and monitoring systems",
                   "Reduced carbon footprint per ton transported"

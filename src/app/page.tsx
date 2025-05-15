@@ -3,7 +3,7 @@
 import HeroWithVideo from "@/components/homepage/Hero";
 import AboutCompany from "@/components/homepage/AboutCompany";
 import ServicesSection from "@/components/homepage/ServicesHero";
-import TestimonialsSection from "@/components/homepage/TestimonialsHero";
+// import TestimonialsSection from "@/components/homepage/TestimonialsHero";
 import CTASection from "@/components/homepage/CTAHero";
 import { useEffect } from "react";
 
@@ -23,7 +23,7 @@ export default function Home() {
       <HeroWithVideo />
       <AboutCompany />
       <ServicesSection />
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
       <CTASection />
     </main>
   );

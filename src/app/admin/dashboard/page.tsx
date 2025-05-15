@@ -6,7 +6,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { Job } from "@/types/job";
 import { useJobs } from "@/hooks/useJobs";
 import { formatSalaryRange, formatDate } from "@/utils/format";
-import { Briefcase, ChevronLeft, ChevronRight, Eye, Edit, Search, Plus } from "lucide-react";
+import { Briefcase, ChevronLeft, ChevronRight, Eye, Edit, Search, Plus, Trash2 } from "lucide-react";
+import Swal from "sweetalert2";
 
 // Update the Job type to include the deadline property
 declare module "@/types/job" {
@@ -18,7 +19,7 @@ declare module "@/types/job" {
 export default function AdminDashboardPage() {
   const { user, isLoading: authLoading } = useAuth();
   const router = useRouter();
-  const { getJobs, isLoading: jobsLoading } = useJobs();
+  const { getJobs, deleteJob, isLoading: jobsLoading } = useJobs();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [pagination, setPagination] = useState({
@@ -27,6 +28,7 @@ export default function AdminDashboardPage() {
     totalItems: 0,
     totalPages: 0,
   });
+  const [deleteLoading, setDeleteLoading] = useState<string | null>(null);
 
   const isAdmin = user?.role === "ADMIN";
   const isAuthenticated = !!user;
@@ -64,6 +66,57 @@ export default function AdminDashboardPage() {
     e.preventDefault();
     setPagination(prev => ({ ...prev, page: 1 }));
     fetchJobs();
+  };
+
+  const handleDeleteJob = async (id: string, title: string) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `You are about to delete "${title}". This action cannot be undone!`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#E85C23',
+      cancelButtonColor: '#64748b',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+      background: '#fff',
+      customClass: {
+        title: 'text-gray-800 text-xl',
+        htmlContainer: 'text-gray-600'
+      }
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setDeleteLoading(id);
+        try {
+          const response = await deleteJob(id);
+          if (response.data) {
+            // Remove from state and update pagination
+            setJobs(prevJobs => prevJobs.filter(job => job.id !== id));
+            setPagination(prev => ({ 
+              ...prev, 
+              totalItems: prev.totalItems - 1,
+              totalPages: Math.ceil((prev.totalItems - 1) / prev.limit)
+            }));
+            
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Job listing has been deleted successfully.',
+              icon: 'success',
+              confirmButtonColor: '#E85C23'
+            });
+          }
+        } catch (error) {
+          console.error("Failed to delete job:", error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Failed to delete the job. Please try again.',
+            icon: 'error',
+            confirmButtonColor: '#E85C23'
+          });
+        } finally {
+          setDeleteLoading(null);
+        }
+      }
+    });
   };
 
   // Loading state
@@ -182,9 +235,6 @@ export default function AdminDashboardPage() {
                   Posted Date
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                   Actions
                 </th>
               </tr>
@@ -219,15 +269,6 @@ export default function AdminDashboardPage() {
                           {formatDate(job.postedAt)}
                         </div>
                       </td>
-                      <td className="px-6 py-4">
-                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                          ${isActive 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-gray-100 text-gray-800'}`}
-                        >
-                          {isActive ? 'Active' : 'Closed'}
-                        </span>
-                      </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <div className="flex space-x-2">
                           <button
@@ -243,6 +284,18 @@ export default function AdminDashboardPage() {
                             title="View applications"
                           >
                             <Eye className="h-4 w-4" />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteJob(job.id, job.title)}
+                            className="text-red-500 hover:text-red-700"
+                            title="Delete job"
+                            disabled={deleteLoading === job.id}
+                          >
+                            {deleteLoading === job.id ? (
+                              <div className="h-4 w-4 rounded-full border-2 border-t-red-500 border-red-500/30 animate-spin"></div>
+                            ) : (
+                              <Trash2 className="h-4 w-4" />
+                            )}
                           </button>
                         </div>
                       </td>

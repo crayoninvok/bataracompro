@@ -59,7 +59,7 @@ export default function HeroWithVideo() {
           </h1>
 
           <p className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-gray-200 mb-6 md:mb-8 leading-relaxed">
-            A trusted partner for coal transportation needs with reliable
+            A trusted partner for Indonesia-based mining contractor with reliable
             fleets and management systems.
           </p>
 

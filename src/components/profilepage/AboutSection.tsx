@@ -53,11 +53,11 @@ export default function AboutSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="text-white font-medium text-lg">
-                  PT. Batara Dharma Persada Headquarters
+                  PT. Batara Dharma Persada Pitstop
                 </p>
                 <div className="flex items-center mt-2">
                   <span className="w-8 h-0.5 bg-[#E85C23] mr-2" />
-                  <span className="text-white/80 text-sm">Jakarta, Indonesia</span>
+                  <span className="text-white/80 text-sm">Kalimantan, Indonesia</span>
                 </div>
               </div>
             </div>
@@ -98,7 +98,7 @@ export default function AboutSection() {
                   { icon: Calendar, value: "2024", label: "Established", color: "#E85C23" },
                   { icon: Users, value: "150+", label: "Employees", color: "#1FBFB8" },
                   { icon: Briefcase, value: "2", label: "Active Projects", color: "#E85C23" },
-                  { icon: Award, value: "10+ Years", label: "Collective Experience", color: "#1FBFB8" }
+                  { icon: Award, value: "5+ Years", label: "Collective Experience", color: "#1FBFB8" }
                 ].map((item, index) => (
                   <div key={index} className="flex items-start space-x-4">
                     <div 
@@ -114,12 +114,11 @@ export default function AboutSection() {
                   </div>
                 ))}
               </div>
-
               <a
-                href="/about"
+                href="/proyek"
                 className="inline-flex items-center group text-[#E85C23] font-medium hover:text-[#d14b17] transition-colors"
               >
-                Learn more about our company
+                Learn more about our projects
                 <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>

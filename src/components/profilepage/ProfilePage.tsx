@@ -5,8 +5,6 @@ import React from "react";
 import ProfileHero from "./ProfileHero";
 import AboutSection from "./AboutSection";
 import CoreValues from "./CoreValues";
-import CompanyStats from "./CompanyStats";
-import ProfileCTA from "./ProfileCTA";
 
 export default function ProfilePage() {
   return (
@@ -14,7 +12,6 @@ export default function ProfilePage() {
       <ProfileHero />
       <AboutSection />
       <CoreValues />
-      <ProfileCTA />
     </main>
   );
 }

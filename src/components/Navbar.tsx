@@ -28,9 +28,11 @@ export default function Navbar() {
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (!(e.target as Element).closest(".dropdown-container")) {
-        setActiveDropdown(null);
-        setAvatarDropdown(false);
+      if (window.innerWidth >= 768) {
+        if (!(e.target as Element).closest(".dropdown-container")) {
+          setActiveDropdown(null);
+          setAvatarDropdown(false);
+        }
       }
     };
 
@@ -47,6 +49,7 @@ export default function Navbar() {
         { href: "/tentang/profil", label: "Company Profile" },
         { href: "/tentang/visi-misi", label: "Vision & Mission" },
         { href: "/tentang/tim", label: "Board of Director" },
+        { href: "/tentang/organization", label: "Organization Structure" },
       ],
     },
     { href: "/proyek", label: "Project" },
@@ -240,6 +243,7 @@ export default function Navbar() {
                 {link.dropdown ? (
                   <div>
                     <button
+                      type="button" // ✅ ini penting
                       onClick={() => toggleDropdown(link.label)}
                       className="flex items-center justify-between w-full py-2 text-gray-300"
                     >

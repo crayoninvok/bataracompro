@@ -19,35 +19,50 @@ export async function POST(req: Request) {
   });
   try {
     await transporter.sendMail({
-        from: `"Customer Support" <${process.env.EMAIL_USER}>`,
-        to: "sneakybastird@gmail.com",
-        subject: "You Have a New Message",
-        html: `
-            <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee; border-radius: 8px; background-color: #f9f9f9;">
-              <div style="text-align: center; margin-bottom: 20px;">
-                <img src="cid:company-logo" alt="Batara Mining Logo" style="max-width: 180px; height: auto;" />
-              </div>
-              <h2 style="text-align: center; color: #2c3e50;">📬 Pesan Baru dari Form Kontak</h2>
-              <hr style="margin: 20px 0; border: none; border-top: 1px solid #ccc;" />
-              <p><strong>👤 Nama Pengirim:</strong><br/> ${name}</p>
-              <p><strong>📧 Email Pengirim:</strong><br/> ${email}</p>
-              <p><strong>📝 Pesan:</strong><br/>
-                <div style="margin-top: 8px; padding: 10px; background-color: #fff; border: 1px solid #ddd; border-radius: 6px;">
-                  ${message.replace(/\n/g, "<br/>")}
-                </div>
-              </p>
-              <hr style="margin: 20px 0; border: none; border-top: 1px solid #ccc;" />
-              <p style="font-size: 0.9em; color: #888;">Email ini dikirim otomatis dari formulir website Anda.</p>
-            </div>
+      from: `"Customer Support" <${process.env.EMAIL_USER}>`,
+      to: "sneakybastird@gmail.com",
+      subject: "New Contact Form Submission - PT Batara Dharma Persada",
+      html: `
+           <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: auto; padding: 0; color: #333333;">
+      <!-- Header with Logo -->
+      <div style="background-color: #1a1a1a; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+        <img src="cid:company-logo" alt="PT Batara Dharma Persada" style="max-width: 200px; height: auto;" />
+      </div>
+      
+      <!-- Main Content -->
+      <div style="background-color: #ffffff; padding: 30px; border-left: 1px solid #e0e0e0; border-right: 1px solid #e0e0e0;">
+        <h2 style="color: #E85C23; margin-top: 0; font-size: 24px; font-weight: 600;">New Message Received</h2>
+        <p style="color: #666666; margin-bottom: 25px; font-size: 16px;">You have received a new message from your website contact form.</p>
+        
+        <div style="margin-bottom: 25px; padding: 20px; background-color: #f9f9f9; border-radius: 6px; border-left: 4px solid #1FBFB8;">
+          <p style="margin: 0 0 15px 0;"><span style="display: block; font-weight: 600; color: #555555; margin-bottom: 5px;">From:</span> ${name}</p>
+          <p style="margin: 0 0 15px 0;"><span style="display: block; font-weight: 600; color: #555555; margin-bottom: 5px;">Email:</span> <a href="mailto:${email}" style="color: #1FBFB8; text-decoration: none;">${email}</a></p>
+          <p style="margin: 0;"><span style="display: block; font-weight: 600; color: #555555; margin-bottom: 5px;">Message:</span></p>
+          <div style="background-color: #ffffff; padding: 15px; border-radius: 4px; border: 1px solid #e0e0e0; margin-top: 10px; line-height: 1.6;">
+            ${message.replace(/\n/g, "<br/>")}
+          </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+          <a href="mailto:${email}" style="display: inline-block; background-color: #E85C23; color: #ffffff; text-decoration: none; padding: 12px 25px; border-radius: 4px; font-weight: 500;">Reply to Sender</a>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div style="background-color: #f5f5f5; padding: 20px; text-align: center; color: #777777; font-size: 14px; border-radius: 0 0 8px 8px; border: 1px solid #e0e0e0; border-top: none;">
+        <p style="margin-top: 0; margin-bottom: 10px;">© ${new Date().getFullYear()} PT Batara Dharma Persada. All rights reserved.</p>
+        <p style="margin: 0;">This is an automated email from your website contact form.</p>
+      </div>
+    </div>
           `,
-        attachments: [
-          {
-            filename: 'btr.png',
-            path: 'public/btr.png',
-            cid: 'company-logo' // Referenced in the HTML with cid:company-logo
-          }
-        ]
-      });
+      attachments: [
+        {
+          filename: "btr.png",
+          path: "public/btr.png",
+          cid: "company-logo", // Referenced in the HTML with cid:company-logo
+        },
+      ],
+    });
     return NextResponse.json(
       { message: "Email sent successfully" },
       { status: 200 }

@@ -1,3 +1,4 @@
+// Updated Contact component with loading and status notifications
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -16,19 +17,39 @@ import {
   Twitter,
   Youtube,
   ArrowRight,
-  ChevronRight
+  ChevronRight,
+  Check,
+  AlertCircle
 } from "lucide-react";
+
+interface FormData {
+  name: string;
+  email: string;
+  company: string;
+  phone: string;
+  message: string;
+}
+
+interface StatusState {
+  type: "success" | "error" | null;
+  message: string;
+}
 
 export default function Contact() {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     company: "",
     phone: "",
     message: ""
+  });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState<StatusState>({
+    type: null,
+    message: "",
   });
 
   useEffect(() => {
@@ -92,18 +113,62 @@ export default function Contact() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
-    alert("Your message has been sent. We will contact you soon.");
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      phone: "",
-      message: ""
-    });
+    setLoading(true);
+    setStatus({ type: null, message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: `
+            Name: ${formData.name}
+            Company: ${formData.company}
+            Email: ${formData.email}
+            Phone: ${formData.phone}
+            
+            Message:
+            ${formData.message}
+          `,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus({
+          type: "success",
+          message: "Your message has been successfully sent. We will contact you soon.",
+        });
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        setStatus({
+          type: "error",
+          message: data.message || "An error occurred while sending the message. Please try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setStatus({
+        type: "error",
+        message: "An error occurred on the system. Please try again later.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Parallax effect calculation
@@ -286,7 +351,7 @@ export default function Contact() {
                     <Facebook className="w-6 h-6 text-gray-300 hover:text-[#1FBFB8] transition" />
                   </a>
                   <a 
-                    href="https://linkedin.com/company/pt-batara-dharma-persada" 
+                    href="https://www.linkedin.com/company/pt-bdp/posts/?feedView=all" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="bg-black/30 hover:bg-[#1FBFB8]/30 transition-all duration-300 p-4 rounded-lg border border-gray-800 hover:border-[#1FBFB8]"
@@ -322,6 +387,37 @@ export default function Contact() {
                 
                 <div className="relative z-10">
                   <h2 className="text-2xl font-bold mb-6 text-white">Send a Message</h2>
+                  
+                  {status.type === "success" ? (
+                    <div className="bg-green-900/30 border border-green-700/50 rounded p-3 mb-5">
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <Check className="h-4 w-4 text-green-400" />
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-sm text-green-300">
+                            {status.message}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {status.type === "error" ? (
+                    <div className="bg-red-900/30 border border-red-700/50 rounded p-3 mb-5">
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <AlertCircle className="h-4 w-4 text-red-400" />
+                        </div>
+                        <div className="ml-3">
+                          <p className="text-sm text-red-300">
+                            {status.message}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
+                  
                   <form onSubmit={handleSubmit}>
                     <div className="space-y-5">
                       <div>
@@ -339,6 +435,7 @@ export default function Contact() {
                             value={formData.name}
                             onChange={handleChange}
                             required
+                            disabled={loading}
                             className="block w-full pl-10 pr-3 py-3 bg-black/40 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1FBFB8] focus:border-transparent text-white"
                             placeholder="Enter full name"
                           />
@@ -360,6 +457,7 @@ export default function Contact() {
                             value={formData.email}
                             onChange={handleChange}
                             required
+                            disabled={loading}
                             className="block w-full pl-10 pr-3 py-3 bg-black/40 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1FBFB8] focus:border-transparent text-white"
                             placeholder="email@company.com"
                           />
@@ -381,6 +479,7 @@ export default function Contact() {
                               name="company"
                               value={formData.company}
                               onChange={handleChange}
+                              disabled={loading}
                               className="block w-full pl-10 pr-3 py-3 bg-black/40 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1FBFB8] focus:border-transparent text-white"
                               placeholder="Company name"
                             />
@@ -401,6 +500,7 @@ export default function Contact() {
                               name="phone"
                               value={formData.phone}
                               onChange={handleChange}
+                              disabled={loading}
                               className="block w-full pl-10 pr-3 py-3 bg-black/40 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1FBFB8] focus:border-transparent text-white"
                               placeholder="+62 812 3456 7890"
                             />
@@ -423,6 +523,7 @@ export default function Contact() {
                             onChange={handleChange}
                             rows={5}
                             required
+                            disabled={loading}
                             className="block w-full pl-10 pr-3 py-3 bg-black/40 border border-gray-700 rounded-lg shadow-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1FBFB8] focus:border-transparent text-white"
                             placeholder="Explain your question or need..."
                           />
@@ -432,10 +533,21 @@ export default function Contact() {
                       <div className="pt-2">
                         <button
                           type="submit"
-                          className="w-full flex justify-center items-center py-4 px-4 border border-transparent rounded-lg shadow-md text-base font-medium text-white bg-gradient-to-r from-[#E85C23] to-[#d14b17] hover:from-[#d14b17] hover:to-[#E85C23] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E85C23] transition-all duration-300 group"
+                          disabled={loading}
+                          className={`w-full flex justify-center items-center py-4 px-4 border border-transparent rounded-lg shadow-md text-base font-medium text-white ${
+                            loading
+                              ? "bg-gray-600"
+                              : "bg-gradient-to-r from-[#E85C23] to-[#d14b17] hover:from-[#d14b17] hover:to-[#E85C23]"
+                          } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E85C23] transition-all duration-300 group`}
                         >
-                          <Send className="w-5 h-5 mr-2 transform group-hover:translate-x-1 transition-transform" />
-                          Send Message
+                          {loading ? (
+                            <span>Sending...</span>
+                          ) : (
+                            <>
+                              <Send className="w-5 h-5 mr-2 transform group-hover:translate-x-1 transition-transform" />
+                              Send Message
+                            </>
+                          )}
                         </button>
                       </div>
                     </div>
