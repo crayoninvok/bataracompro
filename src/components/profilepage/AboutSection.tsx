@@ -56,7 +56,7 @@ export default function AboutSection() {
                   PT. Batara Dharma Persada Pitstop
                 </p>
                 <div className="flex items-center mt-2">
-                  <span className="w-8 h-0.5 bg-[#E85C23] mr-2" />
+                  <span className="w-8 h-0.5 bg-[#1FBFB8] mr-2" />
                   <span className="text-white/80 text-sm">Kalimantan, Indonesia</span>
                 </div>
               </div>
@@ -72,11 +72,11 @@ export default function AboutSection() {
             }`}
           >
             <div className="max-w-lg">
-              <span className="inline-block text-[#E85C23] font-medium mb-3">
+              <span className="inline-block text-[#1FBFB8] font-medium mb-3">
                 OUR COMPANY
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                Committed to Excellence in <span className="text-[#E85C23]">Mining Operations</span>
+                Committed to Excellence in <span className="text-[#1FBFB8]">Mining Operations</span>
               </h2>
               
               <div className="space-y-5 text-gray-300 mb-8">
@@ -96,9 +96,9 @@ export default function AboutSection() {
               <div className="grid grid-cols-2 gap-6 mb-10">
                 {[
                   { icon: Calendar, value: "2024", label: "Established", color: "#E85C23" },
-                  { icon: Users, value: "150+", label: "Employees", color: "#1FBFB8" },
-                  { icon: Briefcase, value: "2", label: "Active Projects", color: "#E85C23" },
-                  { icon: Award, value: "5+ Years", label: "Collective Experience", color: "#1FBFB8" }
+                  { icon: Users, value: "200+", label: "Employees", color: "#1FBFB8" },
+                  { icon: Briefcase, value: "1", label: "Active Projects", color: "#E85C23" },
+                  { icon: Award, value: "Best HSE", label: "Collective Experience", color: "#1FBFB8" }
                 ].map((item, index) => (
                   <div key={index} className="flex items-start space-x-4">
                     <div 
@@ -116,7 +116,7 @@ export default function AboutSection() {
               </div>
               <a
                 href="/proyek"
-                className="inline-flex items-center group text-[#E85C23] font-medium hover:text-[#d14b17] transition-colors"
+                className="inline-flex items-center group text-[#1FBFB8] font-medium hover:text-[#d14b17] transition-colors"
               >
                 Learn more about our projects
                 <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

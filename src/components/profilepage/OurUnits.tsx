@@ -110,11 +110,11 @@ export default function OurUnits() {
             isVisible ? "translate-x-0 opacity-100" : "translate-x-12 opacity-0"
           }`}>
             <div className="max-w-lg">
-              <span className="inline-block text-[#1FBFB8] font-medium mb-3">
+              <span className="inline-block text-[#E85C23] font-medium mb-3">
                 OUR TRANSPORTATION UNITS
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                Advanced <span className="text-[#E85C23]">Coal Hauling</span> Solutions
+                Advanced <span className="text-[#1FBFB8]">Coal Hauling</span> Solutions
               </h2>
               
               <div className="space-y-5 text-gray-300 mb-8">
@@ -137,8 +137,8 @@ export default function OurUnits() {
                   "Reduced carbon footprint per ton transported"
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center">
-                    <div className="w-6 h-6 rounded-full bg-[#E85C23]/20 flex items-center justify-center mr-3">
-                      <ChevronRight className="w-4 h-4 text-[#E85C23]" />
+                    <div className="w-6 h-6 rounded-full bg-[#1FBFB8]/40 flex items-center justify-center mr-3">
+                      <ChevronRight className="w-4 h-4 text-[#1FBFB8]" />
                     </div>
                     <p className="text-gray-200">{feature}</p>
                   </div>
@@ -147,7 +147,7 @@ export default function OurUnits() {
               
               <Link
                 href="/kontak"
-                className="inline-flex items-center bg-[#E85C23] hover:bg-[#d14b17] text-white px-6 py-3 rounded-md font-medium transition-all duration-300 group"
+                className="inline-flex items-center bg-[#1FBFB8] hover:bg-[#d14b17] text-black px-6 py-3 rounded-md font-medium transition-all duration-300 group"
               >
                 Discuss Your Transportation Needs
                 <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

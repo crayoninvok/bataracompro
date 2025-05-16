@@ -35,7 +35,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-3">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full border border-[#E85C23] bg-black/60 p-1">
+              <div className="w-10 h-10 rounded-full border border-[#1FBFB8] bg-black/60 p-1">
                 <Image
                   src="/nobgbtrlogo.png"
                   alt="BTR Logo"
@@ -45,7 +45,7 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <h3 className="font-comfortaa font-bold text-[#E85C23] text-lg">Batara Dharma</h3>
+                <h3 className="font-comfortaa font-bold text-[#1FBFB8] text-lg">Batara Dharma</h3>
                 <p className="text-[#1FBFB8] font-inder text-sm">Persada</p>
               </div>
             </div>

@@ -16,7 +16,7 @@ export default function CTASection(): React.ReactNode {
         </p>
         <a
           href="/kontak"
-          className="inline-flex items-center bg-[#E85C23] hover:bg-[#d14b17] text-white px-8 py-4 rounded-md transition-colors shadow-lg text-lg group"
+          className="inline-flex items-center bg-[#1FBFB8] hover:bg-[#d14b17] text-black px-8 py-4 rounded-md transition-colors shadow-lg text-lg group"
         >
           <span>Contact Our Team</span>
           <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />

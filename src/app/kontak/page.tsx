@@ -229,7 +229,7 @@ export default function Contact() {
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Connect with <span className="text-[#E85C23] font-medium">PT. Batara Dharma Persada</span> for all your mining and hauling service needs
+              Connect with <span className="text-[#1FBFB8] font-medium">PT. Batara Dharma Persada</span> for all your mining and hauling service needs
             </p>
             
             <div className="animate-bounce mt-8">
@@ -534,11 +534,11 @@ export default function Contact() {
                         <button
                           type="submit"
                           disabled={loading}
-                          className={`w-full flex justify-center items-center py-4 px-4 border border-transparent rounded-lg shadow-md text-base font-medium text-white ${
+                          className={`w-full flex justify-center items-center py-4 px-4 border border-transparent rounded-lg shadow-md text-base font-medium text-black ${
                             loading
                               ? "bg-gray-600"
-                              : "bg-gradient-to-r from-[#E85C23] to-[#d14b17] hover:from-[#d14b17] hover:to-[#E85C23]"
-                          } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E85C23] transition-all duration-300 group`}
+                              : "bg-gradient-to-r from-[#1FBFB8] to-[#1BABA5] hover:from-[#1FBFB8] hover:to-[#1BABA5]"
+                          } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1FBFB8] transition-all duration-300 group`}
                         >
                           {loading ? (
                             <span>Sending...</span>
@@ -632,7 +632,7 @@ export default function Contact() {
           </p>
           <a
             href="https://res.cloudinary.com/dysmj8esf/image/upload/v1747210242/bdp_companyProfile_202410_r00_jgiio4.pdf"
-            className="inline-flex items-center bg-[#e85c23] hover:bg-[#d14b17] text-white px-8 py-4 rounded-md transition-colors shadow-lg text-lg group"
+            className="inline-flex items-center bg-[#1FBFB8] hover:bg-[#1BABA5] text-black px-8 py-4 rounded-md transition-colors shadow-lg text-lg group"
           >
             <span>Download Company Profile</span>
             <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />

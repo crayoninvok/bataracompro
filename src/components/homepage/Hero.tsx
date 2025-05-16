@@ -52,7 +52,7 @@ export default function HeroWithVideo() {
             Coal Transportation Solutions
             <div className="mt-2">
               <span className="font-bold">PT. </span>
-              <span className="text-[#E85C23] font-extrabold">
+              <span className="text-[#1FBFB8] font-extrabold">
                 Batara Dharma Persada
               </span>
             </div>
@@ -66,19 +66,19 @@ export default function HeroWithVideo() {
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mt-5 md:mt-6 mb-6 md:mb-8">
             <div className="flex items-center gap-3 justify-center bg-black/50 py-2 px-4 rounded-md backdrop-blur-sm border border-gray-800">
               <div className="bg-[#E85C23]/20 p-2 rounded">
-                <Truck className="w-5 h-5 text-[#E85C23]" />
+                <Truck className="w-5 h-5 text-[#1FBFB8]" />
               </div>
               <span className="text-base">Modern Fleet</span>
             </div>
             <div className="flex items-center gap-3 justify-center bg-black/50 py-2 px-4 rounded-md backdrop-blur-sm border border-gray-800">
               <div className="bg-[#1FBFB8]/20 p-2 rounded">
-                <Shield className="w-5 h-5 text-[#1FBFB8]" />
+                <Shield className="w-5 h-5 text-[#E85C23]" />
               </div>
               <span className="text-base">Guaranteed Safety</span>
             </div>
             <div className="flex items-center gap-3 justify-center bg-black/50 py-2 px-4 rounded-md backdrop-blur-sm border border-gray-800">
               <div className="bg-[#E85C23]/20 p-2 rounded">
-                <Award className="w-5 h-5 text-[#E85C23]" />
+                <Award className="w-5 h-5 text-[#1FBFB8]" />
               </div>
               <span className="text-base">Quality Service</span>
             </div>
@@ -88,7 +88,7 @@ export default function HeroWithVideo() {
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6 md:mt-8">
             <Link
               href="/tentang/profil"
-              className="bg-[#E85C23] hover:bg-[#d14b17] text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-base font-medium transition-all duration-300 shadow-md"
+              className="bg-[#1FBFB8] hover:bg-[#d14b17] text-black px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-base font-medium transition-all duration-300 shadow-md"
             >
               About Us
             </Link>
@@ -112,7 +112,7 @@ export default function HeroWithVideo() {
       >
         <div className="relative">
           <div className="absolute -inset-1 rounded-full bg-[#E85C23]/20 animate-pulse"></div>
-          <ArrowDownCircle className="w-8 h-8 md:w-10 md:h-10 text-[#E85C23] relative z-10 animate-bounce" />
+          <ArrowDownCircle className="w-8 h-8 md:w-10 md:h-10 text-[#1FBFB8] relative z-10 animate-bounce" />
         </div>
         <span className="sr-only">Scroll Down</span>
       </div>
