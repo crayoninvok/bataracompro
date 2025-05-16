@@ -74,7 +74,7 @@ export default function ProfileHero() {
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
             <span className="relative inline-block">
               <span className="relative z-10">Company Profile</span>
-              <span className="absolute bottom-0 left-0 w-full h-3 bg-[#E85C23]/30 -z-1" style={{ bottom: '5px' }} />
+              <span className="absolute bottom-0 left-0 w-full h-3 bg-[#1BABA5]/30 -z-1" style={{ bottom: '5px' }} />
             </span>
           </h1>
           

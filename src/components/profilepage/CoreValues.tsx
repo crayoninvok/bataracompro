@@ -195,26 +195,20 @@ export default function StriveValues() {
       <div className="absolute bottom-20 left-0 w-40 h-40 rounded-full bg-[#1FBFB8]/10 blur-3xl -z-0" />
       <div className="absolute top-1/4 -right-20 w-64 h-64 rounded-full bg-[#E85C23]/10 blur-3xl -z-0" />
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+      <div className="container mx-auto px-4
+       md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <span className="inline-block text-[#1FBFB8] font-medium mb-3">
             OUR CORE PRINCIPLES
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            <span className="relative inline-block">
-              Our <span className="text-[#E85C23]">STRIVE</span> Values
-              <span
-                className="absolute bottom-0 left-0 w-full h-1 bg-[#E85C23]/30 -z-1"
-                style={{ bottom: "5px" }}
-              />
-            </span>
+            Our <span className="text-[#1FBFB8]">Quality</span> Policy
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
             The principles that form the foundation in every aspect of our
             business, guiding our decisions and shaping our corporate culture.
           </p>
-
-          <div className="mt-10 mb-16 relative">
+          <div className="p-7 mb-6 relative">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-[#1FBFB8]/20 to-[#E85C23]/20 animate-pulse" />
             </div>

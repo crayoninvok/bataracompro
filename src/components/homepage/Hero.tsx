@@ -48,19 +48,19 @@ export default function HeroWithVideo() {
         }`}
       >
         <div className="bg-black/40 backdrop-blur-md p-6 md:p-8 rounded-lg border border-gray-800">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-5 leading-tight">
-            Coal Transportation Solutions
-            <div className="mt-2">
-              <span className="font-bold">PT. </span>
-              <span className="text-[#1FBFB8] font-extrabold">
-                Batara Dharma Persada
-              </span>
-            </div>
+          <h1 className="text-3xl sm:text-3xl md:text-3xl lg:text-5xl font-bold mb-4 md:mb-5 leading-tight">
+            A Trusted Partner in the Mining Industry
           </h1>
-
-          <p className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-gray-200 mb-6 md:mb-8 leading-relaxed">
-            A trusted partner for Indonesia-based mining contractor with reliable
-            fleets and management systems.
+            <div className="mt-2 text-[#1FBFB8] font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 md:mb-5 leading-tight">   
+                PT Batara Dharma Persada
+            </div>
+          <p className="text-lg sm:text-xl md:text-lg max-w-3xl mx-auto text-gray-200 mb-6 md:mb-8 leading-relaxed">
+            We commited to delivering the best solutions by priotizing safety,
+            productivity and effeciency <br />
+            We understand that the mining industry demands high standards of
+            safety and technologycal innovation. That why we continually invest
+            in the developing cutting edge methods and tehnology to ensure
+            safer, more effective, and sustainable operations.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mt-5 md:mt-6 mb-6 md:mb-8">
@@ -97,7 +97,9 @@ export default function HeroWithVideo() {
               className="bg-transparent border border-gray-700 hover:border-[#1FBFB8] hover:bg-[#1FBFB8]/10 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-base font-medium transition-all duration-300"
             >
               Our Project
-              <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300 inline-block">→</span>
+              <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300 inline-block">
+                →
+              </span>
             </Link>
           </div>
         </div>

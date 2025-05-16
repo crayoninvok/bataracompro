@@ -149,12 +149,12 @@ export default function AllJobs() {
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
               <span className="relative inline-block">
                 <span className="relative z-10">Career Opportunities</span>
-                <span className="absolute bottom-0 left-0 w-full h-3 bg-[#E85C23]/30 z-0" style={{ bottom: '5px' }} />
+                <span className="absolute bottom-0 left-0 w-full h-3 bg-[#1BABA5]/30 z-0" style={{ bottom: '5px' }} />
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Join <span className="text-[#E85C23] font-medium">PT. Batara Dharma Persada</span> and be part of our growing team of professionals
+              Join <span className="text-[#1fbfb8] font-medium">PT. Batara Dharma Persada</span> and be part of our growing team of professionals
             </p>
             
             <div className="animate-bounce mt-8">

@@ -4,18 +4,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/auth-provider";
 import Image from "next/image";
-import { Shield, AlertCircle } from "lucide-react";
+import { User, AlertCircle } from "lucide-react";
 
-export default function AdminLoginPage() {
+export default function EmployeeLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>(
-    {}
-  );
+  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
 
-  const { loginAdmin } = useAuthContext();
+  const { loginEmployee } = useAuthContext();
   const router = useRouter();
 
   const validate = (): boolean => {
@@ -23,8 +21,8 @@ export default function AdminLoginPage() {
 
     if (!email.trim()) {
       newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Email is invalid";
+    } else if (!/\S+@bataramining\.com$/.test(email)) {
+      newErrors.email = "Please use your @bataramining.com email";
     }
 
     if (!password) {
@@ -46,12 +44,12 @@ export default function AdminLoginPage() {
     setLoginError(null);
 
     try {
-      const result = await loginAdmin({ email, password });
+      const result = await loginEmployee({ email, password });
 
       if (result.error) {
         setLoginError(result.error.message);
       } else {
-        router.push("/admin/dashboard");
+        router.push("/employee");
       }
     } catch (error: any) {
       setLoginError(error.message || "Login failed");
@@ -63,17 +61,17 @@ export default function AdminLoginPage() {
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
       {/* Left side - Company branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-[#1BABA5] items-center justify-center relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 bg-[#E85C23] items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#1FBFB8]/30 to-transparent rounded-full -ml-48 -mb-48"></div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#1FBFB8]/20 to-transparent rounded-full -mr-48 -mt-48"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-orange-600/30 to-transparent rounded-full -ml-48 -mb-48"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-400/20 to-transparent rounded-full -mr-48 -mt-48"></div>
 
         <div className="z-10 text-center px-8 max-w-md">
           <div className="mb-8">
             <div className="inline-block p-4 bg-white/10 backdrop-blur-md rounded-2xl shadow-lg">
               <Image
                 src="/nobgbtrlogo.png"
-                alt="PT BATARA Logo"
+                alt="Batara Mining Corp Logo"
                 width={120}
                 height={120}
                 className="object-contain"
@@ -84,8 +82,7 @@ export default function AdminLoginPage() {
             PT Batara Dharma Persada
           </h1>
           <p className="text-white/80 text-lg">
-            Admin Portal for managing mining operations and resources across
-            Indonesia
+            Employee Portal for accessing company resources, documents, and updates
           </p>
         </div>
       </div>
@@ -97,7 +94,7 @@ export default function AdminLoginPage() {
             <div className="flex justify-center mb-6 lg:hidden">
               <Image
                 src="/nobgbtrlogo.png"
-                alt="PT BATARA Logo"
+                alt="Batara Mining Corp Logo"
                 width={80}
                 height={80}
                 className="object-contain"
@@ -106,13 +103,13 @@ export default function AdminLoginPage() {
 
             <div className="text-center mb-8">
               <div className="flex items-center justify-center mb-4">
-                <Shield className="h-6 w-6 text-[#1FBFB8]" />
+                <User className="h-6 w-6 text-[#E85C23]" />
                 <h2 className="ml-2 text-2xl font-bold text-gray-800">
-                  Admin Portal
+                  Employee Portal
                 </h2>
               </div>
               <p className="text-gray-500 text-sm">
-                Enter your credentials to access the dashboard
+                Sign in with your company email
               </p>
             </div>
 
@@ -129,7 +126,7 @@ export default function AdminLoginPage() {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Email address
+                  Company Email
                 </label>
                 <input
                   id="email"
@@ -140,7 +137,7 @@ export default function AdminLoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] transition-colors"
-                  placeholder="you@example.com"
+                  placeholder="yourname@bataramining.com"
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-600">{errors.email}</p>
@@ -172,14 +169,18 @@ export default function AdminLoginPage() {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center"></div>
-                <div className="text-sm"></div>
+                <div className="text-sm">
+                  <a href="/employee/reset-password" className="text-sm text-[#E85C23] hover:text-orange-700">
+                    Forgot your password?
+                  </a>
+                </div>
               </div>
 
               <div>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-2.5 px-4 rounded-lg bg-[#1FBFB8] text-white font-medium hover:bg-[#1BABA5] focus:outline-none focus:ring-2 focus:ring-[#E85C23] focus:ring-offset-2 transition-colors disabled:bg-[#E85C23]/70 disabled:cursor-not-allowed"
+                  className="w-full py-2.5 px-4 rounded-lg bg-[#E85C23] text-white font-medium hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-[#E85C23] focus:ring-offset-2 transition-colors disabled:bg-orange-400 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center">
@@ -212,6 +213,18 @@ export default function AdminLoginPage() {
               </div>
 
               <div className="mt-4 text-center">
+                <p className="text-sm text-gray-500">
+                  Don't have an account?{" "}
+                  <a
+                    href="/register-employe"
+                    className="font-medium text-[#E85C23] hover:text-orange-700 transition-colors"
+                  >
+                    Register here
+                  </a>
+                </p>
+              </div>
+
+              <div className="mt-4 text-center">
                 <a
                   href="/"
                   className="inline-flex items-center justify-center text-sm font-medium text-gray-600 hover:text-[#E85C23] transition-colors"
@@ -237,7 +250,7 @@ export default function AdminLoginPage() {
 
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-500">
-                © 2024 PT Batara Dharma Persada. All rights reserved.
+                © 2024 Batara Mining Corp. All rights reserved.
               </p>
             </div>
           </div>

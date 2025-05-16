@@ -79,13 +79,46 @@ export function useAuth() {
       if (response.admin) {
         setUser({
           ...response.admin,
-          role: "ADMIN", // ✅ tambahkan ini supaya cocok dengan tipe User
+          role: "ADMIN",
         });
       }
 
       return { data: response, isLoading: false };
     } catch (err: any) {
       setError(err.message || "Admin login failed");
+      return { error: err, isLoading: false };
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loginEmployee = async (
+    credentials: LoginRequest
+  ): Promise<ApiResponse<AuthResponse>> => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      // Validate email domain
+      if (!credentials.email.endsWith('@bataramining.com')) {
+        throw new Error('Please use your @bataramining.com email address');
+      }
+      
+      const response = await authService.loginEmployee(credentials);
+      localStorage.setItem("token", response.token);
+
+      if (response.employee) {
+        setUser({
+          ...response.employee,
+          role: "EMPLOYEE",
+        });
+        // Store employee data separately for employee-specific functions
+        authService.storeEmployeeData(response.employee);
+      }
+
+      return { data: response, isLoading: false };
+    } catch (err: any) {
+      setError(err.message || "Employee login failed");
       return { error: err, isLoading: false };
     } finally {
       setIsLoading(false);
@@ -109,11 +142,46 @@ export function useAuth() {
     }
   };
 
+  const registerEmployee = async (
+    data: RegisterRequest
+  ): Promise<ApiResponse<AuthResponse>> => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      if (!data.email.endsWith('@bataramining.com')) {
+        throw new Error('Employee registration requires a valid @bataramining.com email address');
+      }
+      
+      const response = await authService.registerEmployee(data);
+      return { data: response, isLoading: false };
+    } catch (err: any) {
+      setError(err.message || "Employee registration failed");
+      return { error: err, isLoading: false };
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const logout = () => {
     const isAdmin = user?.role === "ADMIN";
-    authService.logout();
+    const isEmployee = user?.role === "EMPLOYEE";
+    
+    if (isEmployee) {
+      authService.logoutEmployee();
+    } else {
+      authService.logout();
+    }
+    
     setUser(null);
-    window.location.assign(isAdmin ? "/login-admin" : "/login");
+    
+    if (isAdmin) {
+      window.location.assign("/login-admin");
+    } else if (isEmployee) {
+      window.location.assign("/employee/login");
+    } else {
+      window.location.assign("/login");
+    }
   };
 
   return {
@@ -122,9 +190,12 @@ export function useAuth() {
     error,
     isAuthenticated: !!user,
     isAdmin: user?.role === "ADMIN",
+    isEmployee: user?.role === "EMPLOYEE",
     login,
     loginAdmin,
+    loginEmployee,
     register,
+    registerEmployee,
     logout,
   };
 }

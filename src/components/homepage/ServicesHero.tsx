@@ -104,15 +104,6 @@ export default function ServicesSection() {
           </div>
 
           {/* Service 6 */}
-          <div className="reveal-service opacity-0 translate-y-6 transition-all duration-700 delay-500 bg-gray-900/80 p-6 rounded-lg shadow-md border border-gray-800 hover:border-[#1FBFB8]/50 group">
-            <div className="bg-[#1FBFB8]/10 p-3 rounded-lg w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[#1FBFB8]/20 transition-colors">
-              <Truck className="w-7 h-7 text-[#1FBFB8]" />
-            </div>
-            <h3 className="text-lg font-bold mb-2 text-white group-hover:text-[#1FBFB8] transition-colors">Integrated Hauling Solutions</h3>
-            <p className="text-gray-400 text-sm">
-              Comprehensive hauling management with route optimization, real-time tracking, and preventive maintenance to ensure efficient and reliable mineral transportation.
-            </p>
-          </div>
         </div>
       </div>
     </section>

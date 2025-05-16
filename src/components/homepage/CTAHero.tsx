@@ -343,8 +343,8 @@ export default function CTASection() {
                   className={`w-full inline-flex justify-center items-center ${
                     loading
                       ? "bg-gray-600"
-                      : "bg-[#E85C23] hover:bg-[#d14b17]"
-                  } text-white py-2.5 px-5 rounded transition group font-medium shadow-md text-sm`}
+                      : "bg-[#1FBFB8] hover:bg-[#1BABA5]"
+                  } text-black py-2.5 px-5 rounded transition group font-medium shadow-md text-sm`}
                 >
                   {loading ? (
                     <span>Sending...</span>

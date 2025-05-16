@@ -98,7 +98,7 @@ export default function AboutSection() {
                   { icon: Calendar, value: "2024", label: "Established", color: "#E85C23" },
                   { icon: Users, value: "200+", label: "Employees", color: "#1FBFB8" },
                   { icon: Briefcase, value: "1", label: "Active Projects", color: "#E85C23" },
-                  { icon: Award, value: "Best HSE", label: "Collective Experience", color: "#1FBFB8" }
+                  { icon: Award, value: "6,2 M Ton", label: "Coal Production Capacity", color: "#1FBFB8" }
                 ].map((item, index) => (
                   <div key={index} className="flex items-start space-x-4">
                     <div 

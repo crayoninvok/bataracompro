@@ -2,7 +2,6 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { MapPin, Building, Truck } from "lucide-react";
 
 export default function MapSection() {
   useEffect(() => {
@@ -112,7 +111,7 @@ export default function MapSection() {
             
             .leaflet-popup-content b {
               font-weight: bold;
-              color: #E85C23;
+              color: #1FBFB8;
             }
           `}</style>
         </div>

@@ -4,7 +4,7 @@ export interface User {
   email: string;
   name: string;
   avatar?: string;
-  role: "ADMIN" | "USER";
+  role: "ADMIN" | "USER" | "EMPLOYEE";
   isVerify?: boolean;
   createdAt?: string;
   updatedAt?: string;
@@ -30,5 +30,12 @@ export interface AuthResponse {
     id: string;
     email: string;
     name: string;
+  };
+  employee?: {
+    id: string;
+    email: string;
+    name: string;
+    avatar?: string;
+    isVerify?: boolean;
   };
 }

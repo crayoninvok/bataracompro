@@ -15,17 +15,17 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const companyLinks = [
-    { href: "/about/profile", label: "Company Profile" },
-    { href: "/about/vision-mission", label: "Vision & Mission" },
-    { href: "/about/team", label: "Board of Director" },
-    { href: "/privacy-policy", label: "Privacy Policy" },
+    { href: "/tentang/profil", label: "Company Profile" },
+    { href: "/tentang/visi-misi", label: "Vision & Mission" },
+    { href: "/tentang/tim", label: "Board of Director" },
+    { href: "/tentang/ourteam", label: "Our Team" },
   ];
 
   const serviceLinks = [
-    { href: "/services/construction", label: "Construction" },
-    { href: "/services/consulting", label: "Consulting" },
-    { href: "/services/development", label: "Development" },
-    { href: "/projects", label: "Our Projects" },
+    { href: "/proyek", label: "Our Projects" },
+    { href: "/kontak", label: "Contacts" },
+    { href: "/karir", label: "Career" },
+    { href: "/login-employe", label: "Employee Portal" },
   ];
 
   return (
@@ -45,22 +45,10 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <h3 className="font-comfortaa font-bold text-[#1FBFB8] text-lg">Batara Dharma</h3>
-                <p className="text-[#1FBFB8] font-inder text-sm">Persada</p>
+                <h3 className="font-comfortaa font-bold text-[#1FBFB8] text-lg">PT Batara Dharma Persada</h3>
               </div>
             </div>
-            <p className="text-gray-400 text-sm">
-              PT. Batara Dharma Persada is a company engaged in construction, consulting, and development services with the best quality standards.
-            </p>
             <div className="flex space-x-3 pt-1">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gray-800 hover:bg-[#E85C23] p-1.5 rounded transition-colors"
-              >
-                <Facebook size={16} />
-              </a>
               <a
                 href="https://instagram.com"
                 target="_blank"
@@ -102,7 +90,7 @@ export default function Footer() {
           {/* Services Links */}
           <div>
             <h3 className="font-bold text-base mb-3 border-b border-gray-800 pb-2">
-              Our Services
+              Projects and Services
             </h3>
             <ul className="space-y-1.5">
               {serviceLinks.map((link) => (

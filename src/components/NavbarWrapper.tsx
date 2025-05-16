@@ -9,7 +9,22 @@ interface NavbarWrapperProps {
 }
 
 // Hide Navbar on these route prefixes
-const hiddenRoutePrefixes = ["/admin/dashboard", "/admin/jobs/applications", "/admin/jobs/create", "/admin/jobs/edit", "/admin/applicants", "/login-admin"];
+const hiddenRoutePrefixes = [
+  "/admin/dashboard",
+  "/admin/jobs/applications",
+  "/admin/jobs/create",
+  "/admin/jobs/edit",
+  "/admin/applicants",
+  "/admin/article",
+  "/admin/driver",
+  "/login-admin",
+  "/employee",
+  "/login-employe",
+  "/register-employe",
+  "/verify-email",
+  "verify-email-employe",
+
+];
 
 export default function NavbarWrapper({ children }: NavbarWrapperProps) {
   const pathname = usePathname();

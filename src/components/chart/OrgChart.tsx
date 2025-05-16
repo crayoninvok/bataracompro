@@ -1,68 +1,87 @@
 "use client";
 
-import { OrgNode } from "./OrgNode";
+import React from "react";
 
-export default function OrgChart() {
+const OrgChart = () => {
   return (
-    <section className="py-20 px-4 md:px-8 relative border-b border-gray-800 bg-black text-white">
-      {/* Decorative background */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#1FBFB8]/10 to-transparent rounded-full -mr-48 -mt-48 pointer-events-none" />
-      <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5 bg-[length:60px_60px] pointer-events-none" />
+    <div className="min-h-screen bg-white p-4 md:p-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Commissioner */}
+        <div className="flex justify-start mb-16">
+          <div className="w-80 h-24 rounded-xl bg-[#171717] shadow-lg flex flex-col justify-center px-6 border-l-4 border-[#0bbfb3]">
+            <h3 className="text-[#FF5722] text-xl font-bold">Lauw Lie In</h3>
+            <p className="text-white text-lg italic">Commissioner</p>
+          </div>
+        </div>
 
-      <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-3xl font-bold mb-4 relative inline-block">
-          <span className="relative z-10">Our Teams</span>
-          <span className="absolute -bottom-2 left-0 w-full h-3 bg-[#E85C23]/20 z-0"></span>
-        </h2>
-        <p className="text-lg text-gray-300">
-          Explore the leadership behind our operations
-        </p>
-      </div>
+        {/* Dotted line separator */}
+        <div className="border-b border-gray-300 border-dashed mb-16"></div>
 
-      {/* Chart Tree */}
-      <div className="flex justify-center relative z-10">
-        <OrgNode
-          title="Project Manager"
-          name="A. Qyta Yudha Prakasa"
-          photoUrl="/photos/qyta.jpg"
-          description="Oversees all project operations and strategic planning."
-        >
-          <OrgNode
-            title="Deputy Project Manager"
-            name="Zulfahmi"
-            photoUrl="https://res.cloudinary.com/dysmj8esf/image/upload/v1746991692/avatar_reqruiters/t6nml3ywr5wskzdojqzl.png"
-            description="Assists Project Manager and leads inter-departmental coordination."
-          >
-            <OrgNode
-              title="Dept Head Plant & Log"
-              name="Dadang S"
-              photoUrl="/photos/dadang.jpg"
-              description="Manages plant operations and logistics support."
-            />
-            <OrgNode
-              title="Dept Head Production"
-              name="VACANT"
-              description="Responsible for production efficiency and output."
-            />
-            <OrgNode
-              title="HSE SPV"
-              name="VACANT"
-              description="Supervises safety, health, and environmental programs."
-            >
-              <OrgNode
-                title="Safety Officer"
-                name="Prasatama A. Hendra"
-                photoUrl="/photos/prasatama.jpg"
-                description="Ensures site safety compliance and accident prevention."
-              />
-              <OrgNode title="Envi Officer" name="VACANT" />
-              <OrgNode title="Paramedic" name="VACANT" />
-            </OrgNode>
-            <OrgNode title="Dept Head HRGA" name="VACANT" />
-            <OrgNode title="Finance & Acct Officer" name="VACANT" />
-          </OrgNode>
-        </OrgNode>
+        {/* Directors */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="w-full h-24 rounded-xl bg-[#171717] shadow-lg flex flex-col justify-center px-6 border-l-4 border-[#0bbfb3]">
+            <h3 className="text-[#FF5722] text-xl font-bold">A. Kurnia</h3>
+            <p className="text-white text-lg italic">President Director</p>
+          </div>
+          <div className="w-full h-24 rounded-xl bg-[#171717] shadow-lg flex flex-col justify-center px-6 border-l-4 border-[#0bbfb3]">
+            <h3 className="text-[#FF5722] text-xl font-bold">Eric Ng</h3>
+            <p className="text-white text-lg italic">Director</p>
+          </div>
+          <div className="w-full h-24 rounded-xl bg-[#171717] shadow-lg flex flex-col justify-center px-6 border-l-4 border-[#0bbfb3]">
+            <h3 className="text-[#FF5722] text-xl font-bold">Yohanes C. Wibowo</h3>
+            <p className="text-white text-lg italic">Operations Director</p>
+          </div>
+        </div>
+
+        {/* Dotted line separator */}
+        <div className="border-b border-gray-300 border-dashed mb-16"></div>
+
+        {/* Managers */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div className="w-full h-24 rounded-xl bg-[#171717] shadow-lg flex flex-col justify-center px-6 border-l-4 border-[#0bbfb3] relative">
+            <h3 className="text-[#FF5722] text-xl font-bold">Dio Tragitza Rescha</h3>
+            <p className="text-white text-lg italic">Operations Manager</p>
+            {/* Vertical connecting line below this manager */}
+            <div className="absolute bottom-0 left-1/2 w-0.5 h-16 bg-[#0bbfb3] transform -translate-x-1/2 translate-y-full"></div>
+          </div>
+          <div className="w-full h-24 rounded-xl bg-[#171717] shadow-lg flex flex-col justify-center px-6 border-l-4 border-[#0bbfb3]">
+            <h3 className="text-[#FF5722] text-xl font-bold">Dadang Setyawan</h3>
+            <p className="text-white text-lg italic">Manager</p>
+          </div>
+          <div className="w-full h-24 rounded-xl bg-[#171717] shadow-lg flex flex-col justify-center px-6 border-l-4 border-[#0bbfb3]">
+            <h3 className="text-[#FF5722] text-xl font-bold">A. Heru Prastowo</h3>
+            <p className="text-white text-lg italic">Manager</p>
+          </div>
+          <div className="w-full h-24 rounded-xl bg-[#171717] shadow-lg flex flex-col justify-center px-6 border-l-4 border-[#0bbfb3]">
+            <h3 className="text-[#FF5722] text-xl font-bold">Susanto</h3>
+            <p className="text-white text-lg italic">Manager</p>
+          </div>
+        </div>
+
+        {/* Project Site Box */}
+        <div className="bg-[#444444] rounded-md p-6 mt-8 max-w-3xl mx-auto">
+          <div className="flex items-center mb-2">
+            <span className="text-white text-lg mr-3">Project site</span>
+            <span className="text-[#FF5722] text-xl">🔥</span>
+            <span className="text-white font-bold ml-2 text-xl">PT INDONESIA PRATAMA</span>
+          </div>
+          <p className="text-[#0bbfb3] mb-8">Tabang, East Kalimantan</p>
+
+          {/* Site Managers */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="w-full h-24 rounded-xl bg-[#171717] shadow-lg flex flex-col justify-center px-6 border-l-4 border-[#0bbfb3]">
+              <h3 className="text-[#FF5722] text-xl font-bold">Anggi Okta Yudha P.</h3>
+              <p className="text-white text-lg italic">Project Site Manager</p>
+            </div>
+            <div className="w-full h-24 rounded-xl bg-[#171717] shadow-lg flex flex-col justify-center px-6 border-l-4 border-[#0bbfb3]">
+              <h3 className="text-[#FF5722] text-xl font-bold">Zulfahmi</h3>
+              <p className="text-white text-lg italic">Deputy Site Manager</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default OrgChart;

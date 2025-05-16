@@ -1,4 +1,3 @@
-// src/context/auth-provider.tsx
 "use client";
 
 import { createContext, useContext, ReactNode } from "react";
@@ -12,9 +11,12 @@ interface AuthContextType {
   error: string | null;
   isAuthenticated: boolean;
   isAdmin: boolean;
+  isEmployee: boolean;
   login: (credentials: LoginRequest) => Promise<ApiResponse<any>>;
   loginAdmin: (credentials: LoginRequest) => Promise<ApiResponse<any>>;
+  loginEmployee: (credentials: LoginRequest) => Promise<ApiResponse<any>>;
   register: (data: RegisterRequest) => Promise<ApiResponse<any>>;
+  registerEmployee: (data: RegisterRequest) => Promise<ApiResponse<any>>;
   logout: () => void;
 }
 

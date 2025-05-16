@@ -15,6 +15,7 @@ import {
   BarChart3,
   Users,
   Settings,
+  RefreshCcw,
   FileText
 } from "lucide-react";
 import Swal from "sweetalert2";
@@ -32,7 +33,7 @@ export default function AdminLayout({
   // Check auth when component mounts
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      router.push("/admin/login");
+      router.push("/login-admin");
     } else if (!isLoading && !isAdmin) {
       router.push("/dashboard");
     }
@@ -122,8 +123,8 @@ export default function AdminLayout({
                 />
               </div>
               <div>
-                <h1 className="text-lg font-bold text-white">BDP Career</h1>
-                <p className="text-xs text-gray-400">Recruitment Admin Portal</p>
+                <h1 className="text-lg font-bold text-white">BDP Admin</h1>
+                <p className="text-xs text-gray-400">Post Job, Article & Software </p>
               </div>
             </Link>
           </div>
@@ -189,6 +190,28 @@ export default function AdminLayout({
               >
                 <Users className="mr-3 h-5 w-5" />
                 Applications
+              </Link>
+              <Link
+                href="/admin/articles"
+                className={`group flex items-center rounded-lg px-3 py-2 text-sm font-medium ${
+                  pathname.startsWith("/admin/article")
+                    ? "bg-[#E85C23]/10 text-[#E85C23]"
+                    : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                }`}
+              >
+                <FileText className="mr-3 h-5 w-5" />
+                Article
+              </Link>
+              <Link
+                href="/admin/driver"
+                className={`group flex items-center rounded-lg px-3 py-2 text-sm font-medium ${
+                  pathname.startsWith("/admin/driver")
+                    ? "bg-[#E85C23]/10 text-[#E85C23]"
+                    : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                }`}
+              >
+                <RefreshCcw className="mr-3 h-5 w-5" />
+                Driver
               </Link>
               
               <p className="mt-6 px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
