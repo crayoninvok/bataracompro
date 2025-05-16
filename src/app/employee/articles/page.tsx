@@ -11,8 +11,7 @@ import {
   User,
   Clock,
   AlertCircle,
-  ArrowLeft,
-  Filter
+  ArrowLeft
 } from "lucide-react";
 import { Article, DriverUpdate } from "@/types/adminemploye";
 import { articleService } from "@/services/article.services";
@@ -95,8 +94,14 @@ export default function EmployeeArticlesPage() {
     
     // Sort by date (newest first)
     return filteredItems.sort((a, b) => {
-      const dateA = new Date('publishedAt' in a ? a.publishedAt || a.createdAt : a.releaseDate);
-      const dateB = new Date('publishedAt' in b ? b.publishedAt || b.createdAt : b.releaseDate);
+      const dateA = new Date('publishedAt' in a 
+        ? a.publishedAt || a.createdAt 
+        : 'releaseDate' in a ? a.releaseDate : a.createdAt);
+      
+      const dateB = new Date('publishedAt' in b 
+        ? b.publishedAt || b.createdAt 
+        : 'releaseDate' in b ? b.releaseDate : b.createdAt);
+      
       return dateB.getTime() - dateA.getTime();
     });
   };
@@ -213,7 +218,7 @@ export default function EmployeeArticlesPage() {
               <Calendar className="h-4 w-4 mr-1" />
               {isArticle 
                 ? formatDate(item.publishedAt || item.createdAt) 
-                : formatDate(item.releaseDate)}
+                : formatDate(isDriverUpdate ? item.releaseDate : item.createdAt)}
             </div>
           </div>
           

@@ -253,22 +253,11 @@ export default function TeamPage() {
         </div>
       </div>
 
-// Team Members Section
+      {/* Team Members Section */}
       <section className="py-20 px-4 md:px-8 lg:px-24 border-b border-gray-800">
-        <div className="max-w-6xl mx-auto space-y-12">
-          {/* Top Members */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {topMembers.map((member, idx) => (
-              <MemberCard
-                key={idx}
-                member={member}
-                onClick={() => setSelectedMember(member)}
-              />
-            ))}
-          </div>
-          {/* Bottom Members */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {bottomMembers.map((member, idx) => (
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredMembers.map((member, idx) => (
               <MemberCard
                 key={idx}
                 member={member}
