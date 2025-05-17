@@ -1,53 +1,79 @@
-// Loading.tsx
-import React from "react";
+"use client";
 
-const Loading = () => {
+import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+
+export default function Loading() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900">
-      <div className="w-56 h-56 relative mb-8">
-        {/* Mining truck animation */}
-        <div className="absolute w-full h-full">
-          <div className="relative w-40 h-24 mx-auto mt-12 bg-[#1a1a1a] rounded-sm shadow-lg animate-bounce-slow">
-            {/* Truck body */}
-            <div className="absolute bottom-0 w-full h-5 bg-[#E85C23] rounded-b-sm"></div>
-            <div className="absolute left-0 top-0 w-12 h-10 bg-[#1FBFB8] rounded-t-sm"></div>
-            
-            {/* Wheels */}
-            <div className="absolute -bottom-4 left-4 w-8 h-8 bg-gray-800 rounded-full border-4 border-gray-600 animate-spin-slow"></div>
-            <div className="absolute -bottom-4 right-4 w-8 h-8 bg-gray-800 rounded-full border-4 border-gray-600 animate-spin-slow"></div>
-            
-            {/* Truck bed with animated coal */}
-            <div className="absolute top-2 right-2 w-20 h-16 bg-[#222] rounded-sm overflow-hidden">
-              <div className="absolute bottom-0 w-full h-6 bg-[#333] rounded-sm"></div>
-              <div className="absolute bottom-4 left-2 w-4 h-4 bg-[#444] rounded-full animate-pulse"></div>
-              <div className="absolute bottom-3 left-8 w-5 h-5 bg-[#444] rounded-full animate-pulse delay-150"></div>
-              <div className="absolute bottom-5 right-3 w-3 h-3 bg-[#444] rounded-full animate-pulse delay-300"></div>
-            </div>
-          </div>
-        </div>
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50">
+      <div className="relative w-24 h-24 sm:w-32 sm:h-32">
+        {/* Orange part (left vertical) */}
+        <motion.div
+          className="absolute w-6 sm:w-8 h-full bg-[#E85C23] rounded-md"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.5 },
+          }}
+        />
 
-        {/* Ground with mining elements */}
-        <div className="absolute bottom-4 w-full">
-          <div className="h-4 bg-[#333] rounded-lg"></div>
-          <div className="absolute -top-6 left-10 w-6 h-6 bg-[#E85C23] opacity-70 rounded-full animate-pulse"></div>
-          <div className="absolute -top-4 right-12 w-4 h-4 bg-[#1FBFB8] opacity-70 rounded-full animate-pulse delay-700"></div>
-        </div>
+        {/* Teal part (top right curve) */}
+        <motion.div
+          className="absolute right-0 top-0 w-16 sm:w-20 h-12 sm:h-16 bg-[#1FBFB8] rounded-tr-full rounded-bl-full"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            transition: { delay: 0.3, duration: 0.5 },
+          }}
+        />
+
+        {/* Gray part (bottom right curve) */}
+        <motion.div
+          className="absolute right-0 bottom-0 w-16 sm:w-20 h-12 sm:h-16 bg-gray-600 rounded-br-full rounded-tl-full"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+            transition: { delay: 0.6, duration: 0.5 },
+          }}
+        />
+
+        {/* Pulsing animation */}
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            opacity: [0.7, 1, 0.7],
+            scale: [0.95, 1, 0.95],
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 2,
+            ease: "easeInOut",
+          }}
+        />
       </div>
 
-      {/* Company name and loading text */}
-      <div className="text-center">
-        <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-[#E85C23] to-[#1FBFB8] bg-clip-text text-transparent">
-          PT. Batara Dharma Persada
-        </h1>
-        <div className="flex items-center justify-center text-gray-300 text-xl">
+      <motion.div
+        className="absolute bottom-16 text-white text-lg font-medium"
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: { delay: 0.8, duration: 0.5 },
+        }}
+      >
+        <div className="flex items-center">
           <span>Loading</span>
-          <span className="ml-1 animate-bounce-dots">.</span>
-          <span className="ml-1 animate-bounce-dots animation-delay-300">.</span>
-          <span className="ml-1 animate-bounce-dots animation-delay-600">.</span>
+          <motion.span
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5 }}
+            className="ml-1"
+          >
+            ...
+          </motion.span>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
-};
-
-export default Loading;
+}
