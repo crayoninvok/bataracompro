@@ -74,14 +74,14 @@ export default function OurTeam() {
             <div className="bg-gray-800 rounded-lg overflow-hidden">
               <div className="relative h-96 group">
                 <Image
-                  src="/soho.png"
+                  src="/teamoffice.png"
                   alt="Head Office Organizational Structure"
                   fill
                   className="object-contain"
                 />
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <button 
-                    onClick={() => openModal("/soho.png", "Head Office Structure")}
+                    onClick={() => openModal("/teamoffice.png", "Head Office Structure")}
                     className="bg-[#0bbfb3] text-white p-3 rounded-full hover:bg-[#0aa9a4]"
                   >
                     <ZoomIn size={24} />

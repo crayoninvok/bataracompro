@@ -45,7 +45,9 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <h3 className="font-comfortaa font-bold text-[#1FBFB8] text-lg">PT Batara Dharma Persada</h3>
+                <h3 className="font-comfortaa font-bold text-[#1FBFB8] text-lg">
+                  PT Batara Dharma Persada
+                </h3>
               </div>
             </div>
             <div className="flex space-x-3 pt-1">
@@ -123,12 +125,15 @@ export default function Footer() {
                 </span>
               </li>
               <li className="flex items-center">
-                <Phone size={16} className="mr-2 flex-shrink-0 text-[#E85C23]" />
+                <Phone
+                  size={16}
+                  className="mr-2 flex-shrink-0 text-[#E85C23]"
+                />
                 <a
-                  href="tel:+6221xxxxxxxx"
+                  href="tel:+628 11229 8203"
                   className="text-gray-400 hover:text-white text-sm"
                 >
-                  +62-21-XXXX-XXXX
+                  +628-11229-8203
                 </a>
               </li>
               <li className="flex items-center">

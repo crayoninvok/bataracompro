@@ -132,13 +132,17 @@ export default function CTASection() {
   };
 
   return (
-    <section className="py-20 px-4 md:px-8 lg:px-24 bg-black/80 backdrop-blur-lg text-white relative overflow-hidden border-y border-gray-800">
+    <section 
+      ref={sectionRef} 
+      className="pt-24 pb-16 px-4 md:px-8 lg:px-24 bg-black/80 backdrop-blur-lg text-white relative overflow-hidden border-y border-gray-800"
+      id="contact"
+    >
       {/* Background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#E85C23]/10 to-transparent rounded-full -mr-48 -mt-48"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#1FBFB8]/10 to-transparent rounded-full -ml-48 -mb-48"></div>
+      <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-br from-[#E85C23]/10 to-transparent rounded-full -mr-32 md:-mr-48 -mt-32 md:-mt-48 blur-xl"></div>
+      <div className="absolute bottom-0 left-0 w-64 md:w-96 h-64 md:h-96 bg-gradient-to-tr from-[#1FBFB8]/10 to-transparent rounded-full -ml-32 md:-ml-48 -mb-32 md:-mb-48 blur-xl"></div>
       
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid md:grid-cols-2 gap-10 items-start">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-10 items-start">
           {/* Left Side: Contact Info */}
           <div className="reveal-cta opacity-0 translate-y-6 transition-all duration-700">
             <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
@@ -150,7 +154,7 @@ export default function CTASection() {
 
             <div className="space-y-5">
               <div className="flex items-center">
-                <div className="bg-[#E85C23]/10 p-2.5 rounded-lg mr-3">
+                <div className="bg-[#E85C23]/10 p-2.5 rounded-lg mr-3 flex-shrink-0">
                   <Phone className="w-5 h-5 text-[#E85C23]" />
                 </div>
                 <div>
@@ -160,17 +164,17 @@ export default function CTASection() {
               </div>
 
               <div className="flex items-center">
-                <div className="bg-[#1FBFB8]/10 p-2.5 rounded-lg mr-3">
+                <div className="bg-[#1FBFB8]/10 p-2.5 rounded-lg mr-3 flex-shrink-0">
                   <Mail className="w-5 h-5 text-[#1FBFB8]" />
                 </div>
-                <div>
+                <div className="overflow-hidden">
                   <p className="text-xs text-gray-400">Email</p>
-                  <p className="font-medium text-gray-200">info@bataramining.com</p>
+                  <p className="font-medium text-gray-200 truncate">info@bataramining.com</p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="bg-[#E85C23]/10 p-2.5 rounded-lg mr-3 mt-0.5">
+                <div className="bg-[#E85C23]/10 p-2.5 rounded-lg mr-3 mt-0.5 flex-shrink-0">
                   <MapPin className="w-5 h-5 text-[#E85C23]" />
                 </div>
                 <div>
@@ -184,7 +188,7 @@ export default function CTASection() {
               </div>
               
               <div className="flex items-center">
-                <div className="bg-[#1FBFB8]/10 p-2.5 rounded-lg mr-3">
+                <div className="bg-[#1FBFB8]/10 p-2.5 rounded-lg mr-3 flex-shrink-0">
                   <Truck className="w-5 h-5 text-[#1FBFB8]" />
                 </div>
                 <div>
@@ -194,7 +198,7 @@ export default function CTASection() {
               </div>
               
               <div className="flex items-center">
-                <div className="bg-[#E85C23]/10 p-2.5 rounded-lg mr-3">
+                <div className="bg-[#E85C23]/10 p-2.5 rounded-lg mr-3 flex-shrink-0">
                   <Calendar className="w-5 h-5 text-[#E85C23]" />
                 </div>
                 <div>
@@ -207,7 +211,7 @@ export default function CTASection() {
 
           {/* Right Side: Contact Form */}
           <div className="reveal-cta opacity-0 translate-y-6 transition-all duration-700 delay-200">
-            <div className="bg-gray-900/80 p-6 rounded-lg shadow-lg border border-gray-800">
+            <div className="bg-gray-900/80 p-5 sm:p-6 rounded-lg shadow-lg border border-gray-800">
               <h3 className="text-xl font-bold mb-5 text-white">Contact Us</h3>
 
               {status.type === "success" ? (
@@ -279,7 +283,7 @@ export default function CTASection() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label
                       htmlFor="email"

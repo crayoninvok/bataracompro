@@ -22,7 +22,7 @@ export default function HeroWithVideo() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center text-white text-center pt-16 md:pt-20">
+    <section className="relative min-h-screen flex flex-col items-center justify-center text-white text-center pt-24 md:pt-28 pb-10 md:pb-0">
       {/* Background Video */}
       <video
         className="absolute inset-0 w-full h-full object-cover z-[-1]"
@@ -47,74 +47,74 @@ export default function HeroWithVideo() {
           isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
         }`}
       >
-        <div className="bg-black/40 backdrop-blur-md p-6 md:p-8 rounded-lg border border-gray-800">
-          <h1 className="text-3xl sm:text-3xl md:text-3xl lg:text-5xl font-bold mb-4 md:mb-5 leading-tight">
+        <div className="bg-black/40 backdrop-blur-md p-5 sm:p-6 md:p-8 rounded-lg border border-gray-800">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 leading-tight">
             A Trusted Partner in the Mining Industry
           </h1>
-            <div className="mt-2 text-[#1FBFB8] font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 md:mb-5 leading-tight">   
-                PT Batara Dharma Persada
-            </div>
-          <p className="text-lg sm:text-xl md:text-lg max-w-3xl mx-auto text-gray-200 mb-6 md:mb-8 leading-relaxed">
-            We commited to delivering the best solutions by priotizing safety,
-            productivity and effeciency <br />
+          <div className="mt-1 sm:mt-2 text-[#1FBFB8] font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-3 md:mb-4 leading-tight">
+            PT Batara Dharma Persada
+          </div>
+          <p className="text-base sm:text-lg md:text-lg max-w-3xl mx-auto text-gray-200 mb-4 md:mb-6 leading-relaxed">
+            We're committed to delivering the best solutions by prioritizing
+            safety, productivity and efficiency
+          </p>
+          <p className="text-sm sm:text-base md:text-base max-w-3xl mx-auto text-gray-300 mb-5 md:mb-6 leading-relaxed">
             We understand that the mining industry demands high standards of
-            safety and technologycal innovation. That why we continually invest
-            in the developing cutting edge methods and tehnology to ensure
-            safer, more effective, and sustainable operations.
+            safety and technological innovation. That's why we continually
+            invest in developing cutting-edge methods and technology for safer,
+            more effective, and sustainable operations.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mt-5 md:mt-6 mb-6 md:mb-8">
-            <div className="flex items-center gap-3 justify-center bg-black/50 py-2 px-4 rounded-md backdrop-blur-sm border border-gray-800">
-              <div className="bg-[#E85C23]/20 p-2 rounded">
-                <Truck className="w-5 h-5 text-[#1FBFB8]" />
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-4 md:mt-5 mb-5 md:mb-6">
+            <div className="flex items-center gap-2 justify-center bg-black/50 py-2 px-3 rounded-md backdrop-blur-sm border border-gray-800">
+              <div className="bg-[#E85C23]/20 p-1.5 rounded">
+                <Truck className="w-4 h-4 text-[#1FBFB8]" />
               </div>
-              <span className="text-base">Modern Fleet</span>
+              <span className="text-sm sm:text-base">Modern Fleet</span>
             </div>
-            <div className="flex items-center gap-3 justify-center bg-black/50 py-2 px-4 rounded-md backdrop-blur-sm border border-gray-800">
-              <div className="bg-[#1FBFB8]/20 p-2 rounded">
-                <Shield className="w-5 h-5 text-[#E85C23]" />
+            <div className="flex items-center gap-2 justify-center bg-black/50 py-2 px-3 rounded-md backdrop-blur-sm border border-gray-800">
+              <div className="bg-[#1FBFB8]/20 p-1.5 rounded">
+                <Shield className="w-4 h-4 text-[#E85C23]" />
               </div>
-              <span className="text-base">Guaranteed Safety</span>
+              <span className="text-sm sm:text-base">Guaranteed Safety</span>
             </div>
-            <div className="flex items-center gap-3 justify-center bg-black/50 py-2 px-4 rounded-md backdrop-blur-sm border border-gray-800">
-              <div className="bg-[#E85C23]/20 p-2 rounded">
-                <Award className="w-5 h-5 text-[#1FBFB8]" />
+            <div className="flex items-center gap-2 justify-center bg-black/50 py-2 px-3 rounded-md backdrop-blur-sm border border-gray-800">
+              <div className="bg-[#E85C23]/20 p-1.5 rounded">
+                <Award className="w-4 h-4 text-[#1FBFB8]" />
               </div>
-              <span className="text-base">Quality Service</span>
+              <span className="text-sm sm:text-base">Quality Service</span>
             </div>
           </div>
 
           {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6 md:mt-8">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 mt-5 md:mt-6 mb-8 sm:mb-4">
             <Link
               href="/tentang/profil"
-              className="bg-[#1FBFB8] hover:bg-[#d14b17] text-black px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-base font-medium transition-all duration-300 shadow-md"
+              className="bg-[#1FBFB8] hover:bg-[#d14b17] text-black px-5 sm:px-6 py-2 sm:py-2.5 rounded-md text-sm sm:text-base font-medium transition-all duration-300 shadow-md"
             >
               About Us
             </Link>
             <Link
               href="/proyek"
-              className="bg-transparent border border-gray-700 hover:border-[#1FBFB8] hover:bg-[#1FBFB8]/10 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-base font-medium transition-all duration-300"
+              className="bg-transparent border border-gray-700 hover:border-[#1FBFB8] hover:bg-[#1FBFB8]/10 text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-md text-sm sm:text-base font-medium transition-all duration-300 flex items-center justify-center"
             >
-              Our Project
-              <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300 inline-block">
-                →
-              </span>
+              <span>Our Project</span>
+              <ArrowDownCircle className="ml-2 w-4 h-4 rotate-270 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator with pulsing effect */}
+      {/* Scroll Indicator with pulsing effect - hidden on mobile */}
       <div
-        className={`absolute bottom-6 md:bottom-8 z-10 cursor-pointer transition-opacity duration-1000 ${
+        className={`absolute bottom-5 md:bottom-8 z-10 cursor-pointer transition-opacity duration-1000 hidden md:block ${
           isVisible ? "opacity-80" : "opacity-0"
         }`}
         onClick={scrollToNextSection}
       >
         <div className="relative">
           <div className="absolute -inset-1 rounded-full bg-[#E85C23]/20 animate-pulse"></div>
-          <ArrowDownCircle className="w-8 h-8 md:w-10 md:h-10 text-[#1FBFB8] relative z-10 animate-bounce" />
+          <ArrowDownCircle className="w-10 h-10 text-[#1FBFB8] relative z-10 animate-bounce" />
         </div>
         <span className="sr-only">Scroll Down</span>
       </div>
