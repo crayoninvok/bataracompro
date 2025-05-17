@@ -12,7 +12,7 @@ import {
 import { useJobs } from "@/hooks/useJobs";
 import { Job, JobFilters } from "@/types/job";
 import { formatDate } from "@/utils/format";
-import Loading from "@/app/loading";
+import Loading from "../loading";
 
 // Strip HTML tags for text preview
 const stripHtml = (html: string) => {
