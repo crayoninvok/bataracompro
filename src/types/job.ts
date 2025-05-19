@@ -5,6 +5,7 @@ export interface Job {
   description: string;
   requirements: string;
   location: string;
+  expiredAt: string;
   salaryMin?: number;
   salaryMax?: number;
   postedAt: string;
@@ -36,6 +37,7 @@ export interface CreateJobRequest {
   description: string;
   requirements: string;
   location: string;
+  expiredAt: string;
   salaryMin?: number;
   salaryMax?: number;
 }

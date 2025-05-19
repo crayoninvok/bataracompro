@@ -296,15 +296,7 @@ export default function AllJobs() {
                           </div>
                           <div className="flex items-center">
                             <Briefcase className="w-5 h-5 mr-2 text-[#1FBFB8]" />
-                            <span>
-                              Apply by:{" "}
-                              {formatDate(
-                                new Date(
-                                  new Date(job.postedAt).getTime() +
-                                    30 * 24 * 60 * 60 * 1000
-                                ).toISOString()
-                              )}
-                            </span>
+                            <span>Expired in: {formatDate(job.expiredAt)}</span>
                           </div>
                         </div>
                         <p className="text-gray-300 max-w-xl text-base">

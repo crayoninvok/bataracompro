@@ -290,7 +290,6 @@ export default function JobDetails() {
             <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">
               {job.title}
             </h1>
-
             <div className="flex flex-wrap gap-6 text-gray-300 text-lg mb-8">
               <div className="flex items-center">
                 <MapPin className="w-5 h-5 mr-2 text-[#E85C23]" />
@@ -299,6 +298,10 @@ export default function JobDetails() {
               <div className="flex items-center">
                 <Clock className="w-5 h-5 mr-2 text-[#E85C23]" />
                 <span>Posted: {formatDate(job.postedAt)}</span>
+              </div>
+              <div className="flex items-center">
+                <Clock className="w-5 h-5 mr-2 text-[#E85C23]" />
+                <span>Expires: {formatDate(job.expiredAt)}</span>
               </div>
               {(job.salaryMin || job.salaryMax) && (
                 <div className="flex items-center">
