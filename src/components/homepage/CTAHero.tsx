@@ -159,17 +159,16 @@ export default function CTASection() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-400">Phone</p>
-                  <p className="font-medium text-gray-200">+68 1122 98203</p>
+                  <p className="font-medium text-gray-200">+62 21 38865143</p>
                 </div>
               </div>
-
               <div className="flex items-center">
                 <div className="bg-[#1FBFB8]/10 p-2.5 rounded-lg mr-3 flex-shrink-0">
                   <Mail className="w-5 h-5 text-[#1FBFB8]" />
                 </div>
                 <div className="overflow-hidden">
                   <p className="text-xs text-gray-400">Email</p>
-                  <p className="font-medium text-gray-200 truncate">info@bataramining.com</p>
+                  <p className="font-medium text-gray-200 truncate">bataradharmapersada@gmail.com</p>
                 </div>
               </div>
 

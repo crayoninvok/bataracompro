@@ -292,9 +292,8 @@ export default function Contact() {
                   <div>
                     <h3 className="font-bold text-xl mb-2 text-white group-hover:text-[#E85C23] transition-colors">Phone</h3>
                     <p className="text-gray-300">
-                      +62 21 5437 8932 <span className="text-gray-400">(Office)</span>
+                      +62 21 38865143 <span className="text-gray-400">(Office)</span>
                       <br />
-                      +62 812 9876 5432 <span className="text-gray-400">(Customer Service)</span>
                     </p>
                   </div>
                 </div>
@@ -306,9 +305,8 @@ export default function Contact() {
                   <div>
                     <h3 className="font-bold text-xl mb-2 text-white group-hover:text-[#1FBFB8] transition-colors">Email</h3>
                     <p className="text-gray-300">
-                      info@batara.id <span className="text-gray-400">(General Information)</span>
+                      bataradharmapersada@gmail.com <span className="text-gray-400">(General Information)</span>
                       <br />
-                      sales@batara.id <span className="text-gray-400">(Business Cooperation)</span>
                     </p>
                   </div>
                 </div>
@@ -412,7 +410,7 @@ export default function Contact() {
                         <div className="ml-3">
                           <p className="text-sm text-red-300">
                             {status.message}
-                          </p>
+                          </p>Phone
                         </div>
                       </div>
                     </div>

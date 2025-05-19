@@ -13,17 +13,16 @@ import Image from "next/image";
 interface Person {
   name: string;
   position: string;
-  description: string;
-  image: string;
+  image?: string;
+  experience: string[];
 }
 
 // Sample data
 const commissionersData: Person[] = [
   {
     name: "Lau Lie In",
-    position: "Commisioners",
-    description: ``,
-    image: "/defavatar.jpg",
+    position: "Commissioner",
+    experience: ["20+ years in mining operations", "Board Member at XYZ Corp"],
   },
 ];
 
@@ -31,22 +30,27 @@ const directorsData: Person[] = [
   {
     name: "A. Kurnia",
     position: "President Director",
-    description: `A. Kurnia (AK) started his career in the mining industry in 1974 by joining the Service Division of PT United Tractors (UT). He ended his career at PT UT in 1997 with his last position as General Manager of the Mining Division.
-He was then trusted to handle the position of Plant Director at PT Pamapersada Nusantara (PAMA) with his vision and competence, and later served as Operations Director.`,
     image: "/defavatar.jpg",
+    experience: [
+      "General Manager, Mining Division at PT United Tractors",
+      "Operations Director, PT Pamapersada Nusantara",
+      "Plant Director, PT Sapta Indra Sejati"
+    ],
   },
   {
     name: "Eric NG",
     position: "Director",
-    description: ``,
     image: "/defavatar.jpg",
+    experience: ["10+ years in corporate finance"],
   },
   {
     name: "Yohanes C. Wibowo",
     position: "Operations Director",
-    description: `Yohanes C. Wibowo (YCW) devoted himself to PT Pamapersada Nusantara (PAMA), where he worked until achieving the position of Plant Manager in 2008.
-He continued his career by joining PT Riung Mitra Lestari (RML) and was trusted to serve as Operations Director for six years.`,
     image: "/defavatar.jpg",
+    experience: [
+      "Plant Manager, PT Pamapersada Nusantara",
+      "Operations Director, PT Riung Mitra Lestari",
+    ],
   },
 ];
 
@@ -54,26 +58,26 @@ const managersData: Person[] = [
   {
     name: "Dhio Tragitza Rescha",
     position: "Operation Manager",
-    description: ``,
     image: "/defavatar.jpg",
+    experience: ["Logistic Coordinator, PT ABC", "Operation Lead, PT XYZ"],
   },
   {
     name: "Dadang Setyawan",
     position: "Manager",
-    description: ``,
     image: "/defavatar.jpg",
+    experience: ["Project Manager at PQR Corp."],
   },
   {
     name: "A. Heru Prastowo",
     position: "Manager",
-    description: ``,
     image: "/defavatar.jpg",
+    experience: ["Manager, Equipment Division"],
   },
   {
     name: "Susanto",
     position: "Manager",
-    description: ``,
     image: "/defavatar.jpg",
+    experience: ["Site Supervisor", "Maintenance Lead"],
   },
 ];
 
@@ -81,24 +85,24 @@ const siteManagersData: Person[] = [
   {
     name: "Anggi Okta Yudha P.",
     position: "Project Site Manager",
-    description: ``,
     image: "/defavatar.jpg",
+    experience: ["Site Manager, PT IP"],
   },
   {
     name: "Zulfahmi",
     position: "Deputy Site Manager",
-    description: ``,
     image: "/defavatar.jpg",
+    experience: ["Deputy Site Supervisor, PT Batara"],
   },
 ];
 
-// Site Information
+// Site info
 const siteInfo = {
-  company: "PT INDONESIA PRATAMA 🔥",
+  company: "PT INDONESIA PRATAMA",
   location: "Tabang, East Kalimantan",
 };
 
-// Modal Component
+// Modal
 const PersonModal = ({
   person,
   onClose,
@@ -116,31 +120,39 @@ const PersonModal = ({
           <X className="w-6 h-6" />
         </button>
 
-        <div className="w-full md:w-1/3 flex justify-center items-start">
-          <div className="relative w-56 h-72 rounded-lg overflow-hidden border">
-            <Image
-              src={person.image}
-              alt={person.name}
-              fill
-              className="object-cover object-top"
-            />
+        {/* Image only if available */}
+        {person.image && (
+          <div className="w-full md:w-1/3 flex justify-center items-start">
+            <div className="relative w-56 h-72 rounded-lg overflow-hidden border">
+              <Image
+                src={person.image}
+                alt={person.name}
+                fill
+                className="object-cover object-top"
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="w-full md:w-2/3 text-left space-y-4 overflow-auto">
+        <div className="w-full md:w-2/3 text-left space-y-4">
           <h3 className="text-2xl font-bold text-[#1a1a1a]">{person.name}</h3>
           <p className="text-[#7c7c7c] font-semibold">{person.position}</p>
           <div className="w-16 h-0.5 bg-[#1FBFB8]/50" />
-          <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-            {person.description}
-          </p>
+          <div>
+            <h4 className="font-semibold text-gray-800 mt-4 mb-1">Experience</h4>
+            <ul className="list-disc ml-5 text-gray-700">
+              {person.experience.map((exp, idx) => (
+                <li key={idx}>{exp}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-// Complete Organization Chart Page
+// Main page
 const OrganizationPage: React.FC = () => {
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
 
@@ -151,31 +163,36 @@ const OrganizationPage: React.FC = () => {
         subtitle="Meet the team driving our vision and operations"
       />
 
-      <CommissionerSection
-        commissioners={commissionersData}
-        onSelect={setSelectedPerson}
-      />
+      <CommissionerSection commissioners={commissionersData} />
 
       <DirectorsSection
-        directors={directorsData}
+        directors={directorsData.map((d) => ({
+          ...d,
+          image: d.image ?? "/defavatar.jpg",
+        }))}
         onSelect={setSelectedPerson}
       />
 
-      <ManagersSection managers={managersData} onSelect={setSelectedPerson} />
+      <ManagersSection
+        managers={managersData.map((m) => ({
+          ...m,
+          image: m.image ?? "/defavatar.jpg",
+        }))}
+        onSelect={setSelectedPerson}
+      />
 
       <SiteManagersSection
-        siteManagers={siteManagersData}
+        siteManagers={siteManagersData.map((s) => ({
+          ...s,
+          image: s.image ?? "/defavatar.jpg",
+        }))}
         siteCompany={siteInfo.company}
         siteLocation={siteInfo.location}
         onSelect={setSelectedPerson}
       />
 
-      {/* Modal */}
       {selectedPerson && (
-        <PersonModal
-          person={selectedPerson}
-          onClose={() => setSelectedPerson(null)}
-        />
+        <PersonModal person={selectedPerson} onClose={() => setSelectedPerson(null)} />
       )}
     </main>
   );

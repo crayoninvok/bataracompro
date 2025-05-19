@@ -20,6 +20,7 @@ import { formatCurrency, formatSalaryRange, formatDate } from "@/utils/format";
 import Swal from "sweetalert2";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
+import CustomLoading from "@/components/CustomLoading";
 
 // Dynamically import React Quill to avoid SSR issues
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -33,6 +34,7 @@ export default function JobDetails() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [descriptionHtml, setDescriptionHtml] = useState("");
   const [requirementsHtml, setRequirementsHtml] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const params = useParams();
   const router = useRouter();
@@ -191,11 +193,7 @@ export default function JobDetails() {
 
   // Check for profile loading condition
   if (isCheckingProfile || isLoading) {
-    return (
-      <div className="min-h-screen bg-black/80 backdrop-blur-lg pt-24 flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-[#1FBFB8] border-t-[#E85C23] rounded-full animate-spin"></div>
-      </div>
-    );
+    return <CustomLoading />;
   }
 
   if (error || !job) {
@@ -430,9 +428,7 @@ export default function JobDetails() {
 
             <div className="mt-12 pt-8 border-t border-gray-700">
               <a
-                href={`https://forms.google.com/your-form-url-here?jobTitle=${encodeURIComponent(
-                  job.title
-                )}&jobId=${job.id}`}
+                href="https://bit.ly/recruitmentbatara"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-gradient-to-r from-[#E85C23] to-[#d14b17] hover:from-[#d14b17] hover:to-[#E85C23] text-white px-8 py-4 rounded-lg transition-all duration-300 font-medium shadow-lg group"
@@ -441,9 +437,63 @@ export default function JobDetails() {
                 <span>Apply for this Position</span>
               </a>
             </div>
+            <div className="mt-4 text-center">
+              <button
+                onClick={() => setShowModal(true)}
+                className="text-sm text-[#1FBFB8] underline hover:text-[#E85C23] transition"
+              >
+                Read Terms and Conditions
+              </button>
+            </div>
           </div>
         </div>
       </section>
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div className="bg-gray-900 border border-gray-700 max-w-lg w-full mx-4 p-6 rounded-xl shadow-lg text-white relative">
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-3 right-4 text-gray-400 hover:text-white text-xl"
+            >
+              &times;
+            </button>
+            <h2 className="text-xl font-bold text-[#E85C23] mb-4">
+              Beware of Recruitment Scams
+            </h2>
+            <p className="mb-4 font-semibold uppercase text-sm text-gray-400">
+              Official Announcement Regarding Recruitment Fraud
+            </p>
+            <p className="text-sm text-gray-300 mb-2">
+              It has come to our attention that messages are being circulated
+              via WhatsApp claiming to be from PT Batara Dharma Persada.
+            </p>
+            <p className="text-sm text-gray-300 mb-2">
+              Please note that PT Batara Dharma Persada does not charge any fees
+              at any stage of the recruitment process. All official
+              communication is conducted through verified channels and not
+              through unknown personal WhatsApp numbers.
+            </p>
+            <p className="text-sm text-gray-300 mb-2">We urge the public to:</p>
+            <ul className="list-disc list-inside text-sm text-gray-300 mb-2 space-y-1">
+              <li>Be cautious of suspicious interview invitations</li>
+              <li>Do not share personal information carelessly</li>
+              <li>Do not make any kind of payment</li>
+            </ul>
+            <p className="text-sm text-gray-300 mb-2">
+              If you receive a suspicious message like this, please report it to
+              the authorities or contact our official company representative for
+              clarification.
+            </p>
+            <p className="text-sm text-gray-300">
+              Thank you for your attention and cooperation.
+            </p>
+            <p className="text-sm font-medium text-[#1FBFB8] mt-4">
+              PT Batara Dharma Persada
+            </p>
+            <p className="text-sm text-gray-400">HRGA Department</p>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

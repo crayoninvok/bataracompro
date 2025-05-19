@@ -214,20 +214,6 @@ export default function AdminLayout({
                 Driver
               </Link>
               
-              <p className="mt-6 px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
-                Account
-              </p>
-              <Link
-                href="/admin/settings"
-                className={`group flex items-center rounded-lg px-3 py-2 text-sm font-medium ${
-                  pathname === "/admin/settings"
-                    ? "bg-[#E85C23]/10 text-[#E85C23]"
-                    : "text-gray-300 hover:bg-gray-800 hover:text-white"
-                }`}
-              >
-                <Settings className="mr-3 h-5 w-5" />
-                Settings
-              </Link>
             </nav>
           </div>
 

@@ -9,86 +9,10 @@ import {
   Briefcase,
   ChevronRight,
 } from "lucide-react";
-import { motion } from "framer-motion";
 import { useJobs } from "@/hooks/useJobs";
 import { Job, JobFilters } from "@/types/job";
 import { formatDate } from "@/utils/format";
-
-// Custom loading component
-function CustomLoading() {
-  return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-50">
-      <div className="relative w-24 h-24 sm:w-32 sm:h-32">
-        {/* Orange part (left vertical) */}
-        <motion.div
-          className="absolute w-6 sm:w-8 h-full bg-[#E85C23] rounded-md"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.5 },
-          }}
-        />
-
-        {/* Teal part (top right curve) */}
-        <motion.div
-          className="absolute right-0 top-0 w-16 sm:w-20 h-12 sm:h-16 bg-[#1FBFB8] rounded-tr-full rounded-bl-full"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            transition: { delay: 0.3, duration: 0.5 },
-          }}
-        />
-
-        {/* Gray part (bottom right curve) */}
-        <motion.div
-          className="absolute right-0 bottom-0 w-16 sm:w-20 h-12 sm:h-16 bg-gray-600 rounded-br-full rounded-tl-full"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            transition: { delay: 0.6, duration: 0.5 },
-          }}
-        />
-
-        {/* Pulsing animation */}
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            opacity: [0.7, 1, 0.7],
-            scale: [0.95, 1, 0.95],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 2,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
-
-      <motion.div
-        className="absolute bottom-16 text-white text-lg font-medium"
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          transition: { delay: 0.8, duration: 0.5 },
-        }}
-      >
-        <div className="flex items-center">
-          <span>Loading</span>
-          <motion.span
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="ml-1"
-          >
-            ...
-          </motion.span>
-        </div>
-      </motion.div>
-    </div>
-  );
-}
+import Loading from "@/components/CustomLoading";
 
 // Strip HTML tags for text preview
 const stripHtml = (html: string) => {
@@ -98,6 +22,7 @@ const stripHtml = (html: string) => {
 
 export default function AllJobs() {
   const [jobs, setJobs] = useState<Job[]>([]);
+  const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState<JobFilters>({
     page: 1,
@@ -173,9 +98,8 @@ export default function AllJobs() {
   // Parallax effect calculation
   const parallaxOffset = scrollPosition * 0.3;
 
-  // If loading, show the custom loading component
   if (isLoading) {
-    return <CustomLoading />;
+    return <Loading />;
   }
 
   return (
@@ -257,6 +181,14 @@ export default function AllJobs() {
 
             <div className="animate-bounce mt-8">
               <ChevronRight className="w-8 h-8 text-[#1FBFB8] transform rotate-90" />
+            </div>
+            <div className="text-center mt-6">
+              <button
+                onClick={() => setShowModal(true)}
+                className="text-sm text-[#1FBFB8] underline hover:text-[#E85C23] transition"
+              >
+                Read Terms and Conditions
+              </button>
             </div>
           </div>
         </div>
@@ -474,6 +406,52 @@ export default function AllJobs() {
           )}
         </div>
       </section>
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
+          <div className="bg-gray-900 border border-gray-700 max-w-lg w-full mx-4 p-6 rounded-xl shadow-lg text-white relative">
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-3 right-4 text-gray-400 hover:text-white text-xl"
+            >
+              &times;
+            </button>
+            <h2 className="text-xl font-bold text-[#E85C23] mb-4">
+              Beware of Recruitment Scams
+            </h2>
+            <p className="mb-4 font-semibold uppercase text-sm text-gray-400">
+              Official Announcement Regarding Recruitment Fraud
+            </p>
+            <p className="text-sm text-gray-300 mb-2">
+              It has come to our attention that messages are being circulated
+              via WhatsApp claiming to be from PT Batara Dharma Persada.
+            </p>
+            <p className="text-sm text-gray-300 mb-2">
+              Please note that PT Batara Dharma Persada does not charge any fees
+              at any stage of the recruitment process. All official
+              communication is conducted through verified channels and not
+              through unknown personal WhatsApp numbers.
+            </p>
+            <p className="text-sm text-gray-300 mb-2">We urge the public to:</p>
+            <ul className="list-disc list-inside text-sm text-gray-300 mb-2 space-y-1">
+              <li>Be cautious of suspicious interview invitations</li>
+              <li>Do not share personal information carelessly</li>
+              <li>Do not make any kind of payment</li>
+            </ul>
+            <p className="text-sm text-gray-300 mb-2">
+              If you receive a suspicious message like this, please report it to
+              the authorities or contact our official company representative for
+              clarification.
+            </p>
+            <p className="text-sm text-gray-300">
+              Thank you for your attention and cooperation.
+            </p>
+            <p className="text-sm font-medium text-[#1FBFB8] mt-4">
+              PT Batara Dharma Persada
+            </p>
+            <p className="text-sm text-gray-400">HRGA Department</p>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

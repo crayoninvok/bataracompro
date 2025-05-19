@@ -49,8 +49,8 @@ export default function Navbar() {
       dropdown: [
         { href: "/tentang/profil", label: "Company Profile" },
         { href: "/tentang/visi-misi", label: "Vision & Mission" },
-        { href: "/tentang/tim", label: "Board of Director" },
-        { href: "/tentang/ourteam", label: "Our Teams" },
+        { href: "/tentang/tim", label: "Our Teams" },
+        { href: "/tentang/projects-gallery", label: "Projects Gallery" },
       ],
     },
     { href: "/proyek", label: "Project" },

@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 interface Director {
   name: string;
   position: string;
-  description: string;
   image: string;
+  experience: string[];
 }
 
 interface DirectorsSectionProps {
@@ -95,13 +94,6 @@ const DirectorsSection: React.FC<DirectorsSectionProps> = ({
                   <p className="text-gray-300 text-lg mt-1 font-medium">
                     {director.position}
                   </p>
-
-                  <div className="mt-4 flex items-center">
-                    <span className="text-[#0bbfb3] text-sm font-medium">
-                      View Profile
-                    </span>
-                    <ChevronRight className="w-4 h-4 text-[#0bbfb3] ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                  </div>
                 </div>
 
                 <div className="w-full h-1 bg-gradient-to-r from-[#0bbfb3] via-[#FF5722]/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>

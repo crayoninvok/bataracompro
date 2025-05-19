@@ -2,13 +2,12 @@
 
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
-import { ChevronRight } from "lucide-react";
 
 interface Manager {
   name: string;
   position: string;
-  description: string;
   image: string;
+  experience: string[];
 }
 
 interface ManagersSectionProps {
@@ -98,13 +97,6 @@ const ManagersSection: React.FC<ManagersSectionProps> = ({
                   <p className="text-gray-400 text-sm mt-1">
                     {manager.position}
                   </p>
-
-                  <div className="mt-4 flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-[#0bbfb3] text-xs font-medium">
-                      View Details
-                    </span>
-                    <ChevronRight className="w-3 h-3 text-[#0bbfb3] ml-1 group-hover:translate-x-1 transition-transform duration-300" />
-                  </div>
                 </div>
 
                 {/* Highlight effect */}

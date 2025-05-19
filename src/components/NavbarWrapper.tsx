@@ -15,6 +15,8 @@ const hiddenRoutePrefixes = [
   "/admin/jobs/create",
   "/admin/jobs/edit",
   "/admin/applicants",
+  "/admin/applications",
+  "/admin/settings",
   "/admin/article",
   "/admin/driver",
   "/login-admin",

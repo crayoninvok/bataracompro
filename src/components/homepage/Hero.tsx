@@ -54,17 +54,10 @@ export default function HeroWithVideo() {
           <div className="mt-1 sm:mt-2 text-[#1FBFB8] font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-3 md:mb-4 leading-tight">
             PT Batara Dharma Persada
           </div>
-          <p className="text-base sm:text-lg md:text-lg max-w-3xl mx-auto text-gray-200 mb-4 md:mb-6 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-lg max-w-4xl mx-auto text-gray-200 mb-4 md:mb-6 leading-relaxed">
             We're committed to delivering the best solutions by prioritizing
             safety, productivity and efficiency
           </p>
-          <p className="text-sm sm:text-base md:text-base max-w-3xl mx-auto text-gray-300 mb-5 md:mb-6 leading-relaxed">
-            We understand that the mining industry demands high standards of
-            safety and technological innovation. That's why we continually
-            invest in developing cutting-edge methods and technology for safer,
-            more effective, and sustainable operations.
-          </p>
-
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-4 md:mt-5 mb-5 md:mb-6">
             <div className="flex items-center gap-2 justify-center bg-black/50 py-2 px-3 rounded-md backdrop-blur-sm border border-gray-800">
               <div className="bg-[#E85C23]/20 p-1.5 rounded">

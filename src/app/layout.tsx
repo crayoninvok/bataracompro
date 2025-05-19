@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | Batara Dharma Persada",
   },
   description: "Profil Perusahaan PT. Batara Dharma Persada",
-  keywords: ["Batara Dharma Persada", "Perusahaan", "Indonesia", "Bekasi"],
+  keywords: ["Batara Dharma Persada", "Perusahaan", "Indonesia", "Cakung"],
   authors: [
     {
       name: "PT. Batara Dharma Persada",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://bataradharma.com",
+    url: "https://bataramining.com",
     title: "Batara Dharma Persada",
     description: "Profil Perusahaan PT. Batara Dharma Persada",
     siteName: "Batara Dharma Persada",

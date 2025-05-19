@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Tambahan fix background putih */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;; /* agar tidak ada flicker putih saat dark mode */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.loader {
+  width: 64px;
+  height: 64px;
+  display: inline-block;
+  position: relative;
+}
+
+.loader::before,
+.loader::after {
+  content: '';
+  width: 64px;
+  height: 64px;
+  border: 3px solid transparent;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotation 1.5s ease-in-out infinite;
+}
+
+.loader::before {
+  border-top-color: #E85C23; /* Primary Orange */
+}
+
+.loader::after {
+  border-bottom-color: #1FBFB8; /* Teal/Turquoise */
+  animation-delay: 0.75s;
+}
+
+.loader img {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Rotation Animation */
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

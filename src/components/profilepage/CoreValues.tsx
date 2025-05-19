@@ -30,7 +30,7 @@ export default function StriveValues() {
       letter: "S",
       title: "Synergy",
       description:
-        "A combined action from more than one participant to create cooperative action where a whole produces more than the sum of its parts.",
+        "We believe that synergy is the key to succes, we create opportunities through strong synergy between teams, partners, customers and stakeholders.",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ export default function StriveValues() {
       letter: "T",
       title: "Trusted",
       description:
-        "Ability to behave honestly and maintain high commitment to company regulations and code of ethics consistently, preserving reputation and customer satisfaction.",
+        "We behave honestly and maintain a high commitment to company regulations and the code ethics consistenly, preserving reputation and ensuring customer satisfaction.",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@ export default function StriveValues() {
       letter: "R",
       title: "Responsible & Resourceful",
       description:
-        "Taking ownership of our actions and obligations while being creative and adaptable in finding solutions to challenges.",
+        "We take ownership of our actions and obligations while being creative and adaptable in finding solution to challanges.",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +99,7 @@ export default function StriveValues() {
       letter: "I",
       title: "Integrity",
       description:
-        "Upstanding character traits and work ethics, including sound judgement, honesty, dependability, and loyalty in all business dealings.",
+        "We upload upstanding character traits and work ethics, including transparancy, honestly, dependability, and loyalty in all businness dealings",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +122,7 @@ export default function StriveValues() {
       letter: "V",
       title: "Values",
       description:
-        "Guiding principles and fundamental beliefs that help our team work toward common business goals, enhancing business relationships and company growth.",
+        "We embrace guiding principles and fundamental beliefs that help our team work toward common business goals, enhancing business dealings.",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +145,7 @@ export default function StriveValues() {
       letter: "E",
       title: "Extraordinary",
       description:
-        "Setting high standards, pursuing excellence, and establishing positive examples in everything we do as a company.",
+        "We set high standards, persue excellence and establish positive examples in everything we do as a company",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -195,8 +195,10 @@ export default function StriveValues() {
       <div className="absolute bottom-20 left-0 w-40 h-40 rounded-full bg-[#1FBFB8]/10 blur-3xl -z-0" />
       <div className="absolute top-1/4 -right-20 w-64 h-64 rounded-full bg-[#E85C23]/10 blur-3xl -z-0" />
 
-      <div className="container mx-auto px-4
-       md:px-6 relative z-10">
+      <div
+        className="container mx-auto px-4
+       md:px-6 relative z-10"
+      >
         <div className="max-w-4xl mx-auto text-center mb-16">
           <span className="inline-block text-[#1FBFB8] font-medium mb-3">
             OUR CORE PRINCIPLES

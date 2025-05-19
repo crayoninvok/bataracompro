@@ -1,14 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import {
-  Truck,
-  HardHat,
-  Factory,
-  Mountain,
-  Shovel,
-  Recycle,
-} from "lucide-react";
+import { Recycle, Shovel } from "lucide-react";
 
 export default function ServicesSection() {
   const sectionRef = useRef(null);
@@ -56,10 +49,14 @@ export default function ServicesSection() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Service 1 */}
+          {/* Coal */}
           <div className="reveal-service opacity-0 translate-y-6 transition-all duration-700 bg-gray-900/80 p-6 rounded-lg shadow-md border border-gray-800 hover:border-[#E85C23]/50 group">
             <div className="bg-[#E85C23]/10 p-3 rounded-lg w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[#E85C23]/20 transition-colors">
-              <Factory className="w-7 h-7 text-[#E85C23]" />
+              <img
+                src="/svg/coals.svg"
+                alt="Coal Icon"
+                className="w-7 h-7 object-contain"
+              />
             </div>
             <h3 className="text-lg font-bold mb-2 text-white group-hover:text-[#E85C23] transition-colors">
               Coal Mining and Hauling
@@ -71,10 +68,14 @@ export default function ServicesSection() {
             </p>
           </div>
 
-          {/* Service 2 */}
+          {/* Bauxite */}
           <div className="reveal-service opacity-0 translate-y-6 transition-all duration-700 delay-100 bg-gray-900/80 p-6 rounded-lg shadow-md border border-gray-800 hover:border-[#1FBFB8]/50 group">
             <div className="bg-[#1FBFB8]/10 p-3 rounded-lg w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[#1FBFB8]/20 transition-colors">
-              <Mountain className="w-7 h-7 text-[#1FBFB8]" />
+              <img
+                src="/svg/rocks.svg"
+                alt="Bauxite Icon"
+                className="w-7 h-7 object-contain"
+              />
             </div>
             <h3 className="text-lg font-bold mb-2 text-white group-hover:text-[#1FBFB8] transition-colors">
               Bauxite Mining and Hauling
@@ -86,12 +87,16 @@ export default function ServicesSection() {
             </p>
           </div>
 
-          {/* Service 3 */}
-          <div className="reveal-service opacity-0 translate-y-6 transition-all duration-700 delay-200 bg-gray-900/80 p-6 rounded-lg shadow-md border border-gray-800 hover:border-[#E85C23]/50 group">
-            <div className="bg-[#E85C23]/10 p-3 rounded-lg w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[#E85C23]/20 transition-colors">
-              <HardHat className="w-7 h-7 text-[#E85C23]" />
+          {/* Nickel */}
+          <div className="reveal-service opacity-0 translate-y-6 transition-all duration-700 delay-200 bg-gray-900/80 p-6 rounded-lg shadow-md border border-gray-800 hover:border-[#A0AEB5]/50 group">
+            <div className="bg-[#A0AEB5]/20 p-3 rounded-lg w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[#A0AEB5]/40 transition-colors">
+              <img
+                src="/svg/stone.svg"
+                alt="Nickel Icon"
+                className="w-7 h-7 object-contain"
+              />
             </div>
-            <h3 className="text-lg font-bold mb-2 text-white group-hover:text-[#E85C23] transition-colors">
+            <h3 className="text-lg font-bold mb-2 text-white group-hover:text-[#A0AEB5] transition-colors">
               Nickel Mining and Hauling
             </h3>
             <p className="text-gray-400 text-sm">
@@ -100,10 +105,14 @@ export default function ServicesSection() {
             </p>
           </div>
 
-          {/* Service 4 positioned on left */}
-          <div className="reveal-service opacity-0 translate-y-6 transition-all duration-700 delay-300 bg-gray-900/80 p-6 rounded-lg shadow-md border border-gray-800 hover:border-[#E85C23]/50 group md:col-start-1 md:col-span-1">
+          {/* Land Reclamation */}
+          <div className="reveal-service opacity-0 translate-y-6 transition-all duration-700 bg-gray-900/80 p-6 rounded-lg shadow-md border border-gray-800 hover:border-[#E85C23]/50 group">
             <div className="bg-[#E85C23]/10 p-3 rounded-lg w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[#E85C23]/20 transition-colors">
-              <Recycle className="w-7 h-7 text-[#E85C23]" />
+              <img
+                src="/svg/reclamation.svg"
+                alt="Reclamation Icon"
+                className="w-7 h-7 object-contain"
+              />
             </div>
             <h3 className="text-lg font-bold mb-2 text-white group-hover:text-[#E85C23] transition-colors">
               Land Reclamation
@@ -114,11 +123,14 @@ export default function ServicesSection() {
               ecological balance.
             </p>
           </div>
-
-          {/* Service 5 positioned on right */}
-          <div className="reveal-service opacity-0 translate-y-6 transition-all duration-700 delay-400 bg-gray-900/80 p-6 rounded-lg shadow-md border border-gray-800 hover:border-[#1FBFB8]/50 group md:col-start-2 md:col-span-1">
+          {/* Top Soil Rehandling */}
+          <div className="reveal-service opacity-0 translate-y-6 transition-all duration-700 delay-100 bg-gray-900/80 p-6 rounded-lg shadow-md border border-gray-800 hover:border-[#1FBFB8]/50 group">
             <div className="bg-[#1FBFB8]/10 p-3 rounded-lg w-14 h-14 flex items-center justify-center mb-4 group-hover:bg-[#1FBFB8]/20 transition-colors">
-              <Shovel className="w-7 h-7 text-[#1FBFB8]" />
+              <img
+                src="/svg/shovel.svg"
+                alt="Shovel Icon"
+                className="w-7 h-7 object-contain"
+              />
             </div>
             <h3 className="text-lg font-bold mb-2 text-white group-hover:text-[#1FBFB8] transition-colors">
               Top Soil Rehandling

@@ -17,8 +17,8 @@ export default function Footer() {
   const companyLinks = [
     { href: "/tentang/profil", label: "Company Profile" },
     { href: "/tentang/visi-misi", label: "Vision & Mission" },
-    { href: "/tentang/tim", label: "Board of Director" },
-    { href: "/tentang/ourteam", label: "Our Team" },
+    { href: "/tentang/tim", label: "Our Team" },
+    { href: "/tentang/projects-gallery", label: "Projects Gallery" },
   ];
 
   const serviceLinks = [
@@ -130,19 +130,19 @@ export default function Footer() {
                   className="mr-2 flex-shrink-0 text-[#E85C23]"
                 />
                 <a
-                  href="tel:+628 11229 8203"
+                  href="tel:+62 21 38865143"
                   className="text-gray-400 hover:text-white text-sm"
                 >
-                  +628-11229-8203
+                  +62 21 38865143
                 </a>
               </li>
               <li className="flex items-center">
                 <Mail size={16} className="mr-2 flex-shrink-0 text-[#E85C23]" />
                 <a
-                  href="mailto:info@bataramining.com"
+                  href="mailto:bataradharmapersada@gmail.com"
                   className="text-gray-400 hover:text-white text-sm"
                 >
-                  info@bataramining.com
+                  bataradharmapersada@gmail.com
                 </a>
               </li>
             </ul>
