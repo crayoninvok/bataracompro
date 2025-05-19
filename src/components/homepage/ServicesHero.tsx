@@ -59,7 +59,7 @@ export default function ServicesSection() {
               />
             </div>
             <h3 className="text-lg font-bold mb-2 text-white group-hover:text-[#E85C23] transition-colors">
-              Coal Mining and Hauling
+              Coal Hauling 
             </h3>
             <p className="text-gray-400 text-sm">
               Comprehensive coal extraction and transportation services with a

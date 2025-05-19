@@ -68,7 +68,7 @@ export default function MapSection() {
                 type="operation"
                 title="Operation Site"
                 location="Tabang, East Kalimantan"
-                address="PT. Indonesia Pratama - Coal Mining and Transportation Operations"
+                address="PT. Indonesia Pratama - Coal Hauling Operations"
               />
             </div>
           </div>
