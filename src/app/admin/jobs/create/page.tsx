@@ -27,6 +27,7 @@ export default function CreateJobPage() {
     location: "",
     salaryMin: undefined,
     salaryMax: undefined,
+    expiredAt:""
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -151,6 +152,7 @@ export default function CreateJobPage() {
           location: "",
           salaryMin: undefined,
           salaryMax: undefined,
+          expiredAt: ""
         });
 
         // Redirect after short delay
