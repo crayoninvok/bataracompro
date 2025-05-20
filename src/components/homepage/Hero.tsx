@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { ArrowDownCircle, Truck, Shield, Award } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HeroWithVideo() {
   const [isVisible, setIsVisible] = useState(false);
@@ -61,8 +62,15 @@ export default function HeroWithVideo() {
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-4 md:mt-5 mb-5 md:mb-6">
             <div className="flex items-center gap-2 justify-center bg-black/50 py-2 px-3 rounded-md backdrop-blur-sm border border-gray-800">
               <div className="bg-[#E85C23]/20 p-1.5 rounded">
-                <Truck className="w-4 h-4 text-[#1FBFB8]" />
+                <Image
+                  src="/svg/trailer.svg"
+                  alt="Trailer Icon"
+                  width={16}
+                  height={16}
+                  className="w-4 h-4"
+                />
               </div>
+
               <span className="text-sm sm:text-base">Modern Fleet</span>
             </div>
             <div className="flex items-center gap-2 justify-center bg-black/50 py-2 px-3 rounded-md backdrop-blur-sm border border-gray-800">
