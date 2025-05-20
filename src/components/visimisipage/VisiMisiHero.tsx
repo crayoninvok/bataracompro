@@ -79,7 +79,7 @@ export default function VisiMisiHero() {
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-            The direction and goals that guide the journey of <span className="text-[#1FBFB8] font-medium">PT. Batara Dharma Persada</span> towards excellence in mining operations.
+            The direction and goals that guide the journey of <span className="text-[#1FBFB8] font-medium">PT Batara Dharma Persada</span> towards excellence in mining operations.
           </p>
           
           <div className="flex justify-center">

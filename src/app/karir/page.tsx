@@ -177,7 +177,7 @@ export default function AllJobs() {
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
               Join{" "}
               <span className="text-[#1fbfb8] font-medium">
-                PT. Batara Dharma Persada
+                PT Batara Dharma Persada
               </span>{" "}
               and be part of our growing team of professionals
             </p>

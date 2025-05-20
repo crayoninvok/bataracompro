@@ -2,11 +2,11 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
   MessageSquare,
   Send,
   User,
@@ -19,7 +19,7 @@ import {
   ArrowRight,
   ChevronRight,
   Check,
-  AlertCircle
+  AlertCircle,
 } from "lucide-react";
 
 interface FormData {
@@ -44,7 +44,7 @@ export default function Contact() {
     email: "",
     company: "",
     phone: "",
-    message: ""
+    message: "",
   });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<StatusState>({
@@ -61,8 +61,8 @@ export default function Contact() {
       setScrollPosition(window.scrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    
+    window.addEventListener("scroll", handleScroll);
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -79,20 +79,30 @@ export default function Contact() {
     elements.forEach((el) => observer.observe(el));
 
     // Initialize map
-    if (typeof window !== 'undefined') {
-      import('leaflet').then(L => {
+    if (typeof window !== "undefined") {
+      import("leaflet").then((L) => {
         setTimeout(() => {
-          const mapContainer = document.getElementById('office-map');
-          
+          const mapContainer = document.getElementById("office-map");
+
           if (mapContainer && !mapContainer.hasChildNodes()) {
-            const map = L.map('office-map').setView([-6.163255, 106.929148], 15);
-            
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            const map = L.map("office-map").setView(
+              [-6.163255, 106.929148],
+              15
+            );
+
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+              attribution:
+                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map);
-            
-            const headOfficeMarker = L.marker([-6.163255, 106.929148]).addTo(map);
-            headOfficeMarker.bindPopup("<b>Head Office PT Batara Dharma Persada</b><br>Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar., Kec. Cakung, Kota Jakarta Timur, DKI Jakarta 13910").openPopup();
+
+            const headOfficeMarker = L.marker([-6.163255, 106.929148]).addTo(
+              map
+            );
+            headOfficeMarker
+              .bindPopup(
+                "<b>Head Office PT Batara Dharma Persada</b><br>Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar., Kec. Cakung, Kota Jakarta Timur, DKI Jakarta 13910"
+              )
+              .openPopup();
           }
         }, 1000);
       });
@@ -100,16 +110,18 @@ export default function Contact() {
 
     return () => {
       clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
       elements.forEach((el) => observer.unobserve(el));
     };
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -144,7 +156,8 @@ export default function Contact() {
       if (response.ok) {
         setStatus({
           type: "success",
-          message: "Your message has been successfully sent. We will contact you soon.",
+          message:
+            "Your message has been successfully sent. We will contact you soon.",
         });
         // Reset form
         setFormData({
@@ -157,7 +170,9 @@ export default function Contact() {
       } else {
         setStatus({
           type: "error",
-          message: data.message || "An error occurred while sending the message. Please try again.",
+          message:
+            data.message ||
+            "An error occurred while sending the message. Please try again.",
         });
       }
     } catch (error) {
@@ -179,20 +194,20 @@ export default function Contact() {
       {/* Hero Header */}
       <section className="relative py-28 overflow-hidden border-b border-gray-800">
         {/* Background layers */}
-        <div 
+        <div
           className="absolute inset-0 bg-gradient-to-br from-[#3A3A3D] to-[#1F1F23]"
           style={{ transform: `translateY(${parallaxOffset * 0.2}px)` }}
         />
-        
+
         {/* Animated grid pattern */}
-        <div 
+        <div
           className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 bg-[length:60px_60px]"
-          style={{ 
+          style={{
             transform: `translateY(${parallaxOffset * 0.1}px)`,
-            animation: 'gridMove 20s linear infinite'
-          }} 
+            animation: "gridMove 20s linear infinite",
+          }}
         />
-        
+
         {/* Floating particles */}
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(15)].map((_, i) => (
@@ -205,49 +220,68 @@ export default function Contact() {
                 top: `${Math.random() * 100}%`,
                 left: `${Math.random() * 100}%`,
                 animation: `float ${Math.random() * 10 + 10}s linear infinite`,
-                animationDelay: `${Math.random() * 5}s`
+                animationDelay: `${Math.random() * 5}s`,
               }}
             />
           ))}
         </div>
-        
+
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div
             className={`max-w-4xl mx-auto text-center transition-all duration-1000 ease-out ${
-              isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
             }`}
           >
             <div className="inline-block mb-6">
               <div className="w-full h-0.5 bg-[#E85C23]/30 mt-2" />
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
               <span className="relative inline-block">
                 <span className="relative z-10">Contact Us</span>
-                <span className="absolute bottom-0 left-0 w-full h-3 bg-[#E85C23]/30 z-0" style={{ bottom: '5px' }} />
+                <span
+                  className="absolute bottom-0 left-0 w-full h-3 bg-[#E85C23]/30 z-0"
+                  style={{ bottom: "5px" }}
+                />
               </span>
             </h1>
-            
+
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Connect with <span className="text-[#1FBFB8] font-medium">PT. Batara Dharma Persada</span> for all your mining and hauling service needs
+              Connect with{" "}
+              <span className="text-[#1FBFB8] font-medium">
+                PT Batara Dharma Persada
+              </span>{" "}
+              for all your mining and hauling service needs
             </p>
-            
+
             <div className="animate-bounce mt-8">
               <ChevronRight className="w-8 h-8 text-[#1FBFB8] transform rotate-90" />
             </div>
           </div>
         </div>
-        
+
         {/* Custom animations */}
         <style jsx global>{`
           @keyframes float {
-            0% { transform: translateY(0) translateX(0); }
-            50% { transform: translateY(-20px) translateX(10px); }
-            100% { transform: translateY(0) translateX(0); }
+            0% {
+              transform: translateY(0) translateX(0);
+            }
+            50% {
+              transform: translateY(-20px) translateX(10px);
+            }
+            100% {
+              transform: translateY(0) translateX(0);
+            }
           }
           @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 60px 60px; }
+            0% {
+              background-position: 0 0;
+            }
+            100% {
+              background-position: 60px 60px;
+            }
           }
         `}</style>
       </section>
@@ -257,17 +291,21 @@ export default function Contact() {
         {/* Background elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#E85C23]/10 to-transparent rounded-full -mr-48 -mt-48"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#1FBFB8]/10 to-transparent rounded-full -ml-48 -mb-48"></div>
-        
+
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16">
             {/* Contact Info */}
             <div className="reveal-contact opacity-0 translate-y-6 transition-all duration-700">
               <h2 className="text-3xl font-bold mb-6 relative inline-block">
-                <span className="relative z-10 text-white">Contact Details</span>
+                <span className="relative z-10 text-white">
+                  Contact Details
+                </span>
                 <span className="absolute -bottom-2 left-0 w-full h-3 bg-[#E85C23]/20 z-0"></span>
               </h2>
               <p className="text-gray-300 text-lg mb-10 leading-relaxed">
-                Reach out to discuss your coal transportation needs or explore other business cooperation opportunities with PT Batara Dharma Persada.
+                Reach out to discuss your coal transportation needs or explore
+                other business cooperation opportunities with PT Batara Dharma
+                Persada.
               </p>
 
               <div className="space-y-8">
@@ -276,11 +314,15 @@ export default function Contact() {
                     <Building className="w-6 h-6 text-[#1FBFB8]" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-xl mb-2 text-white group-hover:text-[#1FBFB8] transition-colors">Head Office</h3>
+                    <h3 className="font-bold text-xl mb-2 text-white group-hover:text-[#1FBFB8] transition-colors">
+                      Head Office
+                    </h3>
                     <p className="text-gray-300">
-                      Jl. Agung Sedayu City Boulevard Utara No.58, 
-                      <br />Cakung Bar., Kec. Cakung, 
-                      <br />East Jakarta, DKI Jakarta 13910
+                      Jl. Agung Sedayu City Boulevard Utara No.58,
+                      <br />
+                      Cakung Bar., Kec. Cakung,
+                      <br />
+                      East Jakarta, DKI Jakarta 13910
                     </p>
                   </div>
                 </div>
@@ -290,9 +332,12 @@ export default function Contact() {
                     <Phone className="w-6 h-6 text-[#E85C23]" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-xl mb-2 text-white group-hover:text-[#E85C23] transition-colors">Phone</h3>
+                    <h3 className="font-bold text-xl mb-2 text-white group-hover:text-[#E85C23] transition-colors">
+                      Phone
+                    </h3>
                     <p className="text-gray-300">
-                      +62 21 38865143 <span className="text-gray-400">(Office)</span>
+                      +62 21 38865143{" "}
+                      <span className="text-gray-400">(Office)</span>
                       <br />
                     </p>
                   </div>
@@ -303,9 +348,14 @@ export default function Contact() {
                     <Mail className="w-6 h-6 text-[#1FBFB8]" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-xl mb-2 text-white group-hover:text-[#1FBFB8] transition-colors">Email</h3>
+                    <h3 className="font-bold text-xl mb-2 text-white group-hover:text-[#1FBFB8] transition-colors">
+                      Email
+                    </h3>
                     <p className="text-gray-300">
-                      info@bataramining.com <span className="text-gray-400">(General Information)</span>
+                      info@bataramining.com{" "}
+                      <span className="text-gray-400">
+                        (General Information)
+                      </span>
                       <br />
                     </p>
                   </div>
@@ -316,13 +366,13 @@ export default function Contact() {
                     <Clock className="w-6 h-6 text-[#E85C23]" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-xl mb-2 text-white group-hover:text-[#E85C23] transition-colors">Operating Hours</h3>
+                    <h3 className="font-bold text-xl mb-2 text-white group-hover:text-[#E85C23] transition-colors">
+                      Operating Hours
+                    </h3>
                     <p className="text-gray-300">
                       Monday - Friday: 08:00 - 17:00 WIB
                       <br />
-                      Saturday: 08:00 - 13:00 WIB
-                      <br />
-                      Sunday & Public Holidays: Closed
+                      Saturday, Sunday & Public Holidays: Closed
                     </p>
                   </div>
                 </div>
@@ -330,47 +380,25 @@ export default function Contact() {
 
               {/* Social Media Links */}
               <div className="mt-12">
-                <h3 className="font-bold text-xl mb-5 text-white">Connect With Us</h3>
+                <h3 className="font-bold text-xl mb-5 text-white">
+                  Connect With Us
+                </h3>
                 <div className="flex space-x-4">
-                  <a 
-                    href="https://instagram.com/pt_batara" 
-                    target="_blank" 
+                  <a
+                    href="https://instagram.com/pt_batara"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="bg-black/30 hover:bg-[#E85C23]/30 transition-all duration-300 p-4 rounded-lg border border-gray-800 hover:border-[#E85C23]"
                   >
                     <Instagram className="w-6 h-6 text-gray-300 hover:text-[#E85C23] transition" />
                   </a>
-                  <a 
-                    href="https://facebook.com/ptbatara" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="bg-black/30 hover:bg-[#1FBFB8]/30 transition-all duration-300 p-4 rounded-lg border border-gray-800 hover:border-[#1FBFB8]"
-                  >
-                    <Facebook className="w-6 h-6 text-gray-300 hover:text-[#1FBFB8] transition" />
-                  </a>
-                  <a 
-                    href="https://www.linkedin.com/company/pt-bdp/posts/?feedView=all" 
-                    target="_blank" 
+                  <a
+                    href="https://www.linkedin.com/company/pt-bdp/posts/?feedView=all"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="bg-black/30 hover:bg-[#1FBFB8]/30 transition-all duration-300 p-4 rounded-lg border border-gray-800 hover:border-[#1FBFB8]"
                   >
                     <Linkedin className="w-6 h-6 text-gray-300 hover:text-[#1FBFB8] transition" />
-                  </a>
-                  <a 
-                    href="https://twitter.com/pt_batara" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="bg-black/30 hover:bg-[#E85C23]/30 transition-all duration-300 p-4 rounded-lg border border-gray-800 hover:border-[#E85C23]"
-                  >
-                    <Twitter className="w-6 h-6 text-gray-300 hover:text-[#E85C23] transition" />
-                  </a>
-                  <a 
-                    href="https://youtube.com/channel/ptbatara" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="bg-black/30 hover:bg-[#1FBFB8]/30 transition-all duration-300 p-4 rounded-lg border border-gray-800 hover:border-[#1FBFB8]"
-                  >
-                    <Youtube className="w-6 h-6 text-gray-300 hover:text-[#1FBFB8] transition" />
                   </a>
                 </div>
               </div>
@@ -382,10 +410,12 @@ export default function Contact() {
                 {/* Background accent */}
                 <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-[#E85C23]/10 via-[#1FBFB8]/5 to-transparent rounded-full -mr-20 -mt-20 blur-xl"></div>
                 <div className="absolute -left-16 -bottom-16 w-48 h-48 bg-gradient-to-tr from-[#1FBFB8]/10 via-[#E85C23]/5 to-transparent rounded-full blur-xl"></div>
-                
+
                 <div className="relative z-10">
-                  <h2 className="text-2xl font-bold mb-6 text-white">Send a Message</h2>
-                  
+                  <h2 className="text-2xl font-bold mb-6 text-white">
+                    Send a Message
+                  </h2>
+
                   {status.type === "success" ? (
                     <div className="bg-green-900/30 border border-green-700/50 rounded p-3 mb-5">
                       <div className="flex items-start">
@@ -410,16 +440,20 @@ export default function Contact() {
                         <div className="ml-3">
                           <p className="text-sm text-red-300">
                             {status.message}
-                          </p>Phone
+                          </p>
+                          Phone
                         </div>
                       </div>
                     </div>
                   ) : null}
-                  
+
                   <form onSubmit={handleSubmit}>
                     <div className="space-y-5">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+                        <label
+                          htmlFor="name"
+                          className="block text-sm font-medium text-gray-300 mb-1"
+                        >
                           Full Name
                         </label>
                         <div className="relative">
@@ -441,7 +475,10 @@ export default function Contact() {
                       </div>
 
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+                        <label
+                          htmlFor="email"
+                          className="block text-sm font-medium text-gray-300 mb-1"
+                        >
                           Email
                         </label>
                         <div className="relative">
@@ -464,7 +501,10 @@ export default function Contact() {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
-                          <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-1">
+                          <label
+                            htmlFor="company"
+                            className="block text-sm font-medium text-gray-300 mb-1"
+                          >
                             Company
                           </label>
                           <div className="relative">
@@ -485,7 +525,10 @@ export default function Contact() {
                         </div>
 
                         <div>
-                          <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+                          <label
+                            htmlFor="phone"
+                            className="block text-sm font-medium text-gray-300 mb-1"
+                          >
                             Phone
                           </label>
                           <div className="relative">
@@ -507,7 +550,10 @@ export default function Contact() {
                       </div>
 
                       <div>
-                        <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
+                        <label
+                          htmlFor="message"
+                          className="block text-sm font-medium text-gray-300 mb-1"
+                        >
                           Message
                         </label>
                         <div className="relative">
@@ -560,7 +606,7 @@ export default function Contact() {
       {/* Map */}
       <section className="py-20 px-4 md:px-8 lg:px-24 relative border-b border-gray-800">
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#1FBFB8]/10 to-transparent rounded-full -mr-48 -mt-48"></div>
-        
+
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 reveal-contact opacity-0 translate-y-6 transition-all duration-700">
             <h2 className="text-3xl font-bold mb-4 relative inline-block">
@@ -572,20 +618,23 @@ export default function Contact() {
             </p>
           </div>
 
-          <div className="reveal-contact opacity-0 translate-y-6 transition-all duration-700 bg-gray-900/60 rounded-xl overflow-hidden shadow-lg border border-gray-800" style={{ height: "500px" }}>
+          <div
+            className="reveal-contact opacity-0 translate-y-6 transition-all duration-700 bg-gray-900/60 rounded-xl overflow-hidden shadow-lg border border-gray-800"
+            style={{ height: "500px" }}
+          >
             {/* Map Container */}
             <div id="office-map" className="w-full h-full">
               {/* Leaflet will initialize here */}
             </div>
-            
+
             {/* CSS for Leaflet */}
             <style jsx global>{`
-              @import 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-              
+              @import "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+
               .leaflet-container {
                 background-color: #1a1a1a;
               }
-              
+
               .leaflet-popup-content-wrapper {
                 background: rgba(30, 30, 30, 0.95);
                 color: #ffffff;
@@ -593,24 +642,24 @@ export default function Contact() {
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
                 border: 1px solid rgba(80, 80, 80, 0.3);
               }
-              
+
               .leaflet-popup-tip {
                 background: rgba(30, 30, 30, 0.95);
               }
-              
+
               .leaflet-popup-content {
                 margin: 13px 19px;
                 line-height: 1.5;
               }
-              
+
               .leaflet-popup-content p {
                 margin: 8px 0;
                 color: #e0e0e0;
               }
-              
+
               .leaflet-popup-content b {
                 font-weight: bold;
-                color: #E85C23;
+                color: #e85c23;
               }
             `}</style>
           </div>
@@ -620,13 +669,14 @@ export default function Contact() {
       {/* CTA Section */}
       <section className="py-20 px-4 md:px-8 lg:px-24 relative">
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#E85C23]/10 to-transparent rounded-full -ml-48 -mb-48"></div>
-        
+
         <div className="max-w-4xl mx-auto text-center reveal-contact opacity-0 translate-y-6 transition-all duration-700">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
             Want to Learn More?
           </h2>
           <p className="text-lg md:text-xl mb-10 text-gray-300 max-w-2xl mx-auto">
-            Download our company brochure for complete information about PT Batara Dharma Persada's mining and transportation services.
+            Download our company brochure for complete information about PT
+            Batara Dharma Persada's mining and transportation services.
           </p>
           <a
             href="https://res.cloudinary.com/dysmj8esf/image/upload/v1747210242/bdp_companyProfile_202410_r00_jgiio4.pdf"
