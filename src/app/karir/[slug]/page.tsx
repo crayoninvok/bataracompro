@@ -463,39 +463,38 @@ export default function JobDetails() {
               &times;
             </button>
             <h2 className="text-xl font-bold text-[#E85C23] mb-4">
-              Beware of Recruitment Scams
+              PENGUMUMAN RESMI TERKAIT PENIPUAN REKRUTMEN
             </h2>
-            <p className="mb-4 font-semibold uppercase text-sm text-gray-400">
-              Official Announcement Regarding Recruitment Fraud
+            <p className="text-sm text-gray-300 mb-2">
+              Sehubungan dengan beredarnya pesan melalui aplikasi WhatsApp yang
+              mengatasnamakan PT Batara Dharma Persada.
             </p>
             <p className="text-sm text-gray-300 mb-2">
-              It has come to our attention that messages are being circulated
-              via WhatsApp claiming to be from PT Batara Dharma Persada.
+              PT Batara Dharma Persada tidak pernah memungut biaya apapun dalam
+              proses rekrutmen. Segala proses seleksi dan komunikasi resmi dari
+              perusahaan hanya dilakukan melalui saluran resmi dan bukan melalui
+              nomor WhatsApp pribadi yang tidak dikenal.
             </p>
             <p className="text-sm text-gray-300 mb-2">
-              Please note that PT Batara Dharma Persada does not charge any fees
-              at any stage of the recruitment process. All official
-              communication is conducted through verified channels and not
-              through unknown personal WhatsApp numbers.
+              Kami menghimbau kepada seluruh masyarakat untuk:
             </p>
-            <p className="text-sm text-gray-300 mb-2">We urge the public to:</p>
             <ul className="list-disc list-inside text-sm text-gray-300 mb-2 space-y-1">
-              <li>Be cautious of suspicious interview invitations</li>
-              <li>Do not share personal information carelessly</li>
-              <li>Do not make any kind of payment</li>
+              <li>Waspada terhadap undangan interview yang mencurigakan</li>
+              <li>Tidak memberikan data pribadi secara sembarangan</li>
+              <li>Tidak melakukan pembayaran dalam bentuk apapun</li>
             </ul>
             <p className="text-sm text-gray-300 mb-2">
-              If you receive a suspicious message like this, please report it to
-              the authorities or contact our official company representative for
-              clarification.
+              Jika Anda menerima pesan mencurigakan seperti ini, segera laporkan
+              ke pihak berwenang atau hubungi kontak resmi perusahaan kami untuk
+              klarifikasi.
             </p>
             <p className="text-sm text-gray-300">
-              Thank you for your attention and cooperation.
+              Terima kasih atas perhatian dan kerja samanya.
             </p>
             <p className="text-sm font-medium text-[#1FBFB8] mt-4">
               PT Batara Dharma Persada
             </p>
-            <p className="text-sm text-gray-400">HRGA Department</p>
+            <p className="text-sm text-gray-400">HRGA Dept</p>
           </div>
         </div>
       )}
