@@ -34,14 +34,15 @@ const directorsData: Person[] = [
     experience: [
       "General Manager, Mining Division at PT United Tractors",
       "Operations Director, PT Pamapersada Nusantara",
-      "Plant Director, PT Sapta Indra Sejati"
+      "Plant Director, PT Sapta Indra Sejati",
+      "President Director, PT Batara Dharma Persada"
     ],
   },
   {
     name: "Eric NG",
     position: "Director",
     image: "/defavatar.jpg",
-    experience: ["10+ years in corporate finance"],
+    experience: [""],
   },
   {
     name: "Yohanes C. Wibowo",
@@ -50,6 +51,7 @@ const directorsData: Person[] = [
     experience: [
       "Plant Manager, PT Pamapersada Nusantara",
       "Operations Director, PT Riung Mitra Lestari",
+      "Operations Director, PT Batara Dharma Persada"
     ],
   },
 ];

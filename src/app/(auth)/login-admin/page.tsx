@@ -5,7 +5,14 @@ import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/auth-provider";
 import Image from "next/image";
 import { Shield, AlertCircle } from "lucide-react";
+import { jwtDecode } from "jwt-decode";
+import { useEffect } from "react";
 
+type DecodedToken = {
+  role: string;
+  exp: number;
+  [key: string]: any;
+};
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +25,28 @@ export default function AdminLoginPage() {
   const { loginAdmin } = useAuthContext();
   const router = useRouter();
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded = jwtDecode<DecodedToken>(token);
+        const now = Math.floor(Date.now() / 1000);
+
+        if (decoded.exp && decoded.exp < now) {
+          console.warn("Token expired");
+          return;
+        }
+
+        if (decoded.type?.toUpperCase() === "ADMIN") {
+          router.push("/admin/dashboard");
+        }
+      } catch (error) {
+        console.error("Invalid token", error);
+      }
+    }
+  }, [router]);
   const validate = (): boolean => {
     const newErrors: { email?: string; password?: string } = {};
 

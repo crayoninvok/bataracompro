@@ -5,20 +5,21 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuthContext } from "@/context/auth-provider";
-import { 
-  Home, 
-  Briefcase, 
-  LogOut, 
-  Menu, 
-  X, 
-  User, 
+import {
+  Home,
+  Briefcase,
+  LogOut,
+  Menu,
+  X,
+  User,
   BarChart3,
   Users,
   Settings,
   RefreshCcw,
-  FileText
+  FileText,
 } from "lucide-react";
 import Swal from "sweetalert2";
+import CustomLoading from "@/components/homepage/CustomLoading";
 
 export default function AdminLayout({
   children,
@@ -26,7 +27,8 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { user, isAdmin, isAuthenticated, isLoading, logout } = useAuthContext();
+  const { user, isAdmin, isAuthenticated, isLoading, logout } =
+    useAuthContext();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -41,14 +43,7 @@ export default function AdminLayout({
 
   // Loading state
   if (isLoading) {
-    return (
-      <div className="flex h-screen items-center justify-center bg-gray-50">
-        <div className="flex flex-col items-center">
-          <div className="h-12 w-12 rounded-full border-4 border-t-[#E85C23] border-[#E85C23]/30 animate-spin"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </div>
-    );
+    return <CustomLoading />;
   }
 
   // Auth guard
@@ -84,7 +79,10 @@ export default function AdminLayout({
       {/* Mobile header */}
       <div className="bg-[#E85C23] px-4 py-3 md:hidden">
         <div className="flex items-center justify-between">
-          <Link href="/admin/dashboard" className="text-xl font-bold text-white flex items-center">
+          <Link
+            href="/admin/dashboard"
+            className="text-xl font-bold text-white flex items-center"
+          >
             <Image
               src="/nobgbtrlogo.png"
               alt="PT BATARA Logo"
@@ -124,7 +122,9 @@ export default function AdminLayout({
               </div>
               <div>
                 <h1 className="text-lg font-bold text-white">BDP Admin</h1>
-                <p className="text-xs text-gray-400">Post Job, Article & Software </p>
+                <p className="text-xs text-gray-400">
+                  Post Job, Article & Software{" "}
+                </p>
               </div>
             </Link>
           </div>
@@ -142,7 +142,9 @@ export default function AdminLayout({
                 <p className="text-xs text-gray-400">{user?.email}</p>
                 <div className="mt-1 flex items-center">
                   <span className="flex h-2 w-2 rounded-full bg-green-400"></span>
-                  <span className="ml-1 text-xs font-medium text-gray-300">Administrator</span>
+                  <span className="ml-1 text-xs font-medium text-gray-300">
+                    Administrator
+                  </span>
                 </div>
               </div>
             </div>
@@ -176,7 +178,7 @@ export default function AdminLayout({
                 <Briefcase className="mr-3 h-5 w-5" />
                 Post New Job
               </Link>
-              
+
               <p className="mt-6 px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
                 Management
               </p>
@@ -213,7 +215,6 @@ export default function AdminLayout({
                 <RefreshCcw className="mr-3 h-5 w-5" />
                 Driver
               </Link>
-              
             </nav>
           </div>
 
@@ -238,7 +239,8 @@ export default function AdminLayout({
                 {pathname === "/admin/dashboard" && "Dashboard"}
                 {pathname === "/admin/jobs/create" && "Create New Job"}
                 {pathname.startsWith("/admin/jobs/edit") && "Edit Job"}
-                {pathname.startsWith("/admin/jobs/applications") && "Job Applications"}
+                {pathname.startsWith("/admin/jobs/applications") &&
+                  "Job Applications"}
                 {pathname === "/admin/applications" && "All Applications"}
                 {pathname === "/admin/profile" && "My Profile"}
                 {pathname === "/admin/settings" && "Settings"}
@@ -248,24 +250,37 @@ export default function AdminLayout({
               <div className="relative">
                 <button className="p-1 text-gray-400 hover:text-gray-500 rounded-full">
                   <span className="sr-only">Notifications</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                    />
                   </svg>
                   <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400"></span>
                 </button>
               </div>
-              
+
               <div className="h-6 border-l border-gray-200"></div>
-              
+
               <div className="flex items-center">
                 <div className="h-8 w-8 rounded-full bg-[#E85C23]/20 flex items-center justify-center text-[#E85C23]">
                   <User className="h-4 w-4" />
                 </div>
-                <span className="ml-2 text-sm font-medium text-gray-700">{user?.name}</span>
+                <span className="ml-2 text-sm font-medium text-gray-700">
+                  {user?.name}
+                </span>
               </div>
             </div>
           </div>
-          
+
           {/* Content area */}
           <div className="flex-1 overflow-auto p-4 md:p-6">
             {/* Overlay for mobile sidebar */}

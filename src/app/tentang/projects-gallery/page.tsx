@@ -16,32 +16,38 @@ export default function ProjectGallery() {
     {
       id: 1,
       title: "Coal Hauling Project - Tabang, Kalimantan",
-      coverImage: "/projects/coal-transport-1.jpg",
+      coverImage:
+        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747703546/DJI_0621_xjr19d.jpg",
     },
     {
       id: 2,
-      title: "Mining Equipment Supply",
-      coverImage: "/projects/equipment-1.jpg",
+      title: "Coal Hauling Units",
+      coverImage:
+        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747208062/IMG20241231091819_mktl7d.jpg",
     },
     {
       id: 3,
-      title: "Overburden Removal Project",
-      coverImage: "/projects/overburden-1.jpg",
+      title: "Units Pitstop",
+      coverImage:
+        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747207936/DJI_0671_waz5wb.jpg",
     },
     {
       id: 4,
-      title: "Coal Hauling Road Construction",
-      coverImage: "/projects/road-1.jpg",
+      title: "Ribbon Cutting Ceremony - PT Indonesia Pratama",
+      coverImage:
+        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747703578/IMG_8654_a27fgn.jpg",
     },
     {
       id: 5,
-      title: "Mine Site Development",
-      coverImage: "/projects/site-development-1.jpg",
+      title: "Our Site Teams",
+      coverImage:
+        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747703497/DJI_0609_hxxr67.jpg",
     },
     {
       id: 6,
-      title: "Port Facility Transportation",
-      coverImage: "/projects/port-transport-1.jpg",
+      title: "Unit Maintenance",
+      coverImage:
+        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747208043/IMG_8386_cpqgnd.jpg",
     },
   ];
 
@@ -56,28 +62,61 @@ export default function ProjectGallery() {
 
   return (
     <main className="min-h-screen bg-black/80 backdrop-blur-lg text-white">
-      {/* Page Header */}
-      <section className="relative py-20 border-b border-gray-800 overflow-hidden">
-        <div
+      {/* Page Header - Styled like ProfileHero */}
+      <section className="relative pt-20 pb-16 md:pt-24 md:pb-20 overflow-hidden border-b border-gray-800">
+        {/* Background layers */}
+        <div 
           className="absolute inset-0 bg-gradient-to-br from-[#3A3A3D] to-[#1F1F23]"
           style={{ transform: `translateY(${parallaxOffset * 0.2}px)` }}
         />
-        <div
+        
+        {/* Animated grid pattern */}
+        <div 
           className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10 bg-[length:60px_60px]"
-          style={{ animation: "gridMove 20s linear infinite", transform: `translateY(${parallaxOffset * 0.1}px)` }}
+          style={{ 
+            transform: `translateY(${parallaxOffset * 0.1}px)`,
+            animation: 'gridMove 20s linear infinite'
+          }} 
         />
+        
+        {/* Floating particles */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(15)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full bg-[#E85C23]/30"
+              style={{
+                width: `${Math.random() * 8 + 2}px`,
+                height: `${Math.random() * 8 + 2}px`,
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animation: `float ${Math.random() * 10 + 10}s linear infinite`,
+                animationDelay: `${Math.random() * 5}s`
+              }}
+            />
+          ))}
+        </div>
+
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div
             className={`max-w-4xl mx-auto text-center transition-all duration-1000 ease-out ${
               isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
             }`}
           >
+            <div className="inline-block mb-6">
+              <div className="w-full h-0.5 bg-[#E85C23]/30 mt-2" />
+            </div>
+            
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
               <span className="relative inline-block">
                 <span className="relative z-10">Project Gallery</span>
-                <span className="absolute bottom-0 left-0 w-full h-3 bg-[#E85C23]/30 z-0" style={{ bottom: "5px" }} />
+                <span className="absolute bottom-0 left-0 w-full h-3 bg-[#E85C23]/30 z-0" style={{ bottom: '5px' }} />
               </span>
             </h1>
+            
+            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
+              Explore our <span className="text-[#1FBFB8] font-medium">ongoing and completed projects</span> across Indonesia's diverse mining operations.
+            </p>
           </div>
         </div>
       </section>
@@ -104,14 +143,16 @@ export default function ProjectGallery() {
         </div>
       </section>
 
+      {/* Custom animations */}
       <style jsx global>{`
+        @keyframes float {
+          0% { transform: translateY(0) translateX(0); }
+          50% { transform: translateY(-20px) translateX(10px); }
+          100% { transform: translateY(0) translateX(0); }
+        }
         @keyframes gridMove {
-          0% {
-            background-position: 0 0;
-          }
-          100% {
-            background-position: 60px 60px;
-          }
+          0% { background-position: 0 0; }
+          100% { background-position: 60px 60px; }
         }
       `}</style>
     </main>

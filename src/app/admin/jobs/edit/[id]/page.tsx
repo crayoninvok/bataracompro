@@ -7,17 +7,17 @@ import { useJobs } from "@/hooks/useJobs";
 import { UpdateJobRequest, Job } from "@/types/job";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
+import {
+  AlertTriangle,
+  CheckCircle,
+  Building,
+  CreditCard,
+} from "lucide-react";
 
-// Import React Quill dynamically to avoid SSR issues
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function EditJobPage({ params }: { params: { id: string } }) {
-  const {
-    user,
-    isAdmin,
-    isAuthenticated,
-    isLoading: authLoading,
-  } = useAuthContext();
+  const { user, isAdmin, isAuthenticated, isLoading: authLoading } = useAuthContext();
   const router = useRouter();
   const { getJobById, updateJob } = useJobs();
 
@@ -37,10 +37,9 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
 
-  // Quill editor modules configuration
   const modules = {
     toolbar: [
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "underline", "strike"],
       [{ list: "ordered" }, { list: "bullet" }],
       ["link"],
@@ -48,20 +47,13 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
     ],
   };
 
-  // Check if user is authenticated and is an admin
   useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push("/admin/login");
-    } else if (!authLoading && !isAdmin) {
-      router.push("/dashboard");
-    }
+    if (!authLoading && !isAuthenticated) router.push("/admin/login");
+    else if (!authLoading && !isAdmin) router.push("/dashboard");
   }, [authLoading, isAuthenticated, isAdmin, router]);
 
-  // Load job data
   useEffect(() => {
-    if (isAdmin && params.id) {
-      fetchJob();
-    }
+    if (isAdmin && params.id) fetchJob();
   }, [isAdmin, params.id]);
 
   const fetchJob = async () => {
@@ -80,74 +72,42 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
           salaryMax: jobData.salaryMax,
         });
       }
-    } catch (error) {
-      console.error("Failed to load job:", error);
+    } catch (err) {
+      console.error("Failed to load job:", err);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    const parsedValue = name === "salaryMin" || name === "salaryMax" ? (value === "" ? undefined : Number(value)) : value;
 
-    // Handle salary fields specially to convert string to number
-    if (name === "salaryMin" || name === "salaryMax") {
-      const numericValue = value === "" ? undefined : Number(value);
-      setFormData((prev) => ({ ...prev, [name]: numericValue }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
-
-    // Clear error for this field when user types
+    setFormData((prev) => ({ ...prev, [name]: parsedValue }));
     if (errors[name]) {
-      setErrors((prev) => {
-        const newErrors = { ...prev };
-        delete newErrors[name];
-        return newErrors;
-      });
+      const newErrors = { ...errors };
+      delete newErrors[name];
+      setErrors(newErrors);
     }
   };
 
-  // Handle Quill editor changes
   const handleQuillChange = (value: string, field: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    
-    // Clear error for this field when user types
     if (errors[field]) {
-      setErrors((prev) => {
-        const newErrors = { ...prev };
-        delete newErrors[field];
-        return newErrors;
-      });
+      const newErrors = { ...errors };
+      delete newErrors[field];
+      setErrors(newErrors);
     }
   };
 
   const validate = (): boolean => {
     const newErrors: Record<string, string> = {};
-
-    if (!formData.title?.trim()) {
-      newErrors.title = "Job title is required";
-    }
-
-    if (!formData.description?.trim()) {
-      newErrors.description = "Job description is required";
-    }
-
-    if (!formData.requirements?.trim()) {
-      newErrors.requirements = "Job requirements are required";
-    }
-
-    if (!formData.location?.trim()) {
-      newErrors.location = "Job location is required";
-    }
-
-    if (formData.salaryMin !== undefined && formData.salaryMax !== undefined) {
-      if (formData.salaryMin > formData.salaryMax) {
-        newErrors.salaryMin =
-          "Minimum salary cannot be greater than maximum salary";
-      }
+    if (!formData.title?.trim()) newErrors.title = "Job title is required";
+    if (!formData.description?.trim()) newErrors.description = "Job description is required";
+    if (!formData.requirements?.trim()) newErrors.requirements = "Job requirements are required";
+    if (!formData.location?.trim()) newErrors.location = "Job location is required";
+    if (formData.salaryMin !== undefined && formData.salaryMax !== undefined && formData.salaryMin > formData.salaryMax) {
+      newErrors.salaryMin = "Minimum salary cannot be greater than maximum salary";
     }
 
     setErrors(newErrors);
@@ -156,7 +116,6 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validate()) return;
 
     setIsSubmitting(true);
@@ -165,16 +124,11 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
 
     try {
       const result = await updateJob(params.id, formData);
-
       if (result.error) {
         setSubmitError(result.error.message);
       } else {
         setSubmitSuccess("Job updated successfully!");
-
-        // Redirect after short delay
-        setTimeout(() => {
-          router.push("/admin/dashboard");
-        }, 2000);
+        setTimeout(() => router.push("/admin/dashboard"), 2000);
       }
     } catch (error: any) {
       setSubmitError(error.message || "Failed to update job");
@@ -183,190 +137,151 @@ export default function EditJobPage({ params }: { params: { id: string } }) {
     }
   };
 
-  // Loading state
   if (authLoading || isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-xl">Loading...</div>
+      <div className="flex h-full items-center justify-center p-8">
+        <div className="flex flex-col items-center">
+          <div className="h-12 w-12 rounded-full border-4 border-t-[#E85C23] border-[#E85C23]/30 animate-spin"></div>
+          <p className="mt-4 text-gray-600">Loading form...</p>
+        </div>
       </div>
     );
   }
 
-  // Only render content if user is authenticated and admin
-  if (!user || !isAdmin || !job) {
-    return null;
-  }
+  if (!user || !isAdmin || !job) return null;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold">Edit Job</h1>
+    <div className="h-full overflow-auto">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Edit Job</h1>
+        <p className="text-gray-500">Update existing job details</p>
       </div>
 
       {submitError && (
-        <div className="mb-4 rounded-md bg-red-50 p-4">
-          <div className="flex">
-            <div className="ml-3">
-              <h3 className="text-sm font-medium text-red-800">
-                {submitError}
-              </h3>
-            </div>
+        <div className="mb-6 rounded-lg bg-red-50 p-4 flex items-start border border-red-100">
+          <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5 mr-3 flex-shrink-0" />
+          <div>
+            <h3 className="text-sm font-medium text-red-800">{submitError}</h3>
           </div>
         </div>
       )}
 
       {submitSuccess && (
-        <div className="mb-4 rounded-md bg-green-50 p-4">
-          <div className="flex">
-            <div className="ml-3">
-              <h3 className="text-sm font-medium text-green-800">
-                {submitSuccess}
-              </h3>
-            </div>
+        <div className="mb-6 rounded-lg bg-green-50 p-4 flex items-start border border-green-100">
+          <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
+          <div>
+            <h3 className="text-sm font-medium text-green-800">{submitSuccess}</h3>
           </div>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label
-            htmlFor="title"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Job Title
-          </label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            value={formData.title || ""}
-            onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-          />
-          {errors.title && (
-            <p className="mt-2 text-sm text-red-600">{errors.title}</p>
-          )}
-        </div>
-
-        <div>
-          <label
-            htmlFor="location"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Location
-          </label>
-          <input
-            type="text"
-            name="location"
-            id="location"
-            value={formData.location || ""}
-            onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            placeholder="e.g. New York, NY or Remote"
-          />
-          {errors.location && (
-            <p className="mt-2 text-sm text-red-600">{errors.location}</p>
-          )}
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div>
-            <label
-              htmlFor="salaryMin"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Minimum Salary (optional)
-            </label>
+      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md border border-gray-100 divide-y divide-gray-200">
+        <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Job Title*</label>
             <input
-              type="number"
-              name="salaryMin"
-              id="salaryMin"
-              value={formData.salaryMin === undefined ? "" : formData.salaryMin}
+              type="text"
+              name="title"
+              value={formData.title}
               onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="e.g. 50000"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] transition-colors"
+              placeholder="e.g. Project Engineer"
             />
-            {errors.salaryMin && (
-              <p className="mt-2 text-sm text-red-600">{errors.salaryMin}</p>
-            )}
+            {errors.title && <p className="mt-1 text-sm text-red-600">{errors.title}</p>}
           </div>
 
           <div>
-            <label
-              htmlFor="salaryMax"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Maximum Salary (optional)
-            </label>
-            <input
-              type="number"
-              name="salaryMax"
-              id="salaryMax"
-              value={formData.salaryMax === undefined ? "" : formData.salaryMax}
-              onChange={handleChange}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              placeholder="e.g. 80000"
-            />
-            {errors.salaryMax && (
-              <p className="mt-2 text-sm text-red-600">{errors.salaryMax}</p>
-            )}
+            <label className="block text-sm font-medium text-gray-700 mb-1">Location*</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <Building className="h-4 w-4 text-gray-400" />
+              </div>
+              <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] transition-colors"
+                placeholder="e.g. Jakarta, Indonesia"
+              />
+            </div>
+            {errors.location && <p className="mt-1 text-sm text-red-600">{errors.location}</p>}
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Minimum Salary (IDR)</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <CreditCard className="h-4 w-4 text-gray-400" />
+              </div>
+              <input
+                type="number"
+                name="salaryMin"
+                value={formData.salaryMin === undefined ? "" : formData.salaryMin}
+                onChange={handleChange}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] transition-colors"
+                placeholder="e.g. 5000000"
+              />
+            </div>
+            {errors.salaryMin && <p className="mt-1 text-sm text-red-600">{errors.salaryMin}</p>}
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Maximum Salary (IDR)</label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <CreditCard className="h-4 w-4 text-gray-400" />
+              </div>
+              <input
+                type="number"
+                name="salaryMax"
+                value={formData.salaryMax === undefined ? "" : formData.salaryMax}
+                onChange={handleChange}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-[#E85C23] focus:border-[#E85C23] transition-colors"
+                placeholder="e.g. 10000000"
+              />
+            </div>
           </div>
         </div>
 
-        <div>
-          <label
-            htmlFor="description"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Job Description
-          </label>
-          <div className="mt-1">
-            <ReactQuill
-              theme="snow"
-              value={formData.description || ""}
-              onChange={(content) => handleQuillChange(content, "description")}
-              modules={modules}
-              className="h-64"
-            />
-          </div>
-          {errors.description && (
-            <p className="mt-2 text-sm text-red-600">{errors.description}</p>
-          )}
+        <div className="p-6">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Job Description*</label>
+          <ReactQuill
+            theme="snow"
+            value={formData.description}
+            onChange={(value) => handleQuillChange(value, "description")}
+            modules={modules}
+            className="rounded h-64"
+          />
+          {errors.description && <p className="mt-1 text-sm text-red-600">{errors.description}</p>}
         </div>
 
-        <div>
-          <label
-            htmlFor="requirements"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Job Requirements
-          </label>
-          <div className="mt-1">
-            <ReactQuill
-              theme="snow"
-              value={formData.requirements || ""}
-              onChange={(content) => handleQuillChange(content, "requirements")}
-              modules={modules}
-              className="h-48"
-            />
-          </div>
-          {errors.requirements && (
-            <p className="mt-2 text-sm text-red-600">{errors.requirements}</p>
-          )}
+        <div className="p-6">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Job Requirements*</label>
+          <ReactQuill
+            theme="snow"
+            value={formData.requirements}
+            onChange={(value) => handleQuillChange(value, "requirements")}
+            modules={modules}
+            className="rounded h-48"
+          />
+          {errors.requirements && <p className="mt-1 text-sm text-red-600">{errors.requirements}</p>}
         </div>
 
-        <div className="flex justify-end space-x-3 pt-5">
+        <div className="px-6 py-4 bg-gray-50 flex justify-end space-x-3">
           <button
             type="button"
             onClick={() => router.push("/admin/dashboard")}
-            className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E85C23] transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-indigo-400"
+            className={`px-5 py-2 rounded-lg text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E85C23] transition-colors ${
+              isSubmitting ? "bg-[#E85C23]/70 cursor-not-allowed" : "bg-[#E85C23] hover:bg-[#d14b17]"
+            }`}
           >
             {isSubmitting ? "Updating..." : "Update Job"}
           </button>

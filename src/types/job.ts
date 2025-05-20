@@ -1,3 +1,5 @@
+export type JobType = "FULL_TIME" | "PART_TIME" | "CONTRACT" | "FREELANCE" | "INTERNSHIP";
+
 export interface Job {
   id: string;
   title: string;
@@ -5,6 +7,7 @@ export interface Job {
   description: string;
   requirements: string;
   location: string;
+  jobType: JobType;
   expiredAt: string;
   salaryMin?: number;
   salaryMax?: number;
@@ -38,6 +41,7 @@ export interface CreateJobRequest {
   requirements: string;
   location: string;
   expiredAt: string;
+  jobType: JobType;
   salaryMin?: number;
   salaryMax?: number;
 }
@@ -46,6 +50,8 @@ export interface UpdateJobRequest {
   title?: string;
   description?: string;
   requirements?: string;
+  jobType?: JobType;
+  expiredAt?: string;
   location?: string;
   salaryMin?: number;
   salaryMax?: number;

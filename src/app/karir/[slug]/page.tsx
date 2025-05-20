@@ -232,9 +232,9 @@ export default function JobDetails() {
           <img
             src="https://res.cloudinary.com/dysmj8esf/image/upload/v1747204272/IMG_8480_sc9mlm.jpg"
             alt="Mining operations"
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/70"></div>
         </div>
 
         {/* Animated grid pattern */}
@@ -272,19 +272,21 @@ export default function JobDetails() {
                 : "translate-y-10 opacity-0"
             }`}
           >
-            <button
-              onClick={goBack}
-              className="inline-flex items-center bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md transition mb-6 border border-white/20 group"
-            >
-              <ArrowLeft
-                className="mr-2 group-hover:-translate-x-1 transition-transform"
-                size={16}
-              />
-              <span>Back to Jobs</span>
-            </button>
+            <div className="flex items-center gap-3 mb-6">
+              <button
+                onClick={goBack}
+                className="inline-flex items-center bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-md transition border border-white/20 group"
+              >
+                <ArrowLeft
+                  className="mr-2 group-hover:-translate-x-1 transition-transform"
+                  size={16}
+                />
+                <span>Back to Jobs</span>
+              </button>
 
-            <div className="bg-[#1FBFB8]/20 text-[#1FBFB8] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-3 border border-[#1FBFB8]/30">
-              Full Time
+              <div className="bg-[#1FBFB8]/20 text-[#1FBFB8] px-4 py-1.5 rounded-full text-sm font-medium border border-[#1FBFB8]/30 capitalize">
+                {job.jobType.replace("_", " ").toLowerCase()}
+              </div>
             </div>
 
             <h1 className="text-3xl md:text-5xl font-bold mb-6 text-white leading-tight">

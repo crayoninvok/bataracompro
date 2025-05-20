@@ -189,14 +189,7 @@ export default function Navbar() {
                       )}
                     </div>
                     <Link
-                      href="/user/myprofile"
-                      className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-[#1FBFB8] transition-colors"
-                      onClick={() => setAvatarDropdown(false)}
-                    >
-                      My Profile
-                    </Link>
-                    <Link
-                      href="/user/dashboard"
+                      href="/admin/dashboard"
                       className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-[#1FBFB8] transition-colors"
                       onClick={() => setAvatarDropdown(false)}
                     >
