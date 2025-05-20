@@ -121,7 +121,7 @@ export default function OurUnits() {
             }`}
           >
             <div className="max-w-xl mx-auto md:mx-0">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 leading-tight text-center md:text-left">
+              <h2 className="text-2xl sm:text-2xl md:text-3xl font-bold text-white mb-6 leading-tight text-center md:text-left">
                 Coal Hauling <span className="text-[#1FBFB8]">Project</span>{" "}
                 Indonesia Pratama
               </h2>
