@@ -15,10 +15,7 @@ interface ManagersSectionProps {
   onSelect: (manager: Manager) => void;
 }
 
-const ManagersSection: React.FC<ManagersSectionProps> = ({
-  managers,
-  onSelect,
-}) => {
+const ManagersSection: React.FC<ManagersSectionProps> = ({ managers, onSelect }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,84 +31,75 @@ const ManagersSection: React.FC<ManagersSectionProps> = ({
       { threshold: 0.1 }
     );
 
-    const elements = document.querySelectorAll(".fade-in");
-    elements.forEach((el) => observer.observe(el));
+    const elements = sectionRef.current?.querySelectorAll(".man-animate");
+    elements?.forEach((el) => observer.observe(el));
 
     return () => {
-      elements.forEach((el) => observer.unobserve(el));
+      elements?.forEach((el) => observer.unobserve(el));
     };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="py-16 px-4 md:px-8 bg-gradient-to-b from-[#050505] to-[#030303] relative overflow-hidden"
+      className="py-16 px-4 md:px-8 bg-gradient-to-b from-[#2a2c2f] via-[#202124] to-[#2a2c2f] relative overflow-hidden"
     >
       {/* Background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#0bbfb3]/5 to-transparent rounded-full -mr-48 -mt-48 blur-xl"></div>
+      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-[#0bbfb3]/5 to-transparent rounded-full -ml-48 -mt-48 blur-xl"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tr from-[#FF5722]/5 to-transparent rounded-full -mr-48 -mb-48 blur-xl"></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000 ease-out">
+        <div className="man-animate opacity-0 translate-y-8 transition-all duration-1000 ease-out">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 inline-block relative">
             <span className="relative z-10">Managers</span>
             <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-[#0bbfb3] to-[#0bbfb3]/20 rounded-full"></span>
           </h2>
           <p className="text-gray-400 mb-12 max-w-lg">
-            Operational leaders executing our vision with excellence
+            Experienced professionals leading day-to-day operational execution across the organization.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {managers.map((manager, idx) => (
             <div
               key={idx}
-              className={`fade-in opacity-0 translate-y-8 transition-all duration-700 delay-${
-                (idx % 4) * 100
-              }`}
+              className={`man-animate opacity-0 translate-y-8 transition-all duration-700 delay-[${idx * 100}ms]`}
             >
               <div
-                className="relative group h-full rounded-xl bg-[#0f0f0f] shadow-lg overflow-hidden cursor-pointer transition-all duration-300"
+                className="group h-full rounded-xl bg-gradient-to-b from-[#171717] to-[#0b0b0b] shadow-lg hover:shadow-xl border border-gray-800 hover:border-[#FF5722]/50 cursor-pointer transition-all duration-300 overflow-hidden"
                 onClick={() => onSelect(manager)}
               >
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0bbfb3]/10 via-black/50 to-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                {/* Image */}
-                <div className="relative w-full h-32 overflow-hidden">
+                <div className="relative w-full h-48 overflow-hidden">
                   <Image
                     src={manager.image}
                     alt={manager.name}
                     fill
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0f0f0f]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
                 </div>
 
-                {/* Content */}
-                <div className="relative p-5">
-                  <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#0bbfb3] to-transparent transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"></div>
+                <div className="relative p-6">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#FF5722]/10 to-transparent rounded-bl-full"></div>
 
-                  <h3 className="text-white font-bold text-lg group-hover:text-[#FF5722] transition-colors duration-300">
+                  <h3 className="text-[#0bbfb3] text-xl font-bold group-hover:text-white transition-colors duration-300">
                     {manager.name}
                   </h3>
-                  <p className="text-gray-400 text-sm mt-1">
+                  <p className="text-gray-300 text-lg mt-1 font-medium">
                     {manager.position}
                   </p>
                 </div>
 
-                {/* Highlight effect */}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#0bbfb3] via-[#FF5722]/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                <div className="w-full h-1 bg-gradient-to-r from-[#FF5722] via-[#0bbfb3]/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
               </div>
             </div>
           ))}
         </div>
 
         {/* Decorative separator */}
-        <div className="fade-in opacity-0 translate-y-8 transition-all duration-700 delay-500 flex items-center">
+        <div className="man-animate opacity-0 translate-y-8 transition-all duration-700 delay-500 flex items-center">
           <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
-          <div className="w-2 h-2 rounded-full bg-[#0bbfb3] mx-3"></div>
-          <div className="w-4 h-4 rounded-full bg-[#FF5722]/30 border border-[#FF5722] mx-3"></div>
-          <div className="w-2 h-2 rounded-full bg-[#0bbfb3] mx-3"></div>
+          <div className="w-3 h-3 rounded-full bg-[#0bbfb3] mx-4"></div>
           <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-700 to-transparent"></div>
         </div>
       </div>

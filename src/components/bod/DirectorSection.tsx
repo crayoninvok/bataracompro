@@ -45,7 +45,7 @@ const DirectorsSection: React.FC<DirectorsSectionProps> = ({
   return (
     <section
       ref={sectionRef}
-      className="py-16 px-4 md:px-8 bg-gradient-to-b from-[#0a0a0a] to-[#050505] relative overflow-hidden"
+      className="py-16 px-4 md:px-8 bg-gradient-to-b from-[#2a2c2f] via-[#202124] to-[#2a2c2f] relative overflow-hidden"
     >
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-[#FF5722]/5 to-transparent rounded-full -ml-48 -mt-48 blur-xl"></div>

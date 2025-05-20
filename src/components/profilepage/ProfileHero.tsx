@@ -79,7 +79,7 @@ export default function ProfileHero() {
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-            Discover how <span className="text-[#1FBFB8] font-medium">PT. Batara Dharma Persada</span> became a trusted mining and hauling partner across Indonesia's resource sector.
+            Discover how <span className="text-[#1FBFB8] font-medium">PT Batara Dharma Persada</span> became a trusted mining and hauling partner across Indonesia's resource sector.
           </p>
           
           <div className="flex justify-center space-x-3">

@@ -13,6 +13,7 @@ import { useJobs } from "@/hooks/useJobs";
 import { Job, JobFilters } from "@/types/job";
 import { formatDate } from "@/utils/format";
 import Loading from "@/components/CustomLoading";
+import { AlertTriangle } from "lucide-react";
 
 // Strip HTML tags for text preview
 const stripHtml = (html: string) => {
@@ -61,6 +62,9 @@ export default function AllJobs() {
       if (response.data) {
         setJobs(response.data.jobs);
         setTotalPages(response.data.pagination.totalPages);
+
+        // ✅ Automatically show the modal when data is loaded
+        setShowModal(true);
       }
     } catch (error) {
       console.error("Failed to fetch jobs:", error);
@@ -111,15 +115,14 @@ export default function AllJobs() {
           className="absolute inset-0 bg-gradient-to-br from-[#3A3A3D] to-[#1F1F23]"
           style={{ transform: `translateY(${parallaxOffset * 0.2}px)` }}
         />
-
         {/* Background image with overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://res.cloudinary.com/dysmj8esf/image/upload/v1747209045/IMG_8432_xtgkxt.jpg"
+            src="https://res.cloudinary.com/dysmj8esf/image/upload/v1747206305/IMG_8579_g4f2tm.jpg"
             alt="Mining operations"
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/70"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-black/50"></div>
         </div>
 
         {/* Animated grid pattern */}
@@ -178,18 +181,16 @@ export default function AllJobs() {
               </span>{" "}
               and be part of our growing team of professionals
             </p>
-
+            <button
+              onClick={() => setShowModal(true)}
+              className="text-sm text-[#1FBFB8] underline hover:text-[#E85C23] transition"
+            >
+              Read Terms and Conditions
+            </button>
             <div className="animate-bounce mt-8">
               <ChevronRight className="w-8 h-8 text-[#1FBFB8] transform rotate-90" />
             </div>
-            <div className="text-center mt-6">
-              <button
-                onClick={() => setShowModal(true)}
-                className="text-sm text-[#1FBFB8] underline hover:text-[#E85C23] transition"
-              >
-                Read Terms and Conditions
-              </button>
-            </div>
+            <div className="text-center mt-6"></div>
           </div>
         </div>
 
@@ -407,39 +408,58 @@ export default function AllJobs() {
             >
               &times;
             </button>
-            <h2 className="text-xl font-bold text-[#E85C23] mb-4">
+
+            {/* Warning Icon */}
+            <div className="flex justify-center mb-4">
+              <div className="w-14 h-14 rounded-full bg-[#E85C23]/20 flex items-center justify-center">
+                <AlertTriangle className="w-8 h-8 text-[#E85C23]" />
+              </div>
+            </div>
+
+            <h2 className="text-xl font-bold text-[#E85C23] text-center mb-4">
               PENGUMUMAN RESMI TERKAIT PENIPUAN REKRUTMEN
             </h2>
+
             <p className="text-sm text-gray-300 mb-2">
-              Sehubungan dengan beredarnya pesan melalui aplikasi WhatsApp yang
-              mengatasnamakan PT Batara Dharma Persada.
+              Kami mengimbau kepada seluruh masyarakat untuk selalu berhati-hati
+              terhadap upaya penipuan yang mengatasnamakan proses rekrutmen PT
+              Batara Dharma Persada.
             </p>
+
             <p className="text-sm text-gray-300 mb-2">
-              PT Batara Dharma Persada tidak pernah memungut biaya apapun dalam
-              proses rekrutmen. Segala proses seleksi dan komunikasi resmi dari
-              perusahaan hanya dilakukan melalui saluran resmi dan bukan melalui
-              nomor WhatsApp pribadi yang tidak dikenal.
+              Dengan ini kami menegaskan bahwa PT Batara Dharma Persada:
             </p>
-            <p className="text-sm text-gray-300 mb-2">
-              Kami menghimbau kepada seluruh masyarakat untuk:
-            </p>
+
             <ul className="list-disc list-inside text-sm text-gray-300 mb-2 space-y-1">
-              <li>Waspada terhadap undangan interview yang mencurigakan</li>
-              <li>Tidak memberikan data pribadi secara sembarangan</li>
-              <li>Tidak melakukan pembayaran dalam bentuk apapun</li>
+              <li>
+                Tidak pernah memungut biaya dalam bentuk apa pun selama proses
+                rekrutmen.
+              </li>
+              <li>
+                Hanya menggunakan saluran komunikasi resmi milik perusahaan.
+              </li>
+              <li>
+                Tidak bekerja sama dengan pihak ketiga dalam bentuk pembayaran
+                untuk menjanjikan pekerjaan.
+              </li>
             </ul>
+
             <p className="text-sm text-gray-300 mb-2">
-              Jika Anda menerima pesan mencurigakan seperti ini, segera laporkan
-              ke pihak berwenang atau hubungi kontak resmi perusahaan kami untuk
-              klarifikasi.
+              Apabila Anda menerima pesan mencurigakan, harap segera abaikan dan
+              laporkan kepada pihak yang berwenang. Untuk informasi lebih lanjut
+              atau klarifikasi, silakan hubungi kontak resmi perusahaan kami.
             </p>
+
             <p className="text-sm text-gray-300">
               Terima kasih atas perhatian dan kerja samanya.
             </p>
-            <p className="text-sm font-medium text-[#1FBFB8] mt-4">
-              PT Batara Dharma Persada
-            </p>
-            <p className="text-sm text-gray-400">HRGA Dept</p>
+
+            <div className="mt-4">
+              <p className="text-sm font-semibold text-[#1FBFB8]">
+                PT Batara Dharma Persada
+              </p>
+              <p className="text-sm text-gray-400">Departemen HRGA</p>
+            </div>
           </div>
         </div>
       )}

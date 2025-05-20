@@ -305,7 +305,7 @@ export default function Contact() {
                   <div>
                     <h3 className="font-bold text-xl mb-2 text-white group-hover:text-[#1FBFB8] transition-colors">Email</h3>
                     <p className="text-gray-300">
-                      bataradharmapersada@gmail.com <span className="text-gray-400">(General Information)</span>
+                      info@bataramining.com <span className="text-gray-400">(General Information)</span>
                       <br />
                     </p>
                   </div>

@@ -50,7 +50,7 @@ const SiteManagersSection: React.FC<SiteManagersSectionProps> = ({
   return (
     <section
       ref={sectionRef}
-      className="py-16 px-4 md:px-8 bg-gradient-to-b from-[#030303] to-black relative overflow-hidden"
+      className="py-16 px-4 md:px-8 bg-gradient-to-b from-[#2a2c2f] via-[#202124] to-[#1b1b1d] relative overflow-hidden"
     >
       {/* Background */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#FF5722]/5 to-transparent rounded-full -mr-48 -mt-48 blur-xl"></div>

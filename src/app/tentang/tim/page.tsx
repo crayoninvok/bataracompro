@@ -30,7 +30,7 @@ const directorsData: Person[] = [
   {
     name: "A. Kurnia",
     position: "President Director",
-    image: "/defavatar.jpg",
+    image: "/dark.jpg",
     experience: [
       "General Manager, Mining Division at PT United Tractors",
       "Operations Director, PT Pamapersada Nusantara",
@@ -41,13 +41,13 @@ const directorsData: Person[] = [
   {
     name: "Eric NG",
     position: "Director",
-    image: "/defavatar.jpg",
+    image: "/dark.jpg",
     experience: [""],
   },
   {
     name: "Yohanes C. Wibowo",
     position: "Operations Director",
-    image: "/defavatar.jpg",
+    image: "/dark.jpg",
     experience: [
       "Plant Manager, PT Pamapersada Nusantara",
       "Operations Director, PT Riung Mitra Lestari",
@@ -58,27 +58,27 @@ const directorsData: Person[] = [
 
 const managersData: Person[] = [
   {
-    name: "Dhio Tragitza Rescha",
+    name: "Dio Tragitza Rescha",
     position: "Operation Manager",
-    image: "/defavatar.jpg",
+    image: "/dark.jpg",
     experience: ["Logistic Coordinator, PT ABC", "Operation Lead, PT XYZ"],
   },
   {
     name: "Dadang Setyawan",
     position: "Manager",
-    image: "/defavatar.jpg",
+    image: "/dark.jpg",
     experience: ["Project Manager at PQR Corp."],
   },
   {
     name: "A. Heru Prastowo",
     position: "Manager",
-    image: "/defavatar.jpg",
+    image: "/dark.jpg",
     experience: ["Manager, Equipment Division"],
   },
   {
     name: "Susanto",
     position: "Manager",
-    image: "/defavatar.jpg",
+    image: "/dark.jpg",
     experience: ["Site Supervisor", "Maintenance Lead"],
   },
 ];
@@ -87,13 +87,13 @@ const siteManagersData: Person[] = [
   {
     name: "Anggi Okta Yudha P.",
     position: "Project Site Manager",
-    image: "/defavatar.jpg",
+    image: "/dark.jpg",
     experience: ["Site Manager, PT IP"],
   },
   {
     name: "Zulfahmi",
     position: "Deputy Site Manager",
-    image: "/defavatar.jpg",
+    image: "/dark.jpg",
     experience: ["Deputy Site Supervisor, PT Batara"],
   },
 ];
@@ -161,7 +161,7 @@ const OrganizationPage: React.FC = () => {
   const [selectedPerson, setSelectedPerson] = useState<Person | null>(null);
 
   return (
-    <main className="min-h-screen bg-black/90">
+    <main className="min-h-screen bg-gradient-to-br from-[#0f0f11] via-[#1a1a1d] to-[#2a2a2e]">
       <Hero
         title="Our Leadership Team"
         subtitle="Meet the team driving our vision and operations"
@@ -172,32 +172,32 @@ const OrganizationPage: React.FC = () => {
       <DirectorsSection
         directors={directorsData.map((d) => ({
           ...d,
-          image: d.image ?? "/defavatar.jpg",
+          image: d.image ?? "/dark.jpg",
         }))}
         onSelect={(person) => {
-          if (person.image !== "/defavatar.jpg") setSelectedPerson(person);
+          if (person.image !== "/dark.jpg") setSelectedPerson(person);
         }}
       />
 
       <ManagersSection
         managers={managersData.map((m) => ({
           ...m,
-          image: m.image ?? "/defavatar.jpg",
+          image: m.image ?? "/dark.jpg",
         }))}
         onSelect={(person) => {
-          if (person.image !== "/defavatar.jpg") setSelectedPerson(person);
+          if (person.image !== "/dark.jpg") setSelectedPerson(person);
         }}
       />
 
       <SiteManagersSection
         siteManagers={siteManagersData.map((s) => ({
           ...s,
-          image: s.image ?? "/defavatar.jpg",
+          image: s.image ?? "/dark.jpg",
         }))}
         siteCompany={siteInfo.company}
         siteLocation={siteInfo.location}
         onSelect={(person) => {
-          if (person.image !== "/defavatar.jpg") setSelectedPerson(person);
+          if (person.image !== "/dark.jpg") setSelectedPerson(person);
         }}
       />
 

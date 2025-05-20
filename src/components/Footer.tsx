@@ -139,10 +139,10 @@ export default function Footer() {
               <li className="flex items-center">
                 <Mail size={16} className="mr-2 flex-shrink-0 text-[#E85C23]" />
                 <a
-                  href="mailto:bataradharmapersada@gmail.com"
+                  href="mailto:info@bataramining.com"
                   className="text-gray-400 hover:text-white text-sm"
                 >
-                  bataradharmapersada@gmail.com
+                  info@bataramining.com
                 </a>
               </li>
             </ul>

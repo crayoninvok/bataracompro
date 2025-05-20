@@ -7,6 +7,7 @@ import {
   Clock,
   DollarSign,
   Briefcase,
+  AlertTriangle,
   Loader,
   ChevronRight,
 } from "lucide-react";
@@ -462,39 +463,58 @@ export default function JobDetails() {
             >
               &times;
             </button>
-            <h2 className="text-xl font-bold text-[#E85C23] mb-4">
+
+            {/* Warning Icon */}
+            <div className="flex justify-center mb-4">
+              <div className="w-14 h-14 rounded-full bg-[#E85C23]/20 flex items-center justify-center">
+                <AlertTriangle className="w-8 h-8 text-[#E85C23]" />
+              </div>
+            </div>
+
+            <h2 className="text-xl font-bold text-[#E85C23] text-center mb-4">
               PENGUMUMAN RESMI TERKAIT PENIPUAN REKRUTMEN
             </h2>
+
             <p className="text-sm text-gray-300 mb-2">
-              Sehubungan dengan beredarnya pesan melalui aplikasi WhatsApp yang
-              mengatasnamakan PT Batara Dharma Persada.
+              Kami mengimbau kepada seluruh masyarakat untuk selalu berhati-hati
+              terhadap upaya penipuan yang mengatasnamakan proses rekrutmen PT
+              Batara Dharma Persada.
             </p>
+
             <p className="text-sm text-gray-300 mb-2">
-              PT Batara Dharma Persada tidak pernah memungut biaya apapun dalam
-              proses rekrutmen. Segala proses seleksi dan komunikasi resmi dari
-              perusahaan hanya dilakukan melalui saluran resmi dan bukan melalui
-              nomor WhatsApp pribadi yang tidak dikenal.
+              Dengan ini kami menegaskan bahwa PT Batara Dharma Persada:
             </p>
-            <p className="text-sm text-gray-300 mb-2">
-              Kami menghimbau kepada seluruh masyarakat untuk:
-            </p>
+
             <ul className="list-disc list-inside text-sm text-gray-300 mb-2 space-y-1">
-              <li>Waspada terhadap undangan interview yang mencurigakan</li>
-              <li>Tidak memberikan data pribadi secara sembarangan</li>
-              <li>Tidak melakukan pembayaran dalam bentuk apapun</li>
+              <li>
+                Tidak pernah memungut biaya dalam bentuk apa pun selama proses
+                rekrutmen.
+              </li>
+              <li>
+                Hanya menggunakan saluran komunikasi resmi milik perusahaan.
+              </li>
+              <li>
+                Tidak bekerja sama dengan pihak ketiga dalam bentuk pembayaran
+                untuk menjanjikan pekerjaan.
+              </li>
             </ul>
+
             <p className="text-sm text-gray-300 mb-2">
-              Jika Anda menerima pesan mencurigakan seperti ini, segera laporkan
-              ke pihak berwenang atau hubungi kontak resmi perusahaan kami untuk
-              klarifikasi.
+              Apabila Anda menerima pesan mencurigakan, harap segera abaikan dan
+              laporkan kepada pihak yang berwenang. Untuk informasi lebih lanjut
+              atau klarifikasi, silakan hubungi kontak resmi perusahaan kami.
             </p>
+
             <p className="text-sm text-gray-300">
               Terima kasih atas perhatian dan kerja samanya.
             </p>
-            <p className="text-sm font-medium text-[#1FBFB8] mt-4">
-              PT Batara Dharma Persada
-            </p>
-            <p className="text-sm text-gray-400">HRGA Dept</p>
+
+            <div className="mt-4">
+              <p className="text-sm font-semibold text-[#1FBFB8]">
+                PT Batara Dharma Persada
+              </p>
+              <p className="text-sm text-gray-400">Departemen HRGA</p>
+            </div>
           </div>
         </div>
       )}
