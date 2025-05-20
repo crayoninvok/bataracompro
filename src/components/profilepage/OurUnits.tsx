@@ -11,20 +11,23 @@ export default function OurUnits() {
 
   const slides = [
     {
-      image: "https://res.cloudinary.com/dysmj8esf/image/upload/v1747206106/IMG_0002_rjugv5.jpg",
+      image:
+        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747206106/IMG_0002_rjugv5.jpg",
       title: "Volvo Truck Double Trailer",
-      subtitle: "High Capacity Coal Transportation"
+      subtitle: "High Capacity Coal Transportation",
     },
     {
-      image: "https://res.cloudinary.com/dysmj8esf/image/upload/v1747206072/IMG_8463_yqdams.jpg",
+      image:
+        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747206072/IMG_8463_yqdams.jpg",
       title: "Trailer",
-      subtitle: "Efficient All-Terrain Performance"
+      subtitle: "Efficient All-Terrain Performance",
     },
     {
-      image: "https://res.cloudinary.com/dysmj8esf/image/upload/v1747206132/WhatsApp_Image_2025-01-18_at_12.26.37_aeoan3.jpg",
+      image:
+        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747206132/WhatsApp_Image_2025-01-18_at_12.26.37_aeoan3.jpg",
       title: "Coal Hauling Operations",
-      subtitle: "Safe and Reliable Delivery"
-    }
+      subtitle: "Safe and Reliable Delivery",
+    },
   ];
 
   useEffect(() => {
@@ -60,14 +63,14 @@ export default function OurUnits() {
       <div className="absolute top-1/3 left-0 w-1/3 h-full bg-gradient-to-r from-[#E85C23]/10 to-transparent -z-0" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
+        <div className="flex flex-col md:grid md:grid-cols-2 gap-10 items-center">
           {/* Image Column */}
           <div
-            className={`transition-all duration-1000 ease-out ${
+            className={`w-full transition-all duration-1000 ease-out ${
               isVisible ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0"
             }`}
           >
-            <div className="relative rounded-xl overflow-hidden shadow-2xl border border-gray-700 group aspect-[16/10] min-h-[280px] sm:min-h-[360px] md:min-h-[400px]">
+            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] md:min-h-[360px] rounded-xl overflow-hidden shadow-2xl border border-gray-700 group">
               {slides.map((slide, index) => (
                 <div
                   key={index}
@@ -81,9 +84,12 @@ export default function OurUnits() {
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
+
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-                    <p className="text-white font-semibold text-base sm:text-lg">{slide.title}</p>
+                  <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6">
+                    <p className="text-white font-semibold text-base sm:text-lg">
+                      {slide.title}
+                    </p>
                     <div className="flex items-center mt-1 sm:mt-2">
                       <span className="w-6 sm:w-8 h-0.5 bg-[#1FBFB8] mr-2" />
                       <span className="text-white/80 text-sm">{slide.subtitle}</span>
@@ -110,50 +116,49 @@ export default function OurUnits() {
 
           {/* Content Column */}
           <div
-            className={`transition-all duration-1000 ease-out ${
+            className={`w-full transition-all duration-1000 ease-out ${
               isVisible ? "translate-x-0 opacity-100" : "translate-x-12 opacity-0"
             }`}
           >
-            <div className="max-w-xl">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
-                Advanced <span className="text-[#1FBFB8]">Coal Hauling</span> Solutions
+            <div className="max-w-xl mx-auto md:mx-0">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 leading-tight text-center md:text-left">
+                Coal Hauling <span className="text-[#1FBFB8]">Project</span>{" "}
+                Indonesia Pratama
               </h2>
 
-              <div className="space-y-4 text-gray-300 mb-8 text-sm sm:text-base">
+              <div className="space-y-4 text-gray-300 mb-6 text-sm sm:text-base text-center md:text-left">
                 <p>
-                  Our fleet features state-of-the-art Volvo trucks equipped with double trailers,
-                  maximizing coal transportation efficiency while maintaining the highest safety standards.
-                </p>
-                <p>
-                  These powerful units are specifically designed for the demanding conditions of mining operations,
-                  offering superior reliability, reduced environmental impact, and exceptional hauling capacity.
+                  Operating since 2024, Batara Dharma Persada has served as a
+                  coal hauling contractor for PT Indonesia Pratama.
                 </p>
               </div>
 
-              {/* Key Features */}
               <div className="space-y-3 mb-8">
                 {[
-                  "Up to 200-ton coal capacity per trip",
-                  "Fuel-efficient Volvo engine technology",
-                  "Advanced safety and monitoring systems",
-                  "Reduced carbon footprint per ton transported"
+                  "Tractor Head: Volvo FH 16-700 Horse Power",
+                  "Double Vessel Capacity: 110 m³ + 125 m³",
+                  "Annual Production Capacity: 6.2 million tons",
                 ].map((feature, index) => (
                   <div key={index} className="flex items-start">
                     <div className="w-6 h-6 min-w-[24px] rounded-full bg-[#1FBFB8]/40 flex items-center justify-center mr-3 mt-0.5">
                       <ChevronRight className="w-4 h-4 text-[#1FBFB8]" />
                     </div>
-                    <p className="text-gray-200 text-sm sm:text-base">{feature}</p>
+                    <p className="text-gray-200 text-sm sm:text-base">
+                      {feature}
+                    </p>
                   </div>
                 ))}
               </div>
 
-              <Link
-                href="/kontak"
-                className="inline-flex items-center bg-[#1FBFB8] hover:bg-[#d14b17] text-black px-6 py-3 rounded-md font-medium transition-all duration-300 group text-sm sm:text-base"
-              >
-                Discuss Your Transportation Needs
-                <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              <div className="flex justify-center md:justify-start">
+                <Link
+                  href="/kontak"
+                  className="inline-flex items-center bg-[#1FBFB8] hover:bg-[#d14b17] text-black px-6 py-3 rounded-md font-medium transition-all duration-300 group text-sm sm:text-base"
+                >
+                  Discuss Your Transportation Needs
+                  <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

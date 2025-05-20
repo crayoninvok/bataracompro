@@ -7,7 +7,7 @@ import VisionSection from "./VisionSection";;
 
 export default function VisiMisiPage() {
   return (
-    <main className="min-h-screen overflow-x-hidden">
+    <main>
       <VisiMisiHero />
       <VisionSection />
     </main>

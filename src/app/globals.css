@@ -3,13 +3,15 @@
 @tailwind utilities;
 
 /* Tambahan fix background putih */
-html,
+html {
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow-x: hidden;; /* agar tidak ada flicker putih saat dark mode */
+  overflow-x: hidden; /* agar tidak ada flicker putih saat dark mode */
 }
 
 * {

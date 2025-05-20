@@ -35,7 +35,7 @@ const directorsData: Person[] = [
       "General Manager, Mining Division at PT United Tractors",
       "Operations Director, PT Pamapersada Nusantara",
       "Plant Director, PT Sapta Indra Sejati",
-      "President Director, PT Batara Dharma Persada"
+      "President Director, PT Batara Dharma Persada",
     ],
   },
   {
@@ -51,7 +51,7 @@ const directorsData: Person[] = [
     experience: [
       "Plant Manager, PT Pamapersada Nusantara",
       "Operations Director, PT Riung Mitra Lestari",
-      "Operations Director, PT Batara Dharma Persada"
+      "Operations Director, PT Batara Dharma Persada",
     ],
   },
 ];
@@ -141,7 +141,9 @@ const PersonModal = ({
           <p className="text-[#7c7c7c] font-semibold">{person.position}</p>
           <div className="w-16 h-0.5 bg-[#1FBFB8]/50" />
           <div>
-            <h4 className="font-semibold text-gray-800 mt-4 mb-1">Experience</h4>
+            <h4 className="font-semibold text-gray-800 mt-4 mb-1">
+              Experience
+            </h4>
             <ul className="list-disc ml-5 text-gray-700">
               {person.experience.map((exp, idx) => (
                 <li key={idx}>{exp}</li>
@@ -172,7 +174,9 @@ const OrganizationPage: React.FC = () => {
           ...d,
           image: d.image ?? "/defavatar.jpg",
         }))}
-        onSelect={setSelectedPerson}
+        onSelect={(person) => {
+          if (person.image !== "/defavatar.jpg") setSelectedPerson(person);
+        }}
       />
 
       <ManagersSection
@@ -180,7 +184,9 @@ const OrganizationPage: React.FC = () => {
           ...m,
           image: m.image ?? "/defavatar.jpg",
         }))}
-        onSelect={setSelectedPerson}
+        onSelect={(person) => {
+          if (person.image !== "/defavatar.jpg") setSelectedPerson(person);
+        }}
       />
 
       <SiteManagersSection
@@ -190,11 +196,16 @@ const OrganizationPage: React.FC = () => {
         }))}
         siteCompany={siteInfo.company}
         siteLocation={siteInfo.location}
-        onSelect={setSelectedPerson}
+        onSelect={(person) => {
+          if (person.image !== "/defavatar.jpg") setSelectedPerson(person);
+        }}
       />
 
       {selectedPerson && (
-        <PersonModal person={selectedPerson} onClose={() => setSelectedPerson(null)} />
+        <PersonModal
+          person={selectedPerson}
+          onClose={() => setSelectedPerson(null)}
+        />
       )}
     </main>
   );
