@@ -59,7 +59,7 @@ const directorsData: Person[] = [
 const managersData: Person[] = [
   {
     name: "Dio Tragitza Rescha",
-    position: "Operation Manager",
+    position: "Operations Manager",
     image: "/dark.jpg",
     experience: ["Logistic Coordinator, PT ABC", "Operation Lead, PT XYZ"],
   },

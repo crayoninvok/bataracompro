@@ -16,8 +16,8 @@ const LocationCard: React.FC<LocationCardProps> = ({
   location,
   address,
 }) => {
-  const iconSrc =
-    type === "office" ? "/svg/office.svg" : "/svg/excaorange.svg";
+  // ✅ Set image path based on type
+  const iconSrc = type === "office" ? "/offices.png" : "/trailers.png";
 
   return (
     <div className="flex items-start gap-4 bg-[#1a1a1a]/50 p-6 rounded-lg border border-gray-700 hover:border-[#1FBFB8]/40 transition-all">

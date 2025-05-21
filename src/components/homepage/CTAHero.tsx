@@ -189,19 +189,6 @@ export default function CTASection() {
                   </p>
                 </div>
               </div>
-
-              <div className="flex items-center">
-                <div className="bg-[#1FBFB8]/10 p-2.5 rounded-lg mr-3 flex-shrink-0">
-                  <Truck className="w-5 h-5 text-[#1FBFB8]" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400">Operational Area</p>
-                  <p className="font-medium text-gray-200">
-                    Tabang - East Kalimantan
-                  </p>
-                </div>
-              </div>
-
               <div className="flex items-center">
                 <div className="bg-[#E85C23]/10 p-2.5 rounded-lg mr-3 flex-shrink-0">
                   <Calendar className="w-5 h-5 text-[#E85C23]" />

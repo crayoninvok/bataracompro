@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 interface Project {
   id: number;
   title: string;
+  subtitle?: string; // ← optional subtitle
   coverImage: string;
 }
 
@@ -34,7 +35,8 @@ export default function ProjectGallery() {
     },
     {
       id: 4,
-      title: "Ribbon Cutting Ceremony - PT Indonesia Pratama",
+      title: "Ribbon Cutting Ceremony",
+      subtitle: "Site: PT Indonesia Pratama",
       coverImage:
         "https://res.cloudinary.com/dysmj8esf/image/upload/v1747703578/IMG_8654_a27fgn.jpg",
     },
@@ -100,7 +102,9 @@ export default function ProjectGallery() {
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div
             className={`max-w-4xl mx-auto text-center transition-all duration-1000 ease-out ${
-              isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-10 opacity-0"
             }`}
           >
             <div className="inline-block mb-6">
@@ -153,7 +157,14 @@ export default function ProjectGallery() {
                   >
                     <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-80" />
                     <div className="absolute bottom-4 left-4 text-white">
-                      <h3 className="text-lg font-bold">{project.title}</h3>
+                      <h3 className="text-xl font-bold leading-snug">
+                        {project.title}
+                        {project.subtitle && (
+                          <div className="text-sm font-normal text-gray-100">
+                            {project.subtitle}
+                          </div>
+                        )}
+                      </h3>
                     </div>
                   </div>
                 </div>
