@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://bataramining.com
+
+# Sitemaps
+Sitemap: https://bataramining.com/sitemap.xml

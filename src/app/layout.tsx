@@ -26,7 +26,18 @@ export const metadata: Metadata = {
     template: "%s | Batara Dharma Persada",
   },
   description: "Profil Perusahaan PT. Batara Dharma Persada",
-  keywords: ["Batara Dharma Persada", "Perusahaan", "Indonesia", "Cakung"],
+  keywords: [
+    "Batara Dharma Persada",
+    "Perusahaan",
+    "Indonesia",
+    "Cakung",
+    "Jakarta",
+    "Mining",
+    "Coal Hauling",
+    "Kalimantan Timur",
+    "Indonesia Pratama",
+    "Bayan Group",
+  ],
   authors: [
     {
       name: "PT. Batara Dharma Persada",
@@ -54,6 +65,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
     >
       <head>
+        {/* Google Fonts */}
         <link
           href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap"
           rel="stylesheet"
@@ -62,6 +74,9 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inder&display=swap"
           rel="stylesheet"
         />
+
+        {/* ✅ Favicon for all browsers */}
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
       </head>
       <body className="bg-white text-gray-900 antialiased">
         <AuthWrapper>
