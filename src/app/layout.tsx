@@ -75,9 +75,38 @@ export default function RootLayout({
           rel="stylesheet"
         />
 
-        {/* ✅ Favicon for all browsers */}
+        {/* Favicon */}
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+        {/* ✅ Structured Data for Organization */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "PT Batara Dharma Persada",
+              url: "https://bataramining.com",
+              logo: "https://bataramining.com/favicon.ico",
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+622138865143", 
+                contactType: "Customer Support",
+                areaServed: "ID",
+                availableLanguage: "Indonesian",
+              },
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Jl. Agung Sedayu City Boulevard Utara No.58",
+                addressLocality: "Jakarta Timur",
+                postalCode: "13910",
+                addressCountry: "ID",
+              },
+            }),
+          }}
+        />
       </head>
+
       <body className="bg-white text-gray-900 antialiased">
         <AuthWrapper>
           <div className="relative flex min-h-screen flex-col">
