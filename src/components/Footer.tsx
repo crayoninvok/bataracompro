@@ -52,7 +52,7 @@ export default function Footer() {
             </div>
             <div className="flex space-x-3 pt-1">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/batara.mining/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-gray-800 hover:bg-[#E85C23] p-1.5 rounded transition-colors"
