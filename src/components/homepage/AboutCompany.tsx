@@ -90,7 +90,7 @@ export default function AboutCompany() {
 
             <div className="mt-8">
               <a
-                href="/about/profile"
+                href="/tentang/profil"
                 className="inline-flex items-center bg-[#1FBFB8] hover:bg-[#d14b17] text-black px-6 py-2 rounded-md transition-all duration-300 shadow-md group"
               >
                 <span>Learn More</span>
