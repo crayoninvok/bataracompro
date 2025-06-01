@@ -23,13 +23,12 @@ export default function HeroHeader({
 
       {/* Background image + overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={backgroundImage}
-          alt="Background image"
-          fill
-          className="object-cover opacity-20 max-w-full"
+          <Image
+            src={backgroundImage}
+            alt="Background image"
+            fill
+            className="object-cover opacity-20"
         />
-
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/60" />
       </div>
 

@@ -14,14 +14,14 @@ export default function Projects(): React.ReactNode {
   return (
     <AnimationProvider>
       <main className="min-h-screen bg-black/80 backdrop-blur-lg">
-        <HeroHeader 
+        <HeroHeader
           title="Project Sites"
           description="Strategic locations across Indonesia delivering excellence in mining and hauling operations"
           backgroundImage="https://res.cloudinary.com/dysmj8esf/image/upload/v1747206305/IMG_8579_g4f2tm.jpg"
         />
         <MapSection />
-        <OurUnits/>
-        <CompanyGoals/>
+        <OurUnits />
+        <CompanyGoals />
         <ImageGallery />
         <CTASection />
       </main>

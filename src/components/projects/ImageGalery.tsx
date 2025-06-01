@@ -50,7 +50,7 @@ export default function ImageGallery() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-full overflow-hidden">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-full reveal-project ...">
           {galleryItems.map((item, index) => (
             <GalleryItem
               key={index}

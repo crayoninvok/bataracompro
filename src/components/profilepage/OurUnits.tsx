@@ -72,7 +72,7 @@ export default function OurUnits() {
                 : "-translate-x-12 opacity-0"
             }`}
           >
-            <div className="relative w-full max-w-full min-h-[220px] sm:min-h-[280px] md:min-h-[360px] rounded-xl overflow-hidden border border-gray-700 group">
+            <div className="relative w-full max-w-full min-h-[240px] sm:min-h-[280px] md:min-h-[360px] rounded-xl overflow-hidden ...">
               {slides.map((slide, index) => (
                 <div
                   key={index}

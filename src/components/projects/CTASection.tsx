@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function CTASection(): React.ReactNode {
   return (
-    <section className="py-20 px-4 md:px-8 lg:px-24 relative overflow-x-hidden">
+   <section className="py-20 px-4 md:px-8 lg:px-24 relative">
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#E85C23]/10 to-transparent rounded-full -ml-48 -mb-48"></div>
 
       <div className="max-w-4xl mx-auto text-center reveal-project opacity-0 translate-y-6 transition-all duration-700">

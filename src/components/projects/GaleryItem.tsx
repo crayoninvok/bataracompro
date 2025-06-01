@@ -11,7 +11,7 @@ interface GalleryItemProps {
 
 export default function GalleryItem({ imageSrc, title, location, alt }: GalleryItemProps): React.ReactNode {
   return (
-    <div className="group relative overflow-hidden rounded-lg shadow-lg border border-gray-800 h-64 md:h-80">
+    <div className="group relative rounded-lg shadow-lg border border-gray-800 h-64 md:h-80">
       <Image
         src={imageSrc}
         alt={alt}
