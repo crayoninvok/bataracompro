@@ -88,7 +88,7 @@ export default function CompanyGoals(): React.ReactNode {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 reveal-project opacity-0 translate-y-6 transition-all duration-700">
+        <div className="grid md:grid-cols-2 gap-6 max-w-full">
           {goals.map((goal, index) => (
             <GoalCard
               key={index}

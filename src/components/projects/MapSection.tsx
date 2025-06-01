@@ -11,21 +11,28 @@ export default function MapSection() {
           const mapContainer = document.getElementById("locations-map");
 
           if (mapContainer && !mapContainer.hasChildNodes()) {
-            const map = L.map("locations-map").setView([-6.163255, 106.929148], 10);
+            const map = L.map("locations-map").setView(
+              [-6.163255, 106.929148],
+              10
+            );
 
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
               attribution:
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map);
 
-            const headOfficeMarker = L.marker([-6.163255, 106.929148]).addTo(map);
+            const headOfficeMarker = L.marker([-6.163255, 106.929148]).addTo(
+              map
+            );
             headOfficeMarker
               .bindPopup(
                 "<b>Head Office, PT Batara Dharma Persada</b><br>Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar., Kec. Cakung, East Jakarta City, DKI Jakarta 13910"
               )
               .openPopup();
 
-            const operationSiteMarker = L.marker([0.526275, 116.116552]).addTo(map);
+            const operationSiteMarker = L.marker([0.526275, 116.116552]).addTo(
+              map
+            );
             operationSiteMarker.bindPopup(
               "<b>Operation Site, PT Indonesia Pratama</b><br>Tabang - East Kalimantan"
             );
@@ -50,13 +57,16 @@ export default function MapSection() {
             <span className="absolute -bottom-2 left-0 w-full h-3 bg-[#1FBFB8]/20 z-0"></span>
           </h2>
           <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-            PT Batara Dharma Persada operational presence across the Indonesian archipelago
+            PT Batara Dharma Persada operational presence across the Indonesian
+            archipelago
           </p>
         </div>
 
         <div className="reveal-project opacity-0 translate-y-6 transition-all duration-700">
           <div className="bg-gray-900/60 p-8 rounded-xl shadow-lg mb-10 border border-gray-800">
-            <h3 className="text-2xl font-bold mb-6 text-white">Strategic Locations</h3>
+            <h3 className="text-2xl font-bold mb-6 text-white">
+              Strategic Locations
+            </h3>
             <div className="grid md:grid-cols-2 gap-8">
               <LocationCard
                 type="office"
@@ -74,10 +84,10 @@ export default function MapSection() {
           </div>
 
           {/* Responsive Leaflet Map */}
-          <div className="bg-gray-900/60 rounded-xl overflow-hidden shadow-lg border border-gray-800">
+          <div className="relative w-full max-w-full overflow-hidden rounded-xl shadow-lg border border-gray-800 bg-gray-900/60">
             <div
               id="locations-map"
-              className="w-full aspect-[16/9] min-h-[400px] md:min-h-[500px] max-h-screen"
+              className="w-full h-[300px] sm:h-[400px] md:h-[500px]"
             />
           </div>
 
@@ -113,7 +123,7 @@ export default function MapSection() {
 
             .leaflet-popup-content b {
               font-weight: bold;
-              color: #1FBFB8;
+              color: #1fbfb8;
             }
           `}</style>
         </div>

@@ -90,7 +90,7 @@ export default function RootLayout({
               logo: "https://bataramining.com/favicon.ico",
               contactPoint: {
                 "@type": "ContactPoint",
-                telephone: "+622138865143", 
+                telephone: "+622138865143",
                 contactType: "Customer Support",
                 areaServed: "ID",
                 availableLanguage: "Indonesian",
@@ -107,7 +107,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className="bg-white text-gray-900 antialiased">
+      <body className="bg-white text-gray-900 antialiased overflow-x-hidden">
         <AuthWrapper>
           <div className="relative flex min-h-screen flex-col">
             <NavbarWrapper>

@@ -20,15 +20,16 @@ export default function HeroHeader({
       {/* Background gradients */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#E85C23]/10 to-transparent rounded-full -mr-48 -mt-48" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#1FBFB8]/10 to-transparent rounded-full -ml-48 -mb-48" />
-      
+
       {/* Background image + overlay */}
       <div className="absolute inset-0 z-0">
-        <Image 
+        <Image
           src={backgroundImage}
           alt="Background image"
           fill
-          className="object-cover opacity-20"
+          className="object-cover opacity-20 max-w-full"
         />
+
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/60" />
       </div>
 
@@ -45,7 +46,10 @@ export default function HeroHeader({
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
             <span className="relative inline-block">
               <span className="relative z-10">{title}</span>
-              <span className="absolute bottom-0 left-0 w-full h-3 bg-[#E85C23]/30 z-0" style={{ bottom: "5px" }} />
+              <span
+                className="absolute bottom-0 left-0 w-full h-3 bg-[#E85C23]/30 z-0"
+                style={{ bottom: "5px" }}
+              />
             </span>
           </h1>
 
