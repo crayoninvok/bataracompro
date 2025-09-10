@@ -25,6 +25,8 @@ const hiddenRoutePrefixes = [
   "/register-employe",
   "/verify-email",
   "verify-email-employe",
+  "/admin/kpi",
+  "/admin/kpi/[id]",
 
 ];
 

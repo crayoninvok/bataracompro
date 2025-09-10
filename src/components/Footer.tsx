@@ -25,7 +25,7 @@ export default function Footer() {
     { href: "/proyek", label: "Our Projects" },
     { href: "/kontak", label: "Contacts" },
     { href: "/karir", label: "Career" },
-    { href: "/login-employe", label: "Employee Portal" },
+    { href: "/employee-portal", label: "Employee Portal" },
   ];
 
   return (

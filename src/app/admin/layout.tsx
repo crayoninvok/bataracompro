@@ -17,6 +17,7 @@ import {
   Settings,
   RefreshCcw,
   FileText,
+  TrendingUp,
 } from "lucide-react";
 import Swal from "sweetalert2";
 import CustomLoading from "@/components/homepage/CustomLoading";
@@ -168,6 +169,17 @@ export default function AdminLayout({
                 Dashboard
               </Link>
               <Link
+                href="/admin/kpi"
+                className={`group flex items-center rounded-lg px-3 py-2 text-sm font-medium ${
+                  pathname.startsWith("/admin/kpi")
+                    ? "bg-[#E85C23]/10 text-[#E85C23]"
+                    : "text-gray-300 hover:bg-gray-800 hover:text-white"
+                }`}
+              >
+                <TrendingUp className="mr-3 h-5 w-5" />
+                KPI Management
+              </Link>
+              <Link
                 href="/admin/jobs/create"
                 className={`group flex items-center rounded-lg px-3 py-2 text-sm font-medium ${
                   pathname === "/admin/jobs/create"
@@ -237,6 +249,7 @@ export default function AdminLayout({
             <div className="flex items-center">
               <h1 className="text-lg font-semibold text-gray-800">
                 {pathname === "/admin/dashboard" && "Dashboard"}
+                {pathname.startsWith("/admin/kpi") && "KPI Management"}
                 {pathname === "/admin/jobs/create" && "Create New Job"}
                 {pathname.startsWith("/admin/jobs/edit") && "Edit Job"}
                 {pathname.startsWith("/admin/jobs/applications") &&

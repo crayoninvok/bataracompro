@@ -8,31 +8,13 @@ import {
   Search,
   Briefcase,
   ChevronRight,
+  ExternalLink,
 } from "lucide-react";
-import { useJobs } from "@/hooks/useJobs";
-import { Job, JobFilters } from "@/types/job";
-import { formatDate } from "@/utils/format";
 import Loading from "@/components/CustomLoading";
 import { AlertTriangle } from "lucide-react";
 
-// Strip HTML tags for text preview
-const stripHtml = (html: string) => {
-  const doc = new DOMParser().parseFromString(html, "text/html");
-  return doc.body.textContent || "";
-};
-
 export default function AllJobs() {
-  const [jobs, setJobs] = useState<Job[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [filters, setFilters] = useState<JobFilters>({
-    page: 1,
-    limit: 10,
-  });
-  const [totalPages, setTotalPages] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [locationFilter, setLocationFilter] = useState("");
-  const { getJobs } = useJobs();
   const [isVisible, setIsVisible] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -47,64 +29,17 @@ export default function AllJobs() {
 
     window.addEventListener("scroll", handleScroll);
 
-    fetchJobs();
+    // ✅ Automatically show the modal when component loads
+    setShowModal(true);
 
     return () => {
       clearTimeout(timer);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [filters]);
-
-  const fetchJobs = async () => {
-    setIsLoading(true);
-    try {
-      const response = await getJobs(filters);
-      if (response.data) {
-        setJobs(response.data.jobs);
-        setTotalPages(response.data.pagination.totalPages);
-
-        // ✅ Automatically show the modal when data is loaded
-        setShowModal(true);
-      }
-    } catch (error) {
-      console.error("Failed to fetch jobs:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handlePageChange = (newPage: number) => {
-    setFilters((prev) => ({ ...prev, page: newPage }));
-  };
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFilters((prev) => ({
-      ...prev,
-      page: 1,
-      search: searchTerm,
-      location: locationFilter,
-    }));
-  };
-
-  // Create a safe text preview from HTML content
-  const createTextPreview = (htmlContent: string, maxLength: number = 150) => {
-    // Handle DOM parsing only on client side
-    if (typeof window !== "undefined") {
-      const plainText = stripHtml(htmlContent);
-      return plainText.length > maxLength
-        ? `${plainText.substring(0, maxLength)}...`
-        : plainText;
-    }
-    return "";
-  };
+  }, []);
 
   // Parallax effect calculation
   const parallaxOffset = scrollPosition * 0.3;
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <main className="min-h-screen bg-black/80 backdrop-blur-lg">
@@ -218,47 +153,7 @@ export default function AllJobs() {
         `}</style>
       </section>
 
-      {/* Search & Filter */}
-      <section className="py-12 px-4 md:px-8 lg:px-24 bg-gray-900/60 border-b border-gray-800">
-        <div className="max-w-6xl mx-auto">
-          <form onSubmit={handleSearch} className="grid md:grid-cols-3 gap-5">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search by job title or keyword"
-                className="w-full pl-12 pr-4 py-4 text-base bg-black/40 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1FBFB8] focus:border-transparent"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <Search
-                className="absolute left-4 top-4 text-gray-500"
-                size={20}
-              />
-            </div>
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Filter by location"
-                className="w-full pl-12 pr-4 py-4 text-base bg-black/40 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1FBFB8] focus:border-transparent"
-                value={locationFilter}
-                onChange={(e) => setLocationFilter(e.target.value)}
-              />
-              <MapPin
-                className="absolute left-4 top-4 text-gray-500"
-                size={20}
-              />
-            </div>
-            <button
-              type="submit"
-              className="bg-gradient-to-r from-[#E85C23] to-[#d14b17] hover:from-[#d14b17] hover:to-[#E85C23] text-white py-4 px-6 text-base font-medium rounded-lg transition-all duration-300 shadow-lg"
-            >
-              Search Jobs
-            </button>
-          </form>
-        </div>
-      </section>
-
-      {/* Job Listings */}
+      {/* Recruitment Portal Section */}
       <section className="py-20 px-4 md:px-8 lg:px-24 relative">
         {/* Background elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#E85C23]/10 to-transparent rounded-full -mr-48 -mt-48"></div>
@@ -270,135 +165,69 @@ export default function AllJobs() {
             <span className="absolute -bottom-2 left-0 w-full h-3 bg-[#E85C23]/20 z-0"></span>
           </h2>
 
-          {jobs.length > 0 ? (
-            <div className="grid gap-8">
-              {jobs.map((job) => (
-                <div
-                  key={job.id}
-                  className="bg-gray-900/60 border border-gray-800 hover:border-[#1FBFB8]/50 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#1FBFB8]/5 group"
-                >
-                  <div className="p-8">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                      <div>
-                        <div className="bg-[#1FBFB8]/20 text-[#1FBFB8] px-4 py-1.5 rounded-full text-sm font-medium inline-block mb-3 border border-[#1FBFB8]/30 capitalize">
-                          {job.jobType.replace("_", " ").toLowerCase()}
-                        </div>
-                        <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-[#1FBFB8] transition-colors">
-                          {job.title}
-                        </h3>
-                        <div className="flex flex-wrap gap-5 text-gray-400 text-base mb-4">
-                          <div className="flex items-center">
-                            <MapPin className="w-5 h-5 mr-2 text-[#E85C23]" />
-                            <span>{job.location}</span>
-                          </div>
-                          <div className="flex items-center">
-                            <Clock className="w-5 h-5 mr-2 text-[#E85C23]" />
-                            <span>Posted: {formatDate(job.postedAt)}</span>
-                          </div>
-                          <div className="flex items-center">
-                            <Briefcase className="w-5 h-5 mr-2 text-[#1FBFB8]" />
-                            <span>Expired in: {formatDate(job.expiredAt)}</span>
-                          </div>
-                        </div>
-                        <p className="text-gray-300 max-w-xl text-base">
-                          {createTextPreview(job.description, 180)}
-                        </p>
-                      </div>
-                      <div className="mt-4 md:mt-0 md:ml-6 flex-shrink-0">
-                        <a
-                          href={`/karir/${job.slug}`}
-                          className="inline-flex items-center bg-[#E85C23] hover:bg-[#d14b17] text-white px-6 py-3 rounded-lg transition-colors shadow-md font-medium group"
-                        >
-                          <span>View Details</span>
-                          <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                        </a>
-                      </div>
-                    </div>
+          {/* Portal Access Card */}
+          <div className="bg-gray-900/60 border border-gray-800 hover:border-[#1FBFB8]/50 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#1FBFB8]/5 group">
+            <div className="p-8 text-center">
+              <div className="mb-6">
+                <div className="w-20 h-20 mx-auto bg-[#1FBFB8]/20 rounded-full flex items-center justify-center mb-4">
+                  <Briefcase className="w-10 h-10 text-[#1FBFB8]" />
+                </div>
+                <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-[#1FBFB8] transition-colors">
+                  Portal Rekrutmen PT. Batara Dharma Persada
+                </h3>
+                <p className="text-gray-300 max-w-xl mx-auto text-base mb-6">
+                  Akses portal rekrutmen resmi kami untuk melihat semua posisi
+                  yang tersedia dan melamar pekerjaan dengan mudah dan aman.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+                  <div className="flex items-center text-gray-400 text-sm">
+                    <Clock className="w-4 h-4 mr-2 text-[#E85C23]" />
+                    <span>24/7 Access</span>
+                  </div>
+                  <div className="flex items-center text-gray-400 text-sm">
+                    <MapPin className="w-4 h-4 mr-2 text-[#E85C23]" />
+                    <span>Multiple Locations</span>
+                  </div>
+                  <div className="flex items-center text-gray-400 text-sm">
+                    <Search className="w-4 h-4 mr-2 text-[#1FBFB8]" />
+                    <span>Easy Application</span>
                   </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20 bg-gray-900/60 rounded-xl border border-gray-800">
-              <div className="mb-4">
-                <svg
-                  className="w-20 h-20 mx-auto text-gray-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
+
+                <a
+                  href="https://bdphrdatabase.vercel.app/informasi-posisi"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center bg-[#E85C23] hover:bg-[#d14b17] text-white px-8 py-4 rounded-lg transition-colors shadow-md font-medium text-lg group"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  ></path>
-                </svg>
+                  <span>Masuk ke Portal Rekrutmen</span>
+                  <ExternalLink className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+
+                <p className="text-xs text-gray-500 mt-4">
+                  Link akan membuka di tab baru
+                </p>
               </div>
-              <h3 className="text-xl font-medium text-white mb-2">
-                No positions found
-              </h3>
-              <p className="text-gray-400 mb-6 text-base">
-                We couldn't find any positions matching your criteria.
+            </div>
+          </div>
+
+          {/* Additional Information */}
+          <div className="mt-8 text-center">
+            <div className="bg-black/40 border border-gray-800 rounded-lg p-6">
+              <h4 className="text-lg font-semibold text-white mb-2">
+                Informasi Penting
+              </h4>
+              <p className="text-gray-400 text-sm">
+                Untuk memastikan keamanan dan transparansi proses rekrutmen,
+                semua aplikasi harus melalui portal resmi kami. Hanya lamaran
+                yang diterima melalui portal ini yang akan diproses oleh tim HR
+                kami.
               </p>
-              <button
-                onClick={() => {
-                  setSearchTerm("");
-                  setLocationFilter("");
-                  setFilters({ page: 1, limit: 10 });
-                }}
-                className="text-[#1FBFB8] hover:text-[#E85C23] font-medium text-base transition-colors"
-              >
-                Clear filters and try again
-              </button>
             </div>
-          )}
-
-          {/* Pagination */}
-          {jobs.length > 0 && totalPages > 1 && (
-            <div className="flex justify-center mt-10 gap-2">
-              <button
-                onClick={() =>
-                  handlePageChange(Math.max(1, (filters.page || 1) - 1))
-                }
-                disabled={(filters.page || 1) <= 1}
-                className="px-4 py-2 bg-black/40 border border-gray-700 rounded-md text-white disabled:opacity-50 disabled:cursor-not-allowed hover:border-[#1FBFB8] transition-colors"
-              >
-                Previous
-              </button>
-
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                (page) => (
-                  <button
-                    key={page}
-                    onClick={() => handlePageChange(page)}
-                    className={`px-4 py-2 rounded-md text-base ${
-                      page === filters.page
-                        ? "bg-[#E85C23] text-white"
-                        : "bg-black/40 border border-gray-700 hover:border-[#1FBFB8] text-white"
-                    } transition-colors`}
-                  >
-                    {page}
-                  </button>
-                )
-              )}
-
-              <button
-                onClick={() =>
-                  handlePageChange(
-                    Math.min(totalPages, (filters.page || 1) + 1)
-                  )
-                }
-                disabled={(filters.page || 1) >= totalPages}
-                className="px-4 py-2 bg-black/40 border border-gray-700 rounded-md text-white disabled:opacity-50 disabled:cursor-not-allowed hover:border-[#1FBFB8] transition-colors"
-              >
-                Next
-              </button>
-            </div>
-          )}
+          </div>
         </div>
       </section>
+
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
           <div className="bg-gray-900 border border-gray-700 max-w-lg w-full mx-4 p-6 rounded-xl shadow-lg text-white relative">

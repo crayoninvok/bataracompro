@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "next lint",
-  "postbuild": "next-sitemap"
-},
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
+  },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@react-pdf-viewer/core": "^3.12.0",
@@ -27,6 +27,7 @@
     "react-hook-form": "^7.56.3",
     "react-quill": "^2.0.0",
     "react-spring": "^10.0.0",
+    "recharts": "^3.1.0",
     "sweetalert2": "^11.21.0",
     "zod": "^3.24.4"
   },
