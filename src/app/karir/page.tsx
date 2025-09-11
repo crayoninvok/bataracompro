@@ -53,7 +53,7 @@ export default function AllJobs() {
         {/* Background image with overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://res.cloudinary.com/dysmj8esf/image/upload/v1747206305/IMG_8579_g4f2tm.jpg"
+            src="https://res.cloudinary.com/dfurksrlv/image/upload/v1757610428/IMG_8455_nqljtn.jpg"
             alt="Mining operations"
             className="w-full h-full object-cover opacity-30"
           />
