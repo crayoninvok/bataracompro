@@ -33,7 +33,7 @@ export default function HeroWithVideo() {
         playsInline
       >
         <source
-          src="https://res.cloudinary.com/dysmj8esf/video/upload/v1747203665/btr2_dmvtlk.mp4"
+          src="https://res.cloudinary.com/dfurksrlv/video/upload/v1757609191/90mb_meysjo.mp4"
           type="video/mp4"
         />
         Your browser does not support the video tag.

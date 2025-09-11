@@ -19,38 +19,38 @@ export default function ProjectGallery() {
       id: 1,
       title: "Coal Hauling Project - Tabang, Kalimantan",
       coverImage:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747703546/DJI_0621_xjr19d.jpg",
+        "https://res.cloudinary.com/dfurksrlv/image/upload/v1757609367/DJI_0621_amjdhb.jpg",
     },
     {
       id: 2,
       title: "Coal Hauling Units",
       coverImage:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747208062/IMG20241231091819_mktl7d.jpg",
+        "https://res.cloudinary.com/dfurksrlv/image/upload/v1757609390/IMG_8476_zubkpe.jpg",
     },
     {
       id: 3,
       title: "Units Pitstop",
       coverImage:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747207936/DJI_0671_waz5wb.jpg",
+        "https://res.cloudinary.com/dfurksrlv/image/upload/v1757609446/DJI_0671_tcpg6l.jpg",
     },
     {
       id: 4,
       title: "Ribbon Cutting Ceremony",
       subtitle: "Site: PT Indonesia Pratama",
       coverImage:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747703578/IMG_8654_a27fgn.jpg",
+        "https://res.cloudinary.com/dfurksrlv/image/upload/v1757609478/IMG_8654_jqyqo4.jpg",
     },
     {
       id: 5,
       title: "Our Site Teams",
       coverImage:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747703497/DJI_0609_hxxr67.jpg",
+        "https://res.cloudinary.com/dfurksrlv/image/upload/v1757609542/IMG_8571_dehceo.jpg",
     },
     {
       id: 6,
       title: "Unit Maintenance",
       coverImage:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747208043/IMG_8386_cpqgnd.jpg",
+        "https://res.cloudinary.com/dfurksrlv/image/upload/v1757609559/IMG_8386_t0e8xe.jpg",
     },
   ];
 
