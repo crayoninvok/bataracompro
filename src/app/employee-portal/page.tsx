@@ -291,7 +291,7 @@ export default function EmployeePortal() {
                 </div>
 
                 <a
-                  href="http://localhost:3000/login-web"
+                  href="https://www.bataramining.com/login-web"
                   className="inline-flex items-center justify-center w-full bg-[#1FBFB8] hover:bg-[#17a8a2] text-white px-6 py-4 rounded-lg transition-colors shadow-md font-medium text-lg group"
                 >
                   <span>Masuk ke Halaman Login</span>
