@@ -252,6 +252,54 @@ export default function EmployeePortal() {
               </div>
             </div>
 
+            {/* Website Newsletter Database Card */}
+            <div className="bg-gray-900/60 border border-gray-800 hover:border-[#1FBFB8]/50 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#1FBFB8]/5 group">
+              <div className="p-8">
+                <div className="flex items-center mb-6">
+                  <div className="bg-[#1FBFB8]/20 p-3 rounded-lg mr-4">
+                    <Truck className="h-8 w-8 text-[#1FBFB8]" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-white group-hover:text-[#1FBFB8] transition-colors">
+                      Database Newsletter
+                    </h2>
+                    <p className="text-sm text-[#1FBFB8] font-medium">
+                      Tersedia untuk Anda
+                    </p>
+                  </div>
+                </div>
+
+                <p className="text-gray-300 mb-6 leading-relaxed">
+                  Platform manajemen armada untuk melacak unit operasional,
+                  memantau produksi, mengelola jadwal perawatan, dan
+                  menganalisis kinerja peralatan tambang.
+                </p>
+
+                <div className="space-y-3 mb-8">
+                  <div className="flex items-center text-sm text-gray-300">
+                    <div className="w-2 h-2 bg-[#1FBFB8] rounded-full mr-3"></div>
+                    Pelacakan Kendaraan & Pemantauan GPS
+                  </div>
+                  <div className="flex items-center text-sm text-gray-300">
+                    <div className="w-2 h-2 bg-[#1FBFB8] rounded-full mr-3"></div>
+                    Laporan Produksi & Pemantauan Kinerja
+                  </div>
+                  <div className="flex items-center text-sm text-gray-300">
+                    <div className="w-2 h-2 bg-[#1FBFB8] rounded-full mr-3"></div>
+                    Pengelolaan Jadwal Perawatan & Servis
+                  </div>
+                </div>
+
+                <a
+                  href="http://localhost:3000/login-web"
+                  className="inline-flex items-center justify-center w-full bg-[#1FBFB8] hover:bg-[#17a8a2] text-white px-6 py-4 rounded-lg transition-colors shadow-md font-medium text-lg group"
+                >
+                  <span>Masuk ke Halaman Login</span>
+                  <ExternalLink className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+
             {/* KPI Database Card */}
             <div className="bg-gray-900/60 border border-gray-800 rounded-xl overflow-hidden relative">
               {/* Under Development Overlay */}

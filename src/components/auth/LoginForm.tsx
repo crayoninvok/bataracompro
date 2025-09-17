@@ -12,8 +12,9 @@ export const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState<string | null>(null);
 
-  const { login, isLoading, error } = useAuth();
+  const { login, isLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -40,10 +41,10 @@ export const LoginForm: React.FC = () => {
 
   // Show error message when auth error occurs
   useEffect(() => {
-    if (error) {
+    if (loginError) {
       Swal.fire({
         title: "Login Failed",
-        text: error,
+        text: loginError,
         icon: "error",
         confirmButtonColor: "#E85C23",
         confirmButtonText: "Try Again",
@@ -51,10 +52,13 @@ export const LoginForm: React.FC = () => {
         color: "#fff"
       });
     }
-  }, [error]);
+  }, [loginError]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Clear previous errors
+    setLoginError(null);
 
     // Basic validation
     if (!email || !password) {
@@ -83,8 +87,8 @@ export const LoginForm: React.FC = () => {
         color: "#fff"
       });
 
-      // Call login from auth hook
-      const response = await login({ email, password });
+      // Call login from auth hook - pass email and password as separate arguments
+      const response = await login(email, password);
 
       // Close loading alert
       Swal.close();
@@ -103,9 +107,12 @@ export const LoginForm: React.FC = () => {
         background: "#1a1a1a",
         color: "#fff"
       });
-    } catch (err) {
-      // Error is handled by the auth hook useEffect above
-      Swal.close(); // Make sure to close the loading alert if error
+    } catch (err: any) {
+      // Close loading alert
+      Swal.close();
+      
+      // Set error state to trigger useEffect
+      setLoginError(err.message || "Login failed. Please try again.");
     }
   };
 

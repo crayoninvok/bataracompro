@@ -13,7 +13,6 @@ export default function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [avatarDropdown, setAvatarDropdown] = useState(false);
   const [avatarError, setAvatarError] = useState(false);
-  
 
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
   const pathname = usePathname();
@@ -27,15 +26,15 @@ export default function Navbar() {
   }, []);
 
   // Close dropdowns when clicking outside
- useEffect(() => {
-  const handleClickOutside = (e: MouseEvent) => {
-    if (window.innerWidth >= 768) {
-      if (!(e.target as HTMLElement).closest(".dropdown-container")) {
-        setActiveDropdown(null);
-        setAvatarDropdown(false);
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (window.innerWidth >= 768) {
+        if (!(e.target as HTMLElement).closest(".dropdown-container")) {
+          setActiveDropdown(null);
+          setAvatarDropdown(false);
+        }
       }
-    }
-  };
+    };
 
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
@@ -55,12 +54,13 @@ export default function Navbar() {
     },
     { href: "/proyek", label: "Project" },
     { href: "/kontak", label: "Contact" },
+    { href: "/newsletter", label: "Newsletter" },
     { href: "/karir", label: "Carreer" },
   ];
 
- const toggleDropdown = (label: string) => {
-  setActiveDropdown((prev) => (prev === label ? null : label));
-};
+  const toggleDropdown = (label: string) => {
+    setActiveDropdown((prev) => (prev === label ? null : label));
+  };
 
   const getAvatarUrl = () => {
     if (!user || !user.avatar || avatarError) {
@@ -96,7 +96,10 @@ export default function Navbar() {
           </div>
           <div className="hidden md:block">
             <h1 className="font-comfortaa font-bold text-[#1FBFB8] text-lg">
-              PT Batara Dharma <span className="font-comfortaa font-bold text-[#1FBFB8] text-lg">Persada</span>
+              PT Batara Dharma{" "}
+              <span className="font-comfortaa font-bold text-[#1FBFB8] text-lg">
+                Persada
+              </span>
             </h1>
           </div>
         </Link>
@@ -189,7 +192,7 @@ export default function Navbar() {
                       )}
                     </div>
                     <Link
-                      href="/admin/dashboard"
+                      href="/dashboard-emp"
                       className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-800 hover:text-[#1FBFB8] transition-colors"
                       onClick={() => setAvatarDropdown(false)}
                     >

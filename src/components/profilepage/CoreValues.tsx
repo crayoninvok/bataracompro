@@ -3,9 +3,12 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 export default function StriveValues() {
   const [isVisible, setIsVisible] = useState(false);
+  // Fix: Explicitly type activeCard as number | null
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,8 +32,7 @@ export default function StriveValues() {
     {
       letter: "S",
       title: "Synergy",
-      description:
-        "We believe that synergy is the key to succes, we create opportunities through strong synergy between teams, partners, customers and stakeholders.",
+      description: "We believe synergy is the key to success. We create opportunities through strong collaboration between teams, partners, customers and stakeholders.",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -48,16 +50,16 @@ export default function StriveValues() {
         </svg>
       ),
       color: "#1FBFB8",
+      benefits: ["Enhanced teamwork", "Shared expertise", "Collective growth"]
     },
     {
       letter: "T",
       title: "Trusted",
-      description:
-        "We behave honestly and maintain a high commitment to company regulations and the code ethics consistenly, preserving reputation and ensuring customer satisfaction.",
+      description: "We behave honestly and maintain high commitment to company regulations and ethical codes consistently, preserving reputation and ensuring customer satisfaction.",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-8 h-8 text-[#1FBFB8]"
+          className="w-8 h-8 text-[#E85C23]"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -71,12 +73,12 @@ export default function StriveValues() {
         </svg>
       ),
       color: "#E85C23",
+      benefits: ["Client confidence", "Consistent delivery", "Long-term partnerships"]
     },
     {
       letter: "R",
       title: "Responsible & Resourceful",
-      description:
-        "We take ownership of our actions and obligations while being creative and adaptable in finding solution to challanges.",
+      description: "We take ownership of our actions and obligations while being creative and adaptable in finding solutions to challenges.",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -89,33 +91,35 @@ export default function StriveValues() {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
           />
         </svg>
       ),
       color: "#1FBFB8",
+      benefits: ["Innovative solutions", "Adaptive approach", "Sustainable practices"]
     },
     {
       letter: "I",
       title: "Integrity",
-      description:
-        "We upload upstanding character traits and work ethics, including transparancy, honestly, dependability, and loyalty in all businness dealings",
+      description: "We uphold outstanding character traits and work ethics, including transparency, honesty, dependability, and loyalty in all business dealings.",
       icon: (
-        <Image
-          src="/bow.png"
-          alt="Bow Icon"
-          width={32}
-          height={32}
-          className="object-contain"
-        />
+        <div className="w-8 h-8 bg-[#E85C23]/20 rounded-lg flex items-center justify-center">
+          <Image
+            src="/bow.png"
+            alt="Bow Icon"
+            width={24}
+            height={24}
+            className="object-contain filter brightness-125"
+          />
+        </div>
       ),
       color: "#E85C23",
+      benefits: ["Ethical leadership", "Transparent operations", "Moral excellence"]
     },
     {
       letter: "V",
       title: "Values",
-      description:
-        "We embrace guiding principles and fundamental beliefs that help our team work toward common business goals, enhancing business dealings.",
+      description: "We embrace guiding principles and fundamental beliefs that help our team work toward common business goals, enhancing all business dealings.",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -133,16 +137,16 @@ export default function StriveValues() {
         </svg>
       ),
       color: "#1FBFB8",
+      benefits: ["Unified direction", "Clear principles", "Consistent culture"]
     },
     {
       letter: "E",
       title: "Extraordinary",
-      description:
-        "We set high standards, persue excellence and establish positive examples in everything we do as a company",
+      description: "We set high standards, pursue excellence and establish positive examples in everything we do as a company.",
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="w-8 h-8 text-[#1FBFB8]"
+          className="w-8 h-8 text-[#E85C23]"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -151,11 +155,12 @@ export default function StriveValues() {
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+            d="M13 10V3L4 14h7v7l9-11h-7z"
           />
         </svg>
       ),
       color: "#E85C23",
+      benefits: ["Superior results", "Industry leadership", "Continuous improvement"]
     },
   ];
 
@@ -170,55 +175,100 @@ export default function StriveValues() {
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.5 },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
+  };
+
+  const cardHoverVariants = {
+    rest: { scale: 1, y: 0 },
+    hover: { 
+      scale: 1.02, 
+      y: -5,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 20
+      }
+    }
   };
 
   return (
     <section
       id="strive-section"
-      className="py-20 md:py-28 bg-black/80 backdrop-blur-lg text-white relative overflow-hidden border-t border-gray-800"
+      className="py-20 md:py-32 bg-gradient-to-br from-black via-gray-900 to-black text-white relative overflow-hidden"
     >
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#E85C23]/10 to-transparent -z-0" />
-      <div className="absolute bottom-20 left-0 w-40 h-40 rounded-full bg-[#1FBFB8]/10 blur-3xl -z-0" />
-      <div className="absolute top-1/4 -right-20 w-64 h-64 rounded-full bg-[#E85C23]/10 blur-3xl -z-0" />
+      {/* Enhanced decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#E85C23]/15 via-[#E85C23]/5 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-1/2 h-full bg-gradient-to-r from-[#1FBFB8]/15 via-[#1FBFB8]/5 to-transparent" />
+        
+        {/* Animated gradient orbs */}
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full bg-[#1FBFB8]/10 blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-[#E85C23]/8 blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+        
+        {/* Floating geometric shapes */}
+        <div className="absolute top-20 right-20 w-4 h-4 border border-[#1FBFB8]/30 rotate-45 animate-spin-slow" />
+        <div className="absolute bottom-32 left-16 w-6 h-6 border border-[#E85C23]/30 rotate-12 animate-pulse" />
+      </div>
 
-      <div
-        className="container mx-auto px-4
-       md:px-6 relative z-10"
-      >
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <span className="inline-block text-[#1FBFB8] font-medium mb-3">
-            OUR CORE PRINCIPLES
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Our <span className="text-[#1FBFB8]">Quality</span> Policy
-          </h2>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-8">
-            The principles that form the foundation in every aspect of our
-            business, guiding our decisions and shaping our corporate culture.
-          </p>
-          <div className="p-7 mb-6 relative">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-[#1FBFB8]/20 to-[#E85C23]/20 animate-pulse" />
-            </div>
-            <Image
-              src="/strivenobg.png"
-              alt="STRIVE Illustration"
-              width={320}
-              height={180}
-              className="mx-auto relative z-10 drop-shadow-xl"
-            />
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        {/* Enhanced header */}
+        <motion.div 
+          className="max-w-4xl mx-auto text-center mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Sparkles className="w-5 h-5 text-[#1FBFB8]" />
+            <span className="inline-block text-[#1FBFB8] font-semibold tracking-wider uppercase text-sm">
+              Our Core Principles
+            </span>
+            <Sparkles className="w-5 h-5 text-[#1FBFB8]" />
           </div>
-        </div>
+          
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            Our{" "}
+            <span className="relative">
+              <span className="text-[#1FBFB8] relative z-10">Quality</span>
+              <span className="absolute bottom-0 left-0 w-full h-4 bg-[#1FBFB8]/30 -z-1" />
+            </span>{" "}
+            Policy
+          </h2>
+          
+          <p className="text-gray-300 text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
+            The foundational principles that guide every aspect of our business, 
+            shaping our corporate culture and driving our commitment to excellence.
+          </p>
+          
+          {/* Enhanced STRIVE logo section */}
+          <motion.div 
+            className="relative mb-8"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-[#1FBFB8]/20 via-[#E85C23]/20 to-[#1FBFB8]/20 animate-pulse" />
+            </div>
+            <div className="relative z-10">
+              <Image
+                src="/strivenobg.png"
+                alt="STRIVE Methodology"
+                width={400}
+                height={220}
+                className="mx-auto drop-shadow-2xl filter brightness-110"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
 
+        {/* Enhanced cards grid */}
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
@@ -227,42 +277,123 @@ export default function StriveValues() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="bg-gray-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-800 group hover:border-[#1FBFB8]/30"
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+              onMouseEnter={() => setActiveCard(index)}
+              onMouseLeave={() => setActiveCard(null)}
+              className="relative group cursor-pointer"
             >
-              <div className="flex items-start space-x-5">
-                <div
-                  className="w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-300"
-                  style={{ backgroundColor: `${value.color}15` }}
-                >
-                  {value.icon}
-                </div>
-                <div>
-                  <div className="flex items-center mb-3">
-                    <span
-                      className="text-3xl font-bold mr-2 transition-colors duration-300"
-                      style={{ color: value.color }}
+              <motion.div
+                variants={cardHoverVariants}
+                className="bg-gradient-to-br from-gray-900/90 via-gray-800/80 to-gray-900/90 backdrop-blur-lg rounded-2xl p-8 shadow-2xl border border-gray-700 h-full relative overflow-hidden transition-all duration-500"
+                style={{
+                  borderColor: activeCard === index ? value.color + '50' : undefined,
+                  boxShadow: activeCard === index ? `0 20px 60px ${value.color}25` : undefined
+                }}
+              >
+                {/* Card glow effect */}
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
+                  style={{
+                    background: `radial-gradient(circle at center, ${value.color}10 0%, transparent 70%)`
+                  }}
+                />
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="flex items-start space-x-6 mb-6">
+                    {/* Enhanced icon container */}
+                    <div
+                      className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110 shadow-lg"
+                      style={{ 
+                        backgroundColor: `${value.color}20`,
+                        border: `2px solid ${value.color}30`
+                      }}
                     >
-                      {value.letter}
-                    </span>
-                    <h3 className="text-xl font-bold text-white">
-                      {value.title}
-                    </h3>
+                      {value.icon}
+                    </div>
+                    
+                    {/* Letter and title */}
+                    <div className="flex-1">
+                      <div className="flex items-center mb-4">
+                        <span
+                          className="text-4xl font-bold mr-3 transition-all duration-300 group-hover:scale-110"
+                          style={{ color: value.color }}
+                        >
+                          {value.letter}
+                        </span>
+                        <h3 className="text-2xl font-bold text-white">
+                          {value.title}
+                        </h3>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-gray-300 leading-relaxed">
+                  
+                  {/* Description */}
+                  <p className="text-gray-300 leading-relaxed mb-6 text-lg">
                     {value.description}
                   </p>
+                  
+                  {/* Benefits list */}
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Key Benefits</h4>
+                    {value.benefits.map((benefit, benefitIndex) => (
+                      <div key={benefitIndex} className="flex items-center gap-2">
+                        <div 
+                          className="w-1.5 h-1.5 rounded-full"
+                          style={{ backgroundColor: value.color }}
+                        />
+                        <span className="text-gray-300 text-sm">{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+                
+                {/* Hover arrow */}
+                <motion.div
+                  className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100"
+                  initial={{ x: -10 }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArrowRight 
+                    className="w-5 h-5 transition-colors duration-300" 
+                    style={{ color: value.color }}
+                  />
+                </motion.div>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>
 
-        <div className="mt-16 text-center">
-          <div className="inline-block py-3 px-5 bg-[#1FBFB8]/10 rounded-full text-[#1FBFB8] font-medium">
-            Guided by our values in every project we undertake
+        {/* Enhanced footer */}
+        <motion.div 
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <div className="inline-flex items-center gap-3 py-3 px-6 lg:py-4 lg:px-8 bg-gradient-to-r from-[#1FBFB8]/20 to-[#E85C23]/20 backdrop-blur-sm rounded-full border border-gray-600/50">
+            <div className="w-2 h-2 bg-[#1FBFB8] rounded-full animate-pulse" />
+            <span className="text-white font-semibold text-sm lg:text-base">
+              Guided by our values in every project we undertake
+            </span>
+            <div className="w-2 h-2 bg-[#E85C23] rounded-full animate-pulse" style={{ animationDelay: '0.5s' }} />
           </div>
-        </div>
+        </motion.div>
       </div>
+
+      {/* Custom animations */}
+      <style jsx global>{`
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }

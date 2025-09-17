@@ -3,8 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import { Analytics } from "@/components/Analytics";
-import AuthWrapper from "@/components/AuthWrapper";
 import NavbarWrapper from "@/components/NavbarWrapper";
+import { AuthProvider } from "@/hooks/useAuth"; // Add this import
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -108,14 +108,14 @@ export default function RootLayout({
       </head>
 
       <body className="bg-white text-gray-900 antialiased overflow-x-hidden">
-        <AuthWrapper>
+        <AuthProvider>
           <div className="relative flex min-h-screen flex-col">
             <NavbarWrapper>
               <main className="flex-1">{children}</main>
             </NavbarWrapper>
             <Footer />
           </div>
-        </AuthWrapper>
+        </AuthProvider>
         <Analytics />
       </body>
     </html>

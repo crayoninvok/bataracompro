@@ -20,13 +20,7 @@ const hiddenRoutePrefixes = [
   "/admin/article",
   "/admin/driver",
   "/login-admin",
-  "/employee",
-  "/login-employe",
-  "/register-employe",
-  "/verify-email",
-  "verify-email-employe",
-  "/admin/kpi",
-  "/admin/kpi/[id]",
+  "/dashboard-emp"
 
 ];
 
