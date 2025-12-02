@@ -135,7 +135,7 @@ export default function AboutSection() {
             {/* Main Image */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-700 group">
               <Image
-                src="https://res.cloudinary.com/dysmj8esf/image/upload/v1747204272/IMG_8480_sc9mlm.jpg"
+                src="https://res.cloudinary.com/dg1chwpuo/image/upload/v1764651252/IMG_8480_y3t5yq.jpg"
                 alt="PT. Batara Dharma Persada Office"
                 width={640}
                 height={480}
