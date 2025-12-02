@@ -202,7 +202,7 @@ export default function AboutCompany() {
           >
             <div className="relative w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-gray-700/50 group-hover:border-[#1FBFB8]/30 transition-all duration-500">
               <Image
-                src="https://res.cloudinary.com/dfurksrlv/image/upload/v1758082138/IMG_8501_wktlbq.jpg"
+                src="https://res.cloudinary.com/dg1chwpuo/image/upload/v1764650971/BDPhigh_yrewrc.jpg"
                 alt="About PT Batara Dharma Persada"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
