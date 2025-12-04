@@ -17,7 +17,7 @@ export default function Projects(): React.ReactNode {
         <HeroHeader
           title="Project Sites"
           description="Strategic locations across Indonesia delivering excellence in mining and hauling operations"
-          backgroundImage="https://res.cloudinary.com/dfurksrlv/image/upload/v1757609910/IMG_8461_udnrjq.jpg"
+          backgroundImage="https://res.cloudinary.com/dg1chwpuo/image/upload/v1764811142/WhatsApp_Image_2024-12-23_at_11.34.03_et4qvl.jpg"
         />
         <MapSection />
         <OurUnits />

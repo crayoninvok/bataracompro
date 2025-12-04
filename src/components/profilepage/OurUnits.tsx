@@ -12,19 +12,19 @@ export default function OurUnits() {
   const slides = [
     {
       image:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747206106/IMG_0002_rjugv5.jpg",
+        "https://res.cloudinary.com/dg1chwpuo/image/upload/v1764811896/IMG_8469_zbbimh.jpg",
       title: "Volvo Truck Double Trailer",
       subtitle: "High Capacity Coal Transportation",
     },
     {
       image:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747206072/IMG_8463_yqdams.jpg",
+        "https://res.cloudinary.com/dg1chwpuo/image/upload/v1764811933/IMG_8463_njgsbg.jpg",
       title: "Trailer",
       subtitle: "Efficient All-Terrain Performance",
     },
     {
       image:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747206132/WhatsApp_Image_2025-01-18_at_12.26.37_aeoan3.jpg",
+        "https://res.cloudinary.com/dg1chwpuo/image/upload/v1764811978/WhatsApp_Image_2025-01-18_at_12.26.37_bmlycj.jpg",
       title: "Coal Hauling Operations",
       subtitle: "Safe and Reliable Delivery",
     },

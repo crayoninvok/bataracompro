@@ -10,21 +10,21 @@ export default function ImageGallery() {
   const galleryItems = [
     {
       imageSrc:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747207936/DJI_0671_waz5wb.jpg",
+        "https://res.cloudinary.com/dg1chwpuo/image/upload/v1764811142/WhatsApp_Image_2024-12-23_at_11.34.03_et4qvl.jpg",
       title: "Mining Operations",
       location: "Tabang, East Kalimantan",
       alt: "Mining Operations Pitstop",
     },
     {
       imageSrc:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747208321/IMG_0003_t168bm.jpg",
-      title: "Coal Transportation",
-      location: "Hauling Operations",
-      alt: "Coal Transportation",
+        "https://res.cloudinary.com/dg1chwpuo/image/upload/v1764812493/62379ef0-5edf-4882-a4f5-9eac99705dc9_lpbvcj.jpg",
+      title: "Our Unit Maintenance",
+      location: "Batara Plant Workshop",
+      alt: "Plant Maintenance",
     },
     {
       imageSrc:
-        "https://res.cloudinary.com/dysmj8esf/image/upload/v1747208062/IMG20241231091819_mktl7d.jpg",
+        "https://res.cloudinary.com/dg1chwpuo/image/upload/v1764664824/IMG_8466_gcbbvh.jpg",
       title: "Equipment Fleet",
       location: "Heavy Machinery",
       alt: "Equipment Fleet",
