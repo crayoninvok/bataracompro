@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Comfortaa, Inder } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Footer";
 import { Analytics } from "@/components/Analytics";
-import NavbarWrapper from "@/components/NavbarWrapper";
+import MaintenanceLayout from "@/components/MaintenanceLayout";
 import { AuthProvider } from "@/hooks/useAuth"; // Add this import
 
 const geistSans = localFont({
@@ -17,6 +17,20 @@ const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+  display: "swap",
+});
+
+const comfortaa = Comfortaa({
+  weight: "500",
+  subsets: ["latin"],
+  variable: "--font-comfortaa",
+  display: "swap",
+});
+
+const inder = Inder({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-inder",
   display: "swap",
 });
 
@@ -62,19 +76,9 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${geistSans.variable} ${geistMono.variable} scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} ${comfortaa.variable} ${inder.variable} scroll-smooth`}
     >
       <head>
-        {/* Google Fonts */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inder&display=swap"
-          rel="stylesheet"
-        />
-
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
@@ -109,12 +113,7 @@ export default function RootLayout({
 
       <body className="bg-white text-gray-900 antialiased overflow-x-hidden">
         <AuthProvider>
-          <div className="relative flex min-h-screen flex-col">
-            <NavbarWrapper>
-              <main className="flex-1">{children}</main>
-            </NavbarWrapper>
-            <Footer />
-          </div>
+          <MaintenanceLayout>{children}</MaintenanceLayout>
         </AuthProvider>
         <Analytics />
       </body>

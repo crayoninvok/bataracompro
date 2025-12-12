@@ -21,7 +21,6 @@ const hiddenRoutePrefixes = [
   "/admin/driver",
   "/login-admin",
   "/dashboard-emp"
-
 ];
 
 export default function NavbarWrapper({ children }: NavbarWrapperProps) {
