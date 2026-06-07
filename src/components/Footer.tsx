@@ -29,7 +29,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-black/90 backdrop-blur-lg text-white pt-10 pb-5 border-t border-gray-800">
+    <footer className="font-nav bg-black/90 backdrop-blur-lg text-white pt-10 pb-5 border-t border-gray-800">
       <div className="container mx-auto px-4 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
           {/* Company Info */}
@@ -45,7 +45,7 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <h3 className="font-comfortaa font-bold text-[#1FBFB8] text-lg">
+                <h3 className="font-bold italic text-[#1FBFB8] text-sm lg:text-[15px] leading-snug tracking-tight">
                   PT Batara Dharma Persada
                 </h3>
               </div>
@@ -72,7 +72,7 @@ export default function Footer() {
 
           {/* Company Links */}
           <div>
-            <h3 className="font-bold text-base mb-3 border-b border-gray-800 pb-2">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-200 mb-3 border-b border-gray-800 pb-2">
               Company
             </h3>
             <ul className="space-y-1.5">
@@ -80,7 +80,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-[#1FBFB8] transition-colors text-sm"
+                    className="text-gray-400 hover:text-[#1FBFB8] transition-colors text-xs font-medium tracking-wide"
                   >
                     {link.label}
                   </Link>
@@ -91,7 +91,7 @@ export default function Footer() {
 
           {/* Services Links */}
           <div>
-            <h3 className="font-bold text-base mb-3 border-b border-gray-800 pb-2">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-200 mb-3 border-b border-gray-800 pb-2">
               Projects and Services
             </h3>
             <ul className="space-y-1.5">
@@ -99,7 +99,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-400 hover:text-[#1FBFB8] transition-colors text-sm"
+                    className="text-gray-400 hover:text-[#1FBFB8] transition-colors text-xs font-medium tracking-wide"
                   >
                     {link.label}
                   </Link>
@@ -110,7 +110,7 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-bold text-base mb-3 border-b border-gray-800 pb-2">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.14em] text-gray-200 mb-3 border-b border-gray-800 pb-2">
               Contact
             </h3>
             <ul className="space-y-2">
@@ -119,9 +119,10 @@ export default function Footer() {
                   size={16}
                   className="mr-2 mt-1 flex-shrink-0 text-[#E85C23]"
                 />
-                <span className="text-gray-400 text-xs">
-                  Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar., Kec.
-                  Cakung, East Jakarta City, DKI Jakarta 13910
+                <span className="text-gray-400 text-xs font-medium leading-relaxed tracking-wide">
+                  Rukan Grand Orchard Square, Jl. Terusan Klp. Hybrida Blok D22,
+                  RT.9/RW.1, Sukapura, Kec. Cilincing, Kota Adm, Daerah Khusus
+                  Ibukota Jakarta 14140
                 </span>
               </li>
               <li className="flex items-center">
@@ -131,7 +132,7 @@ export default function Footer() {
                 />
                 <a
                   href="tel:+62 21 38865143"
-                  className="text-gray-400 hover:text-white text-sm"
+                  className="text-gray-400 hover:text-white text-xs font-medium tracking-wide"
                 >
                   +62 21 38865143
                 </a>
@@ -140,7 +141,7 @@ export default function Footer() {
                 <Mail size={16} className="mr-2 flex-shrink-0 text-[#E85C23]" />
                 <a
                   href="mailto:info@bataramining.com"
-                  className="text-gray-400 hover:text-white text-sm"
+                  className="text-gray-400 hover:text-white text-xs font-medium tracking-wide"
                 >
                   info@bataramining.com
                 </a>
@@ -150,7 +151,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="pt-6 mt-6 border-t border-gray-800 text-center text-gray-500 text-xs">
+        <div className="pt-6 mt-6 border-t border-gray-800 text-center text-gray-500 text-xs font-medium tracking-wide">
           <p>
             &copy; {currentYear} PT. Batara Dharma Persada. All Rights Reserved.
           </p>

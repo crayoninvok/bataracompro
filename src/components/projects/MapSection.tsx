@@ -11,35 +11,39 @@ export default function MapSection() {
           const mapContainer = document.getElementById("locations-map");
 
           if (mapContainer && !mapContainer.hasChildNodes()) {
-            const map = L.map("locations-map").setView(
-              [-6.163255, 106.929148],
-              10
-            );
+            const headOfficeCoords: [number, number] = [-6.148536, 106.918356];
+            const senyiurCoords: [number, number] = [0.526275, 116.116552];
+            // Muara Pahu — 0°01'24.3"N 116°01'45.2"E
+            const muaraPahuCoords: [number, number] = [0.023417, 116.029222];
+
+            const map = L.map("locations-map").setView(senyiurCoords, 8);
 
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
               attribution:
                 '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             }).addTo(map);
 
-            const headOfficeMarker = L.marker([-6.163255, 106.929148]).addTo(
-              map
-            );
+            const headOfficeMarker = L.marker(headOfficeCoords).addTo(map);
             headOfficeMarker
               .bindPopup(
-                "<b>Head Office, PT Batara Dharma Persada</b><br>Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar., Kec. Cakung, East Jakarta City, DKI Jakarta 13910"
+                "<b>Head Office, PT Batara Dharma Persada</b><br>Rukan Grand Orchard Square, Jl. Terusan Klp. Hybrida Blok D22, RT.9/RW.1, Sukapura, Kec. Cilincing, Kota Adm, Daerah Khusus Ibukota Jakarta 14140"
               )
               .openPopup();
 
-            const operationSiteMarker = L.marker([0.526275, 116.116552]).addTo(
-              map
+            const senyiurMarker = L.marker(senyiurCoords).addTo(map);
+            senyiurMarker.bindPopup(
+              "<b>Coal Hauling Site — PT Indonesia Pratama</b><br>Senyiur, East Kalimantan<br><i>Active · Contractor: PT Batara Dharma Persada</i>"
             );
-            operationSiteMarker.bindPopup(
-              "<b>Operation Site, PT Indonesia Pratama</b><br>Tabang - East Kalimantan"
+
+            const muaraPahuMarker = L.marker(muaraPahuCoords).addTo(map);
+            muaraPahuMarker.bindPopup(
+              "<b>Muara Pahu Project — PT Indonesia Pratama</b><br>0°01'24.3\"N 116°01'45.2\"E<br><i>In preparation · Go-live 2nd week of July 2026</i>"
             );
 
             const bounds = L.latLngBounds([
-              [-6.163255, 106.929148],
-              [0.526275, 116.116552],
+              headOfficeCoords,
+              senyiurCoords,
+              muaraPahuCoords,
             ]);
             map.fitBounds(bounds, { padding: [50, 50] });
           }
@@ -57,28 +61,35 @@ export default function MapSection() {
             <span className="absolute -bottom-2 left-0 w-full h-3 bg-[#1FBFB8]/20 z-0"></span>
           </h2>
           <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-            PT Batara Dharma Persada operational presence across the Indonesian
-            archipelago
+            Head office in Jakarta, active hauling at Senyiur, and Muara Pahu project
+            preparation underway — all serving PT Indonesia Pratama under the Bayan
+            Resources Group
           </p>
         </div>
 
         <div className="reveal-project opacity-0 translate-y-6 transition-all duration-700">
           <div className="bg-gray-900/60 p-8 rounded-xl shadow-lg mb-10 border border-gray-800">
             <h3 className="text-2xl font-bold mb-6 text-white">
-              Strategic Locations
+              Project Locations
             </h3>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <LocationCard
                 type="office"
                 title="Head Office"
-                location="East Jakarta, Indonesia"
-                address="Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar., Kec. Cakung, East Jakarta City, DKI Jakarta 13910"
+                location="North Jakarta, Indonesia"
+                address="Rukan Grand Orchard Square, Jl. Terusan Klp. Hybrida Blok D22, RT.9/RW.1, Sukapura, Kec. Cilincing, Kota Adm, Daerah Khusus Ibukota Jakarta 14140"
               />
               <LocationCard
                 type="operation"
-                title="Operation Site"
-                location="Tabang, East Kalimantan"
-                address="PT. Indonesia Pratama - Coal Hauling Operations"
+                title="Senyiur Hauling Site"
+                location="Senyiur, East Kalimantan"
+                address="PT Indonesia Pratama — Active coal hauling contract since 2024 (30 units)"
+              />
+              <LocationCard
+                type="operation"
+                title="Muara Pahu Project"
+                location="Muara Pahu, East Kalimantan"
+                address={'0°01\'24.3"N 116°01\'45.2"E — PT Indonesia Pratama, in preparation, go-live 2nd week of July 2026 (23 units)'}
               />
             </div>
           </div>

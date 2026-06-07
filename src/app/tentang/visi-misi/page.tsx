@@ -1,5 +1,5 @@
-import MaintenancePage from "@/components/MaintenancePage";
+import VisiMisiPage from "@/components/visimisipage/VisiMisiPage";
 
-export default function VisiMisi() {
-  return <MaintenancePage />;
+export default function VisionMission() {
+  return <VisiMisiPage />;
 }

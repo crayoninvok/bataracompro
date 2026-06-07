@@ -7,7 +7,7 @@ import { Calendar, Users, Briefcase, Award, ChevronRight, MapPin, Target, Zap, S
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const [countUp, setCountUp] = useState({ employees: 0, capacity: 0 });
+  const [countUp, setCountUp] = useState({ capacity: 0 });
 
   const tabs = [
     { 
@@ -33,8 +33,10 @@ export default function AboutSection() {
   const milestones = [
     { year: '2024', title: 'Company Founded', description: 'Established with divine guidance and vision for excellence' },
     { year: '2024', title: 'First Major Contract', description: 'Secured coal hauling operations in Kalimantan' },
-    { year: '2024', title: 'Fleet Expansion', description: 'Expanded to 200+ specialized mining vehicles' },
-    { year: '2025', title: 'Sustainable Growth', description: 'Targeting 6.2M ton production capacity' }
+    { year: '2024', title: 'Fleet Expansion', description: 'Operated 15 hauling units across active project sites' },
+    { year: '2025', title: 'Fleet Growth', description: 'Total operated hauling units running 30 at Senyiur project site' },
+    { year: '2025', title: 'Workforce Growth', description: 'Total employees reached 300++ across the organization' },
+    { year: '2026', title: 'Muara Pahu Project', description: 'Preparation underway — operations commencing 2nd week of July 2026 with 23 hauling units' }
   ];
 
   useEffect(() => {
@@ -44,19 +46,8 @@ export default function AboutSection() {
           setIsVisible(true);
           
           // Animate counter for employees
-          const employeeTarget = 200;
-          const capacityTarget = 6.2;
-          let employeeCount = 0;
+          const capacityTarget = 5;
           let capacityCount = 0;
-          
-          const employeeInterval = setInterval(() => {
-            if (employeeCount < employeeTarget) {
-              employeeCount += Math.ceil(employeeTarget / 50);
-              setCountUp(prev => ({ ...prev, employees: Math.min(employeeCount, employeeTarget) }));
-            } else {
-              clearInterval(employeeInterval);
-            }
-          }, 50);
           
           const capacityInterval = setInterval(() => {
             if (capacityCount < capacityTarget) {
@@ -235,21 +226,21 @@ export default function AboutSection() {
                   },
                   { 
                     icon: Users, 
-                    value: `${countUp.employees}+`, 
+                    value: "300++", 
                     label: "Employees", 
                     color: "#1FBFB8",
                     description: "Team members"
                   },
                   { 
                     icon: Briefcase, 
-                    value: "5+", 
+                    value: "1", 
                     label: "Active Projects", 
                     color: "#E85C23",
                     description: "Ongoing operations"
                   },
                   { 
                     icon: Award, 
-                    value: `${countUp.capacity.toFixed(1)}M`, 
+                    value: countUp.capacity >= 5 ? "5M" : `${countUp.capacity.toFixed(1)}M`,
                     label: "Ton Capacity", 
                     color: "#1FBFB8",
                     description: "Annual production"

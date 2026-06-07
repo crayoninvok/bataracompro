@@ -11,20 +11,17 @@ export default function OurUnits() {
 
   const slides = [
     {
-      image:
-        "https://res.cloudinary.com/dg1chwpuo/image/upload/v1764811896/IMG_8469_zbbimh.jpg",
+      image: "/senyiur/sny1.jpeg",
       title: "Volvo Truck Double Trailer",
       subtitle: "High Capacity Coal Transportation",
     },
     {
-      image:
-        "https://res.cloudinary.com/dg1chwpuo/image/upload/v1764811933/IMG_8463_njgsbg.jpg",
-      title: "Trailer",
-      subtitle: "Efficient All-Terrain Performance",
+      image: "/senyiur/sny3.jpeg",
+      title: "Coal Hauling Route",
+      subtitle: "Senyiur Pit to Stockpile",
     },
     {
-      image:
-        "https://res.cloudinary.com/dg1chwpuo/image/upload/v1764811978/WhatsApp_Image_2025-01-18_at_12.26.37_bmlycj.jpg",
+      image: "/senyiur/sny5.jpeg",
       title: "Coal Hauling Operations",
       subtitle: "Safe and Reliable Delivery",
     },
@@ -140,7 +137,7 @@ export default function OurUnits() {
                 {[
                   "Tractor Head: Volvo FH 16-700 Horse Power",
                   "Double Vessel Capacity: 110 m³ + 125 m³",
-                  "Annual Production Capacity: 6.2 million tons",
+                  "Annual Production Capacity: 5 million tons",
                 ].map((feature, index) => (
                   <div key={index} className="flex items-start">
                     <div className="w-6 h-6 min-w-[24px] rounded-full bg-[#1FBFB8]/40 flex items-center justify-center mr-3 mt-0.5">

@@ -1,16 +1,17 @@
 "use client";
 
 import React from "react";
-import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 interface HeroHeaderProps {
+  badge?: string;
   title: string;
   description: string;
   backgroundImage: string;
 }
 
 export default function HeroHeader({
+  badge,
   title,
   description,
   backgroundImage,
@@ -38,9 +39,11 @@ export default function HeroHeader({
       {/* Content */}
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-block mb-6">
-            <div className="w-full h-0.5 bg-[#E85C23]/30 mt-2" />
-          </div>
+          {badge && (
+            <span className="inline-block px-4 py-1.5 rounded-full bg-[#1FBFB8]/10 text-[#1FBFB8] text-xs font-semibold uppercase tracking-[0.14em] border border-[#1FBFB8]/20 mb-6">
+              {badge}
+            </span>
+          )}
 
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
             <span className="relative inline-block">
@@ -52,13 +55,9 @@ export default function HeroHeader({
             </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             {description}
           </p>
-
-          <div className="animate-bounce mt-8">
-            <ChevronRight className="w-8 h-8 text-[#1FBFB8] transform rotate-90" />
-          </div>
         </div>
       </div>
     </section>

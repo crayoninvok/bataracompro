@@ -1,5 +1,9 @@
-import MaintenancePage from "@/components/MaintenancePage";
+import OrgChart from "@/components/chart/OrgChart";
 
-export default function OurTeam() {
-  return <MaintenancePage />;
+export default function OurTeamOrgChart() {
+  return (
+    <main className="min-h-screen">
+      <OrgChart />
+    </main>
+  );
 }

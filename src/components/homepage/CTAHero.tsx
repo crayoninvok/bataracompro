@@ -154,7 +154,7 @@ export default function CTASection() {
     {
       icon: MapPin,
       label: "Head Office",
-      value: "Jl. Agung Sedayu City Boulevard Utara No.58, Cakung Bar., Kec. Cakung, East Jakarta, Special Capital Region of Jakarta 13910",
+      value: "Rukan Grand Orchard Square, Jl. Terusan Klp. Hybrida Blok D22, RT.9/RW.1, Sukapura, Kec. Cilincing, Kota Adm, Daerah Khusus Ibukota Jakarta 14140",
       color: "#E85C23",
       description: "Visit our office"
     },

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Comfortaa, Inder } from "next/font/google";
+import { Comfortaa, Inder, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@/components/Analytics";
-import MaintenanceLayout from "@/components/MaintenanceLayout";
-import { AuthProvider } from "@/hooks/useAuth"; // Add this import
+import NavbarWrapper from "@/components/NavbarWrapper";
+import Footer from "@/components/Footer";
+import { AuthProvider } from "@/hooks/useAuth";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,6 +35,13 @@ const inder = Inder({
   display: "swap",
 });
 
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Batara Dharma Persada",
@@ -44,7 +52,7 @@ export const metadata: Metadata = {
     "Batara Dharma Persada",
     "Perusahaan",
     "Indonesia",
-    "Cakung",
+    "Cilincing",
     "Jakarta",
     "Mining",
     "Coal Hauling",
@@ -76,7 +84,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${geistSans.variable} ${geistMono.variable} ${comfortaa.variable} ${inder.variable} scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} ${comfortaa.variable} ${inder.variable} ${plusJakarta.variable} scroll-smooth`}
     >
       <head>
         {/* Favicon */}
@@ -101,9 +109,10 @@ export default function RootLayout({
               },
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "Jl. Agung Sedayu City Boulevard Utara No.58",
-                addressLocality: "Jakarta Timur",
-                postalCode: "13910",
+                streetAddress:
+                  "Rukan Grand Orchard Square, Jl. Terusan Klp. Hybrida Blok D22, RT.9/RW.1",
+                addressLocality: "Sukapura, Cilincing, Jakarta",
+                postalCode: "14140",
                 addressCountry: "ID",
               },
             }),
@@ -113,7 +122,12 @@ export default function RootLayout({
 
       <body className="bg-white text-gray-900 antialiased overflow-x-hidden">
         <AuthProvider>
-          <MaintenanceLayout>{children}</MaintenanceLayout>
+          <div className="relative flex min-h-screen flex-col">
+            <NavbarWrapper>
+              <main className="flex-1">{children}</main>
+            </NavbarWrapper>
+            <Footer />
+          </div>
         </AuthProvider>
         <Analytics />
       </body>

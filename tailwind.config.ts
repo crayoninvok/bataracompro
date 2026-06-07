@@ -14,6 +14,7 @@ const config: Config = {
         mono: ["var(--font-geist-mono)", "monospace"],
         comfortaa: ['"Comfortaa"', "cursive"],
         inder: ['"Inder"', "cursive"],
+        nav: ["var(--font-plus-jakarta)", "system-ui", "sans-serif"],
       },
       animation: {
         "bounce-slow": "bounce 3s infinite",

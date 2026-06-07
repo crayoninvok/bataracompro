@@ -9,11 +9,12 @@ export default function CTASection(): React.ReactNode {
 
       <div className="max-w-4xl mx-auto text-center reveal-project opacity-0 translate-y-6 transition-all duration-700">
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-          Interested in Our Services?
+          Ready to Partner on Your Next Hauling Project?
         </h2>
-        <p className="text-lg md:text-xl mb-10 text-gray-300 max-w-2xl mx-auto">
-          Contact our team to discuss your coal transportation needs and mining
-          solutions. We're ready to help optimize your operations.
+        <p className="text-lg md:text-xl mb-10 text-gray-300 max-w-2xl mx-auto leading-relaxed">
+          Whether you need a dedicated coal hauling contractor for a new mine site
+          or additional fleet capacity for an existing operation, our team is ready
+          to discuss your requirements.
         </p>
         <a
           href="/kontak"

@@ -1,5 +1,5 @@
-import MaintenancePage from "@/components/MaintenancePage";
+import TeamPage from "@/components/timpage/TeamPage";
 
-export default function Tim() {
-  return <MaintenancePage />;
+export default function OurTeam() {
+  return <TeamPage />;
 }

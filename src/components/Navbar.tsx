@@ -75,12 +75,17 @@ export default function Navbar() {
     return "/avatar-default.png";
   };
 
+  const navLinkBase =
+    "px-1 lg:px-2 py-2 text-[11px] lg:text-xs font-semibold uppercase tracking-[0.14em] text-gray-200 hover:text-[#1FBFB8] transition-colors duration-200";
+
+  const navLinkActive = "text-[#1FBFB8]";
+
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      className={`font-nav fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-black/60 backdrop-blur-lg shadow-lg py-2 border-b border-[#1FBFB8]/30"
-          : "bg-black/60 backdrop-blur-lg py-4"
+          ? "bg-black/70 backdrop-blur-lg shadow-lg py-2 border-b border-white/10"
+          : "bg-black/70 backdrop-blur-lg py-4"
       }`}
     >
       <div className="container mx-auto flex justify-between items-center px-4 md:px-6 lg:px-8">
@@ -94,19 +99,16 @@ export default function Navbar() {
               className="object-contain"
             />
           </div>
-          <div className="hidden md:block">
-            <h1 className="font-comfortaa font-bold text-[#1FBFB8] text-lg">
-              PT Batara Dharma{" "}
-              <span className="font-comfortaa font-bold text-[#1FBFB8] text-lg">
-                Persada
-              </span>
+          <div className="hidden md:block max-w-[220px] lg:max-w-none">
+            <h1 className="font-bold italic text-white text-sm lg:text-[15px] leading-snug tracking-tight">
+              PT Batara Dharma Persada
             </h1>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center">
-          <div className="flex items-center space-x-1 font-inder">
+          <div className="flex items-center gap-4 lg:gap-8">
             {navLinks.map((link) => (
               <div
                 key={link.label}
@@ -118,34 +120,34 @@ export default function Navbar() {
                       e.stopPropagation();
                       toggleDropdown(link.label);
                     }}
-                    className="flex items-center px-3 py-2 text-gray-300 hover:text-[#1FBFB8] hover:bg-gray-800 rounded-md transition-colors"
+                    className={`flex items-center ${navLinkBase} ${
+                      activeDropdown === link.label ? navLinkActive : ""
+                    }`}
                   >
                     {link.label}
-                    <ChevronDown size={16} className="ml-1" />
+                    <ChevronDown size={14} className="ml-1 opacity-70" />
                   </button>
                 ) : (
                   <Link
                     href={link.href}
-                    className={`px-3 py-2 ${
-                      pathname === link.href
-                        ? "text-[#1FBFB8] bg-gray-800"
-                        : "text-gray-300 hover:text-[#1FBFB8] hover:bg-gray-800"
-                    } rounded-md block transition-colors`}
+                    className={`${navLinkBase} ${
+                      pathname === link.href ? navLinkActive : ""
+                    }`}
                   >
                     {link.label}
                   </Link>
                 )}
 
                 {link.dropdown && activeDropdown === link.label && (
-                  <div className="absolute left-0 mt-1 w-56 bg-gray-900 border border-[#1FBFB8]/30 rounded-md shadow-lg z-50">
+                  <div className="absolute left-0 mt-3 w-56 bg-gray-950 border border-white/10 rounded-sm shadow-xl z-50">
                     {link.dropdown.map((item) => (
                       <Link
                         key={item.href}
                         href={item.href}
-                        className={`block px-4 py-2 text-sm ${
+                        className={`block px-4 py-3 text-xs font-medium tracking-wide ${
                           pathname === item.href
-                            ? "bg-gray-800 text-[#1FBFB8]"
-                            : "text-gray-300 hover:bg-gray-800 hover:text-[#1FBFB8]"
+                            ? "text-[#1FBFB8] bg-white/5"
+                            : "text-gray-300 hover:bg-white/5 hover:text-[#1FBFB8]"
                         } transition-colors`}
                         onClick={() => setActiveDropdown(null)}
                       >
@@ -234,7 +236,7 @@ export default function Navbar() {
                     <button
                       type="button"
                       onClick={() => toggleDropdown(link.label)}
-                      className="flex items-center justify-between w-full py-2 text-gray-300"
+                      className={`flex items-center justify-between w-full py-2 ${navLinkBase}`}
                     >
                       <span>{link.label}</span>
                       <ChevronDown
@@ -253,7 +255,7 @@ export default function Navbar() {
                           <Link
                             key={item.href}
                             href={item.href}
-                            className={`block py-2 text-sm ${
+                            className={`block py-2 text-sm font-medium ${
                               pathname === item.href
                                 ? "text-[#1FBFB8]"
                                 : "text-gray-400 hover:text-[#1FBFB8]"
@@ -269,11 +271,9 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={link.href}
-                    className={`block py-2 ${
-                      pathname === link.href
-                        ? "text-[#1FBFB8]"
-                        : "text-gray-300 hover:text-[#1FBFB8]"
-                    } transition-colors`}
+                    className={`block py-2 ${navLinkBase} ${
+                      pathname === link.href ? navLinkActive : ""
+                    }`}
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}

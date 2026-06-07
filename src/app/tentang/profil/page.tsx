@@ -1,5 +1,5 @@
-import MaintenancePage from "@/components/MaintenancePage";
+import ProfilePage from "@/components/profilepage/ProfilePage";
 
-export default function Profile() {
-  return <MaintenancePage />;
+export default function CompanyProfile() {
+  return <ProfilePage />;
 }

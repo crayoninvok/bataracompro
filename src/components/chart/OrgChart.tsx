@@ -65,7 +65,7 @@ const OrgChart = () => {
             <span className="text-[#FF5722] text-xl">🔥</span>
             <span className="text-white font-bold ml-2 text-xl">PT INDONESIA PRATAMA</span>
           </div>
-          <p className="text-[#0bbfb3] mb-8">Tabang, East Kalimantan</p>
+          <p className="text-[#0bbfb3] mb-8">Senyiur, East Kalimantan</p>
 
           {/* Site Managers */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
